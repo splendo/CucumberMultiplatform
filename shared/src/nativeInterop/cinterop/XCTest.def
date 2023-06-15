@@ -1,0 +1,5 @@
+language=Objective-C
+package = platform.XCTest
+modules = XCTest
+linkerOpts=-F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/
+compilerOpts=-F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/ -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework

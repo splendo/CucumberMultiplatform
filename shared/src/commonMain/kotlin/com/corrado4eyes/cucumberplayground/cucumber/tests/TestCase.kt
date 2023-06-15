@@ -27,12 +27,13 @@ abstract class BaseGherkinTestCase : GherkinTestCase {
 }
 
 sealed class TestCase : BaseGherkinTestCase() {
-    sealed class Home : TestCase() {
-        class HomeScreenIsVisible(override val lambda: GherkinLambda) : Home() {
+    sealed class Common : TestCase() {
+        class ScreenIsVisible(override val lambda: GherkinLambda) : Common() {
             override val step: CucumberDefinition = CucumberDefinition.Step.Given("I am in the \\\"(.*)\\\" screen")
         }
-        class HomeTitleIsVisible(override val lambda: GherkinLambda) : Home() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Given("I see \\\"(.*)\\\" text")
+
+        class TitleIsVisible(override val lambda: GherkinLambda) : Common() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see \\\"(.*)\\\" text")
         }
     }
 }

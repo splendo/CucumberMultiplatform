@@ -1,10 +1,8 @@
 package com.corrado4eyes.cucumberplayground.cucumber
 
-import cocoapods.Cucumberish.CCIStepBody
-import cocoapods.Cucumberish.Given
-import cocoapods.Cucumberish.Then
-import cocoapods.Cucumberish.When
-
+import Cucumberish.Given
+import Cucumberish.Then
+import Cucumberish.When
 
 actual class GherkinLambda(private val lambda: CCIStepBody) : CCIStepBody {
     actual constructor() : this({_, _ -> throw IllegalArgumentException("Should call the primary constructor")})

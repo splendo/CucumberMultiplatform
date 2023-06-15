@@ -1,0 +1,5 @@
+language = Objective-C
+package = Cucumberish
+modules = Cucumberish
+compilerOpts = -framework Cucumberish
+linkerOpts = -framework Cucumberish -framework XCTest

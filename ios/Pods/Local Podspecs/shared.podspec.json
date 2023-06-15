@@ -14,7 +14,7 @@
     "ios": "14.1"
   },
   "dependencies": {
-    "Cucumberish": [
+    "AFNetworking": [
 
     ]
   },

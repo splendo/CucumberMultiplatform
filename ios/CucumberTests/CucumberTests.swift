@@ -21,7 +21,7 @@ import Cucumberish
         
         DefaultGherkinRunner(
             lambdaMaps: [
-                TestCase.HomeHomeScreenIsVisible { args, userInfo in
+                TestCase.CommonScreenIsVisible { args, userInfo in
                     app.launch()
                     guard let screenName = args?[0] as? String else { return KotlinUnit() }
                     switch(screenName) {
@@ -32,9 +32,9 @@ import Cucumberish
                     }
                     return KotlinUnit()
                 },
-                TestCase.HomeHomeTitleIsVisible { args, userInfo in
-                    guard let textString = args?[0] else { return KotlinUnit() }
-                    let text = app.staticTexts["Home"]
+                TestCase.CommonTitleIsVisible { args, userInfo in
+                    guard let textString = args?[0] as? String else { return KotlinUnit() }
+                    let text = app.staticTexts[textString]
                     XCTAssert(text.exists(timeout: .short), "Couldn't find \(text) text")
                     return KotlinUnit()
                 }
