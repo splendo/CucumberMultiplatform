@@ -7,6 +7,5 @@ end
 target 'CucumberTests' do
   use_frameworks!
   platform :ios, '14.1'
-  pod 'shared', :path => '../shared'
-  pod 'Cucumberish'
+  pod 'cucumbertest', :path => '../cucumber'
 end
