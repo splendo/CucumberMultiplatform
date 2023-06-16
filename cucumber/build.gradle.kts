@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask
-
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -7,11 +5,6 @@ plugins {
 }
 
 kotlin {
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
     android {
         compilations.all {
             kotlinOptions {
@@ -19,25 +12,23 @@ kotlin {
             }
         }
     }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "14.1"
-
-        podfile = project.file("../ios/Podfile")
         framework {
-            baseName = "shared"
+            baseName = "cucumbertest"
         }
+        pod("Cucumberish")
     }
     
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
-            }
-        }
+        val commonMain by getting
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -45,7 +36,6 @@ kotlin {
         }
         val androidMain by getting
         val androidUnitTest by getting
-
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -55,7 +45,6 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
         }
-
         val iosX64Test by getting
         val iosArm64Test by getting
         val iosSimulatorArm64Test by getting
@@ -69,7 +58,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.corrado4eyes.cucumberplayground"
+    namespace = "com.corrado4eyes.cucumbertest"
     compileSdk = 33
     defaultConfig {
         minSdk = 29
