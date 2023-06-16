@@ -1,4 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-CucumberTests/Pods-CucumberTests-frameworks.sh
-${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
-${PODS_ROOT}/../../shared/build/cocoapods/framework/shared.framework
 ${BUILT_PRODUCTS_DIR}/Cucumberish/Cucumberish.framework
+${PODS_ROOT}/../../cucumber/build/cocoapods/framework/cucumbertest.framework

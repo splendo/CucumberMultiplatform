@@ -1,41 +1,28 @@
 PODS:
-  - AFNetworking (4.0.1):
-    - AFNetworking/NSURLSession (= 4.0.1)
-    - AFNetworking/Reachability (= 4.0.1)
-    - AFNetworking/Security (= 4.0.1)
-    - AFNetworking/Serialization (= 4.0.1)
-    - AFNetworking/UIKit (= 4.0.1)
-  - AFNetworking/NSURLSession (4.0.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (4.0.1)
-  - AFNetworking/Security (4.0.1)
-  - AFNetworking/Serialization (4.0.1)
-  - AFNetworking/UIKit (4.0.1):
-    - AFNetworking/NSURLSession
   - Cucumberish (1.4.0)
-  - shared (1.0):
-    - AFNetworking
+  - cucumbertest (1.0):
+    - Cucumberish
+  - shared (1.0)
 
 DEPENDENCIES:
-  - Cucumberish
+  - cucumbertest (from `../cucumber`)
   - shared (from `../shared`)
 
 SPEC REPOS:
   trunk:
-    - AFNetworking
     - Cucumberish
 
 EXTERNAL SOURCES:
+  cucumbertest:
+    :path: "../cucumber"
   shared:
     :path: "../shared"
 
 SPEC CHECKSUMS:
-  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   Cucumberish: 6cbd0c1f50306b369acebfe7d9f514c9c287d26c
-  shared: f4bb306be8da7d4d39f4006692bfd10114507c24
+  cucumbertest: e951bdfefa666e59269ce204e4f2d715f71657ca
+  shared: 2d3b24a8fe27b7d9e65b8d075a9672fbc6a1aa10
 
-PODFILE CHECKSUM: 0db81199cfd2092086ee7fcd78f975653eb37d2a
+PODFILE CHECKSUM: 4aa71ed26055132f254b52180a035af7f55f0a7a
 
 COCOAPODS: 1.11.3
