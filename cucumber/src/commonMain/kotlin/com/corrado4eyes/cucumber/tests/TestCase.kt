@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumbertest.tests
+package com.corrado4eyes.cucumber.tests
 
 import com.corrado4eyes.cucumberplayground.cucumber.CucumberDefinition
 import com.corrado4eyes.cucumberplayground.cucumber.GherkinLambda

@@ -58,7 +58,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.corrado4eyes.cucumbertest"
+    namespace = "com.corrado4eyes.cucumber"
     compileSdk = 33
     defaultConfig {
         minSdk = 29

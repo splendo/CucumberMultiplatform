@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumbertest
+package com.corrado4eyes.cucumber
 
 import cocoapods.Cucumberish.CCIStepBody
 import cocoapods.Cucumberish.Given

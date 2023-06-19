@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumbertest
+package com.corrado4eyes.cucumber
 
 actual class GherkinLambda (private val lambda: () -> Unit) : () -> Unit {
     actual constructor() : this({ throw IllegalArgumentException("Should call the primary constructor") })

@@ -1,6 +1,6 @@
-package com.corrado4eyes.cucumbertest
+package com.corrado4eyes.cucumber
 
-import com.corrado4eyes.cucumbertest.tests.TestCase
+import com.corrado4eyes.cucumber.tests.TestCase
 
 
 typealias Scenario = CucumberDefinition.Descriptive.Example
