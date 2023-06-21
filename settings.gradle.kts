@@ -17,3 +17,4 @@ rootProject.name = "CucumberPlayground"
 include(":android")
 include(":shared")
 include(":cucumber")
+include(":cucumberShared")
