@@ -1,10 +1,10 @@
 package com.corrado4eyes.cucumber.tests
 
-import com.corrado4eyes.cucumberplayground.cucumber.CucumberDefinition
-import com.corrado4eyes.cucumberplayground.cucumber.GherkinLambda
-import com.corrado4eyes.cucumber.cucumber.Given
-import com.corrado4eyes.cucumber.cucumber.Then
-import com.corrado4eyes.cucumber.cucumber.When
+import com.corrado4eyes.cucumber.CucumberDefinition
+import com.corrado4eyes.cucumber.GherkinLambda
+import com.corrado4eyes.cucumber.Given
+import com.corrado4eyes.cucumber.Then
+import com.corrado4eyes.cucumber.When
 
 interface GherkinTestCase {
     val step: CucumberDefinition

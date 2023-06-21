@@ -6,14 +6,14 @@ Pod::Spec.new do |spec|
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Some description for the Shared Module'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/cucumbertest.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/cucumber.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
     spec.dependency 'Cucumberish'
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':cucumber',
-        'PRODUCT_MODULE_NAME' => 'cucumbertest',
+        'PRODUCT_MODULE_NAME' => 'cucumber',
     }
                 
     spec.script_phases = [
