@@ -1,12 +1,12 @@
 import SwiftUI
-//import shared
+import shared
 
 struct ContentView: View {
 //	let greet = Greeting().greet()
 
 	var body: some View {
-        Text("Hello this is 🍎")
-		Text("Home")
+        Text(Greeting().greet())
+        Text("Home")
 	}
 }
 
