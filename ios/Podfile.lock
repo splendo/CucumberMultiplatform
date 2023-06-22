@@ -1,28 +1,16 @@
 PODS:
-  - cucumber (1.0):
-    - Cucumberish
   - Cucumberish (1.4.0)
-  - shared (1.0)
 
 DEPENDENCIES:
-  - cucumber (from `../cucumber`)
-  - shared (from `../shared`)
+  - Cucumberish
 
 SPEC REPOS:
   trunk:
     - Cucumberish
 
-EXTERNAL SOURCES:
-  cucumber:
-    :path: "../cucumber"
-  shared:
-    :path: "../shared"
-
 SPEC CHECKSUMS:
-  cucumber: f9a2fbe489d9ecb895fde71abf421e4ab5212e39
   Cucumberish: 6cbd0c1f50306b369acebfe7d9f514c9c287d26c
-  shared: 2d3b24a8fe27b7d9e65b8d075a9672fbc6a1aa10
 
-PODFILE CHECKSUM: 7d2a015c6b74b9cd3ceb4de57f415aa90bfdc5e4
+PODFILE CHECKSUM: 628c667357c176acb30372b1f5ac2574ef0cf182
 
 COCOAPODS: 1.11.3

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import cucumber
+import shared
 import XCTest
 import Cucumberish
 
