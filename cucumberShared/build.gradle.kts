@@ -1,7 +1,9 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    kotlin("native.cocoapods")
+//    kotlin("native.cocoapods")
 }
 
 kotlin {
@@ -13,13 +15,30 @@ kotlin {
             }
         }
     }
+
+    val target: KotlinNativeTarget.() -> Unit = {
+        binaries {
+            framework {
+                export(project(":shared"))
+                export(project(":cucumber"))
+                baseName = "shared"
+
+//                linkerOpts("-framework", "/Users/corrado4eyes/Developer/work/multiplatform/CucumberPlayground/cucumber/build/cocoapods/synthetic/IOS/build/Release-iphonesimulator/Cucumberish/Cucumberish.framework")
+//                linkerOpts("-framework", "/Users/corrado4eyes/Developer/work/multiplatform/CucumberPlayground/cucumber/build/cocoapods/synthetic/IOS/build/Release-iphoneos/Cucumberish/Cucumberish.framework")
+                //linker opts tells where to find and link
+
+                //compile opts tells what to compile
+
+            }
+        }
+    }
     
-//    iosX64(configure = target)
-//    iosArm64(configure = target)
-//    iosSimulatorArm64(configure = target)
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    iosX64(configure = target)
+    iosArm64(configure = target)
+    iosSimulatorArm64(configure = target)
+//    iosX64()
+//    iosArm64()
+//    iosSimulatorArm64()
 
     sourceSets {
         val commonMain by getting {
@@ -55,20 +74,20 @@ kotlin {
         }
     }
 
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
-
-        podfile = project.file("../ios/Podfile")
-        framework {
-            baseName = "cucumberShared"
-            export(project(":shared"))
-            export(project(":cucumber"))
-            transitiveExport = true
-        }
-    }
+//    cocoapods {
+//        summary = "Some description for the Shared Module"
+//        homepage = "Link to the Shared Module homepage"
+//        version = "1.0"
+//        ios.deploymentTarget = "14.1"
+//
+//        podfile = project.file("../ios/Podfile")
+//        framework {
+//            baseName = "cucumberShared"
+//            export(project(":shared"))
+//            export(project(":cucumber"))
+//            transitiveExport = true
+//        }
+//    }
 }
 
 android {

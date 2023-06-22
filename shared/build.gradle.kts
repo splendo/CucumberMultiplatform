@@ -2,15 +2,23 @@ import org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask
 
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
+//    kotlin("native.cocoapods")
     id("com.android.library")
 }
 
 kotlin {
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    val target: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit = {
+        binaries {
+            framework {
+                baseName = "shared"
+            }
+        }
+    }
+
+    iosX64(configure = target)
+    iosArm64(configure = target)
+    iosSimulatorArm64(configure = target)
 
     android {
         compilations.all {
@@ -20,17 +28,17 @@ kotlin {
         }
     }
 
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
-
-        podfile = project.file("../ios/Podfile")
-        framework {
-            baseName = "shared"
-        }
-    }
+//    cocoapods {
+//        summary = "Some description for the Shared Module"
+//        homepage = "Link to the Shared Module homepage"
+//        version = "1.0"
+//        ios.deploymentTarget = "14.1"
+//
+//        podfile = project.file("../ios/Podfile")
+//        framework {
+//            baseName = "shared"
+//        }
+//    }
     
     sourceSets {
         val commonMain by getting {
