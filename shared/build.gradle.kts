@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask
 
 plugins {
     kotlin("multiplatform")
-//    kotlin("native.cocoapods")
     id("com.android.library")
 }
 
@@ -27,18 +26,6 @@ kotlin {
             }
         }
     }
-
-//    cocoapods {
-//        summary = "Some description for the Shared Module"
-//        homepage = "Link to the Shared Module homepage"
-//        version = "1.0"
-//        ios.deploymentTarget = "14.1"
-//
-//        podfile = project.file("../ios/Podfile")
-//        framework {
-//            baseName = "shared"
-//        }
-//    }
     
     sourceSets {
         val commonMain by getting {

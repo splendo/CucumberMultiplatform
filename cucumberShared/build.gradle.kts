@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-//    kotlin("native.cocoapods")
 }
 
 kotlin {
@@ -36,9 +35,6 @@ kotlin {
     iosX64(configure = target)
     iosArm64(configure = target)
     iosSimulatorArm64(configure = target)
-//    iosX64()
-//    iosArm64()
-//    iosSimulatorArm64()
 
     sourceSets {
         val commonMain by getting {
@@ -73,21 +69,6 @@ kotlin {
             iosSimulatorArm64Test.dependsOn(this)
         }
     }
-
-//    cocoapods {
-//        summary = "Some description for the Shared Module"
-//        homepage = "Link to the Shared Module homepage"
-//        version = "1.0"
-//        ios.deploymentTarget = "14.1"
-//
-//        podfile = project.file("../ios/Podfile")
-//        framework {
-//            baseName = "cucumberShared"
-//            export(project(":shared"))
-//            export(project(":cucumber"))
-//            transitiveExport = true
-//        }
-//    }
 }
 
 android {
