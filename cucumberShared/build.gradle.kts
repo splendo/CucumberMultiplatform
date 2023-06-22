@@ -23,8 +23,8 @@ kotlin {
                 export(project(":cucumber"))
                 baseName = "shared"
 
-//                linkerOpts("-framework", "/Users/corrado4eyes/Developer/work/multiplatform/CucumberPlayground/cucumber/build/cocoapods/synthetic/IOS/build/Release-iphonesimulator/Cucumberish/Cucumberish.framework")
-//                linkerOpts("-framework", "/Users/corrado4eyes/Developer/work/multiplatform/CucumberPlayground/cucumber/build/cocoapods/synthetic/IOS/build/Release-iphoneos/Cucumberish/Cucumberish.framework")
+                linkerOpts("-F${projectDir}/../cucumber/build/cocoapods/synthetic/IOS/build/Release-iphonesimulator/Cucumberish", "-framework", "Cucumberish")
+                linkerOpts("-F${projectDir}/../cucumber/build/cocoapods/synthetic/IOS/build/Release-iphoneos/Cucumberish", "-framework", "Cucumberish")
                 //linker opts tells where to find and link
 
                 //compile opts tells what to compile
