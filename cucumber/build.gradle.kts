@@ -34,7 +34,12 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation("io.cucumber:cucumber-java8:7.12.1")
+                implementation("io.cucumber:cucumber-junit:7.12.1")
+            }
+        }
         val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting

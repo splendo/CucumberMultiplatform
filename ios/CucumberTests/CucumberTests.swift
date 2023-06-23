@@ -42,6 +42,6 @@ import Cucumberish
         ).buildFeature()
         
         let bundle = Bundle(for: CucumberishInitializer.self)
-        Cucumberish.executeFeatures(inDirectory: "Features", from: bundle, includeTags: nil, excludeTags: nil)
+        Cucumberish.executeFeatures(inDirectory: "../../shared/src/commonMain/resources", from: bundle, includeTags: nil, excludeTags: nil)
     }
 }
