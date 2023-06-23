@@ -53,7 +53,6 @@ class RunCucumberTest {
                 testRule.setContent {
                     MainActivityLayout()
                 }
-                ActivityScenario.launch(MainActivity::class.java)
             }
             else -> throw IllegalStateException("Screen $screenName not found")
         }
