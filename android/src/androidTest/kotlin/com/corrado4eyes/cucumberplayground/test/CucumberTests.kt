@@ -1,14 +1,13 @@
-package com.corrado4eyes.cucumberplayground.uitest
+package com.corrado4eyes.cucumberplayground.test
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.test.core.app.ActivityScenario
 import com.corrado4eyes.cucumber.DefaultGherkinRunner
 import com.corrado4eyes.cucumber.GherkinLambda
 import com.corrado4eyes.cucumber.tests.TestCase
-import com.corrado4eyes.cucumberplayground.android.MainActivity
 import com.corrado4eyes.cucumberplayground.android.MainActivityLayout
+import io.cucumber.android.runner.CucumberAndroidJUnitRunner
 import io.cucumber.junit.Cucumber
 import io.cucumber.junit.CucumberOptions
 import org.junit.Rule
@@ -17,9 +16,9 @@ import org.junit.runner.RunWith
 @RunWith(Cucumber::class)
 @CucumberOptions(
     features = ["features"],
-    glue = ["com.corrado4eyes.cucumberplayground.uitest"]
+    glue = ["com.corrado4eyes.cucumberplayground.test"]
 )
-class RunCucumberTest {
+class CucumberTests : CucumberAndroidJUnitRunner() {
     @get:Rule
     val testRule = createComposeRule()
 

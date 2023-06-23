@@ -12,6 +12,9 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
+
+        testApplicationId = "com.corrado4eyes.cucumberplayground.test"
+        testInstrumentationRunner = "com.corrado4eyes.cucumberplayground.test.CucumberTests"
     }
 
     buildFeatures {
@@ -57,6 +60,8 @@ dependencies {
     androidTestImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+    androidTestImplementation("io.cucumber:cucumber-android:4.10.0")
+
     androidTestImplementation("io.cucumber:cucumber-java8:7.12.1")
     androidTestImplementation("io.cucumber:cucumber-junit:7.12.1")
     androidTestImplementation(kotlin("test"))
