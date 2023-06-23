@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
     spec.vendored_frameworks      = 'build/cocoapods/framework/cucumber.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
-    spec.dependency 'Cucumberish'
+    spec.dependency 'Cucumberish', '1.4.0'
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':cucumber',

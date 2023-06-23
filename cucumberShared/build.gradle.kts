@@ -1,4 +1,10 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.AbstractExecutable
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBinary
+import org.jetbrains.kotlin.konan.file.File
+import org.jetbrains.kotlin.konan.properties.Properties
+import org.jetbrains.kotlin.konan.properties.hasProperty
+import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
     kotlin("multiplatform")
@@ -22,12 +28,11 @@ kotlin {
                 export(project(":cucumber"))
                 baseName = "shared"
 
-                linkerOpts("-F${projectDir}/../cucumber/build/cocoapods/synthetic/IOS/build/Release-iphonesimulator/Cucumberish", "-framework", "Cucumberish")
-                linkerOpts("-F${projectDir}/../cucumber/build/cocoapods/synthetic/IOS/build/Release-iphoneos/Cucumberish", "-framework", "Cucumberish")
-                //linker opts tells where to find and link
+                linkFrameworkSearchPaths("$projectDir/../cucumber")
 
-                //compile opts tells what to compile
-
+                getTest("DEBUG").apply {
+                    linkFrameworkSearchPaths("$projectDir/../cucumber")
+                }
             }
         }
     }
@@ -76,5 +81,85 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 29
+    }
+}
+
+val KotlinNativeTarget.targetType: String get() {
+    val isSimulatorTarget: Boolean =
+        konanTarget is org.jetbrains.kotlin.konan.target.KonanTarget.IOS_X64 || konanTarget is org.jetbrains.kotlin.konan.target.KonanTarget.IOS_SIMULATOR_ARM64
+    return if (isSimulatorTarget) "iphonesimulator" else "iphoneos"
+}
+
+fun Properties.getPropertyOrNull(key: String) = if (hasProperty(key)) getProperty(key) else null
+fun Properties.getListProperty(key: String) = getPropertyOrNull(key).orEmpty().split("(\" )?\"".toRegex()).filter { it.isNotEmpty() }
+
+fun Properties.getFrameworkSearchPaths() = (getListProperty("FRAMEWORK_SEARCH_PATHS") + getPropertyOrNull("CONFIGURATION_BUILD_DIR")).filterNotNull()
+
+/**
+ * Gets the [Properties] file of a [KotlinNativeTarget] for a given dependency loaded by the `dependencies` module
+ * @param dependency the name of the dependency to get the properties from
+ * @param pathToIosDependencies the absolute path to the root folder of the health-ios-dependencies module
+ * @return the [Properties] file of the dependency
+ */
+fun KotlinNativeTarget.getPropertiesForDependency(dependency: String, pathToIosDependencies: String): Properties {
+    val path = "$pathToIosDependencies/build/cocoapods/buildSettings/build-settings-$targetType-$dependency.properties"
+    val file = File(path)
+    return file.loadProperties()
+}
+
+/**
+ * Load a list of all dependencies loaded by the `dependencies` module are added to a `NativeBinary`
+ * This checks the `defs` folder to determine these dependencies
+ * @param pathToIosDependencies the absolute path to the root folder of the health-ios-dependencies module
+ * @param includeDependency returns whether a dependency with a given name should be returned
+ * @return the list of dependencies to be added
+ */
+fun Project.dependenciesFromDefs(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }): List<String> {
+    // Load all .def files from the defs folder to determine the list of dependencies
+    val defs = File("$pathToIosDependencies/build/cocoapods/defs")
+    return defs.listFilesOrEmpty.mapNotNull { dependency ->
+        val fileName = dependency.name.removeSuffix(".${dependency.extension}")
+        when {
+            dependency.extension != "def" -> null
+            includeDependency(fileName) -> fileName
+            else -> null
+        }
+    }
+}
+
+/**
+ * Creates the framework search paths required to add all dependencies loaded by the `dependencies` module
+ * @param pathToIosDependencies the absolute path to the root folder of the health-ios-dependencies module
+ * @param includeDependency returns whether a dependency with a given name should be returned
+ * @return the set of paths to add to the framework search paths
+ */
+fun KotlinNativeTarget.createFrameworkSearchPath(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }): Set<String> {
+    val dependencies = dependenciesFromDefs(pathToIosDependencies, includeDependency)
+    return dependencies.map { dependency ->
+        val properties = getPropertiesForDependency(dependency, pathToIosDependencies)
+        properties.getFrameworkSearchPaths()
+    }.flatten().toSet()
+}
+
+/**
+ * Ensures that all dependencies loaded by the `dependencies` module are added to a `NativeBinary`
+ * @param pathToIosDependencies the absolute path to the root folder of the health-ios-dependencies module
+ * @param includeDependency returns whether a dependency with a given name should be added to the `NativeBinary`.
+ */
+fun NativeBinary.linkFrameworkSearchPaths(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }) {
+    val frameworkSearchPaths = target.createFrameworkSearchPath(pathToIosDependencies, includeDependency)
+    // Add all framework search paths
+    linkerOpts(frameworkSearchPaths.map { "-F$it" })
+
+    // Add all frameworks specified by the framework search paths
+    dependenciesFromDefs(pathToIosDependencies, includeDependency).forEach { dependency ->
+        val frameworkFileExists = frameworkSearchPaths.any { dir -> File("$dir/$dependency.framework").exists }
+        if (frameworkFileExists) linkerOpts("-framework", dependency)
+    }
+    // For executable we should set the rpath so the framework is included in the build
+    if (this is AbstractExecutable) {
+        frameworkSearchPaths.forEach {
+            linkerOpts("-rpath", it)
+        }
     }
 }

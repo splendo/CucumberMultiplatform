@@ -24,7 +24,9 @@ kotlin {
         framework {
             baseName = "cucumber"
         }
-        pod("Cucumberish")
+        pod("Cucumberish") {
+            version = "1.4.0"
+        }
     }
     
     sourceSets {
@@ -67,5 +69,36 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 29
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask>().configureEach {
+    doLast {
+
+        val xcodeprojFiles = listOf(
+            "Pods/Pods.xcodeproj",
+            "synthetic.xcodeproj",
+        )
+
+        for (xcodeprojFile in xcodeprojFiles) {
+            logger.lifecycle("Processing $xcodeprojFile")
+            val file = project.buildDir.resolve("cocoapods/synthetic/${family.name}/$xcodeprojFile/project.pbxproj")
+            setIosDeploymentTarget(file)
+        }
+    }
+}
+
+fun Project.setIosDeploymentTarget(
+    xcodeprojFile: File,
+    source: String = "8.0",
+    target: String = "14.1",
+) {
+    val lines = xcodeprojFile.readLines()
+    val out = xcodeprojFile.bufferedWriter()
+    out.use {
+        for (line in lines) {
+            out.write(line.replace("IPHONEOS_DEPLOYMENT_TARGET = $source;", "IPHONEOS_DEPLOYMENT_TARGET = $target;"))
+            out.write(("\n"))
+        }
     }
 }
