@@ -1,33 +1,30 @@
-import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension
+import org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask
 
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
     id("com.android.library")
 }
 
 kotlin {
+
+    val target: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit = {
+        binaries {
+            framework {
+                baseName = "shared"
+            }
+        }
+    }
+
+    iosX64(configure = target)
+    iosArm64(configure = target)
+    iosSimulatorArm64(configure = target)
+
     android {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
             }
         }
-    }
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
-        podfile = project.file("../ios/Podfile")
-        framework {
-            baseName = "shared"
-        }
-        pod("Cucumberish")
     }
     
     sourceSets {
@@ -43,6 +40,7 @@ kotlin {
         }
         val androidMain by getting
         val androidUnitTest by getting
+
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -52,6 +50,7 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
         }
+
         val iosX64Test by getting
         val iosArm64Test by getting
         val iosSimulatorArm64Test by getting

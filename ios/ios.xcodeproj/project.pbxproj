@@ -10,51 +10,23 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		4140822635AF9CFFF681C02E /* Pods_CucumberTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ECF88FBB45FBC97FE0BEDC8 /* Pods_CucumberTests.framework */; };
 		640DFEEC2A370DA300ABF2DD /* CucumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640DFEEB2A370DA300ABF2DD /* CucumberTests.swift */; };
 		640DFEF52A370DD200ABF2DD /* Features in Resources */ = {isa = PBXBuildFile; fileRef = 640DFEF42A370DD200ABF2DD /* Features */; };
 		640DFEF82A370F5C00ABF2DD /* CucumberTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 640DFEF72A370F5C00ABF2DD /* CucumberTests.m */; };
+		648329022A43391500E5A4A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		648329032A43391500E5A4A8 /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		649B6F942A388AC600C40DCC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 649B6F932A388AC600C40DCC /* XCTest.framework */; platformFilter = ios; };
-		649B6F952A388AF200C40DCC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 649B6F932A388AC600C40DCC /* XCTest.framework */; };
-		649B6F962A388AF200C40DCC /* XCTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 649B6F932A388AC600C40DCC /* XCTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		649B6F9A2A389F5F00C40DCC /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B6F992A389F5F00C40DCC /* XCUIElement.swift */; };
 		649B6F9C2A389F9300C40DCC /* Timeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B6F9B2A389F9300C40DCC /* Timeout.swift */; };
-		69C343AAD6C87213DC937161 /* Pods_CucumberTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8818832650078AC174F099 /* Pods_CucumberTests.framework */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
-		E08B03E9E34679E405E995C8 /* Pods_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559B6479A306942DCA0C3002 /* Pods_ios.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		640DFEEF2A370DA300ABF2DD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7555FF73242A565900829871 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7555FF7A242A565900829871;
-			remoteInfo = ios;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		649B6F972A388AF200C40DCC /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				649B6F962A388AF200C40DCC /* XCTest.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1A0234222154A44D8804AEAD /* Pods-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.release.xcconfig"; path = "Target Support Files/Pods-ios/Pods-ios.release.xcconfig"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
-		21CFECE4C5E740AFF81BFD88 /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		4DEA2654EFE69B013946D9B0 /* Pods-CucumberTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CucumberTests.release.xcconfig"; path = "Target Support Files/Pods-CucumberTests/Pods-CucumberTests.release.xcconfig"; sourceTree = "<group>"; };
-		559B6479A306942DCA0C3002 /* Pods_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		640DFEE92A370DA300ABF2DD /* CucumberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CucumberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		640DFEEB2A370DA300ABF2DD /* CucumberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CucumberTests.swift; sourceTree = "<group>"; };
 		640DFEF42A370DD200ABF2DD /* Features */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Features; sourceTree = "<group>"; };
@@ -67,7 +39,7 @@
 		7555FF7B242A565900829871 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BB8818832650078AC174F099 /* Pods_CucumberTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CucumberTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7ECF88FBB45FBC97FE0BEDC8 /* Pods_CucumberTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CucumberTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AF9DD8B6C07A08BD9ED21E /* Pods-CucumberTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CucumberTests.debug.xcconfig"; path = "Target Support Files/Pods-CucumberTests/Pods-CucumberTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,8 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E08B03E9E34679E405E995C8 /* Pods_ios.framework in Frameworks */,
-				649B6F952A388AF200C40DCC /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +56,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				649B6F942A388AC600C40DCC /* XCTest.framework in Frameworks */,
-				69C343AAD6C87213DC937161 /* Pods_CucumberTests.framework in Frameworks */,
+				4140822635AF9CFFF681C02E /* Pods_CucumberTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,8 +74,6 @@
 		0A0D2C84F18C844F76244379 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				21CFECE4C5E740AFF81BFD88 /* Pods-ios.debug.xcconfig */,
-				1A0234222154A44D8804AEAD /* Pods-ios.release.xcconfig */,
 				D8AF9DD8B6C07A08BD9ED21E /* Pods-CucumberTests.debug.xcconfig */,
 				4DEA2654EFE69B013946D9B0 /* Pods-CucumberTests.release.xcconfig */,
 			);
@@ -170,8 +138,7 @@
 			children = (
 				649B6F932A388AC600C40DCC /* XCTest.framework */,
 				640DFEFC2A371F6300ABF2DD /* Cucumberish.framework */,
-				559B6479A306942DCA0C3002 /* Pods_ios.framework */,
-				BB8818832650078AC174F099 /* Pods_CucumberTests.framework */,
+				7ECF88FBB45FBC97FE0BEDC8 /* Pods_CucumberTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -184,15 +151,15 @@
 			buildConfigurationList = 640DFEF32A370DA300ABF2DD /* Build configuration list for PBXNativeTarget "CucumberTests" */;
 			buildPhases = (
 				693FEEC8CBD656800AEB356B /* [CP] Check Pods Manifest.lock */,
+				648329012A43377A00E5A4A8 /* Embed framework */,
 				640DFEE52A370DA300ABF2DD /* Sources */,
 				640DFEE62A370DA300ABF2DD /* Frameworks */,
 				640DFEE72A370DA300ABF2DD /* Resources */,
-				0EEE66E6080983248758F1D9 /* [CP] Embed Pods Frameworks */,
+				558CBE5BFDE9242446515341 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				640DFEF02A370DA300ABF2DD /* PBXTargetDependency */,
 			);
 			name = CucumberTests;
 			productName = CucumberTests;
@@ -203,12 +170,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "ios" */;
 			buildPhases = (
-				4D90C871D369CA893D35D6BE /* [CP] Check Pods Manifest.lock */,
+				648329002A43373100E5A4A8 /* Embed Framework */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				46300BA9CC087F9271C3AAF0 /* Frameworks */,
-				B9789070BFB9AEAB151975F1 /* [CP] Embed Pods Frameworks */,
-				649B6F972A388AF200C40DCC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -279,7 +244,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0EEE66E6080983248758F1D9 /* [CP] Embed Pods Frameworks */ = {
+		558CBE5BFDE9242446515341 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -296,7 +261,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CucumberTests/Pods-CucumberTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4D90C871D369CA893D35D6BE /* [CP] Check Pods Manifest.lock */ = {
+		648329002A43373100E5A4A8 /* Embed Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -304,19 +269,33 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "Embed Framework";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ios-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "cd \"$SRCROOT/../\"\n\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+		};
+		648329012A43377A00E5A4A8 /* Embed framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Embed framework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT/../\"\n\n./gradlew :cucumberShared:embedAndSignAppleFrameworkForXcode\n";
 		};
 		693FEEC8CBD656800AEB356B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -340,23 +319,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B9789070BFB9AEAB151975F1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ios/Pods-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ios/Pods-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios/Pods-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -364,6 +326,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				648329022A43391500E5A4A8 /* ContentView.swift in Sources */,
+				648329032A43391500E5A4A8 /* iOSApp.swift in Sources */,
 				640DFEF82A370F5C00ABF2DD /* CucumberTests.m in Sources */,
 				649B6F9A2A389F5F00C40DCC /* XCUIElement.swift in Sources */,
 				640DFEEC2A370DA300ABF2DD /* CucumberTests.swift in Sources */,
@@ -382,14 +346,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		640DFEF02A370DA300ABF2DD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7555FF7A242A565900829871 /* ios */;
-			targetProxy = 640DFEEF2A370DA300ABF2DD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		640DFEF12A370DA300ABF2DD /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -405,8 +361,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
 					"$(inherited)",
-					"\"${PODS_ROOT}/../../shared/build/cocoapods/framework\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Cucumberish\"",
+					"$(SRCROOT)/../cucumberShared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -416,7 +373,11 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					shared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.corrado4eyes.CucumberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -441,6 +402,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS)",
+					"$(SRCROOT)/../cucumberShared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -450,7 +413,11 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					shared,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.corrado4eyes.CucumberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -579,7 +546,6 @@
 		};
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21CFECE4C5E740AFF81BFD88 /* Pods-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -589,7 +555,7 @@
 					"$(inherited)",
 					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Cucumberish\"",
-					"\"${PODS_ROOT}/../../shared/build/cocoapods/framework\"",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -597,14 +563,9 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = (
-					"-l\"c++\"",
-					"-framework",
-					"\"Cucumberish\"",
-					"-framework",
-					"\"shared\"",
 					"$(inherited)",
 					"-framework",
-					XCTest,
+					shared,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -615,26 +576,21 @@
 		};
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A0234222154A44D8804AEAD /* Pods-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ios/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = (
-					"-l\"c++\"",
-					"-framework",
-					"\"Cucumberish\"",
-					"-framework",
-					"\"shared\"",
 					"$(inherited)",
 					"-framework",
-					XCTest,
+					shared,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
