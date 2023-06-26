@@ -1,6 +1,7 @@
 package com.corrado4eyes.cucumberplayground.common.model.main
 
 import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
+import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import com.splendo.kaluga.architecture.observable.toInitializedObservable
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -8,10 +9,13 @@ import kotlinx.coroutines.launch
 
 sealed class Navigator {
     object Loading : Navigator()
-    object Login : Navigator()
+    data class Login(
+        val loginEvent: (email: String, pass: String) -> Unit
+    ) : Navigator()
+
     data class Home(
         val email: String,
-        val logoutEven: () -> Unit
+        val logoutEvent: () -> Unit
     ) : Navigator()
 }
 
@@ -27,12 +31,21 @@ class MainViewModel : BaseLifecycleViewModel() {
             authService.observeUser().collect { user ->
                 user?.let {
                     _navState.value = Navigator.Home(it.email, ::logout)
-                } ?: run { _navState.value = Navigator.Login }
+                } ?: run { _navState.value = Navigator.Login(::login) }
             }
         }
     }
 
     private fun logout() {
         coroutineScope.launch { authService.logout() }
+    }
+
+    private fun login(email: String, password: String) {
+        coroutineScope.launch {
+            val authResponse = authService.login(email, password)
+            if (authResponse is AuthResponse.Error) {
+                // TODO display error
+            }
+        }
     }
 }
