@@ -3,17 +3,20 @@ package com.corrado4eyes.cucumberplayground.login
 import com.corrado4eyes.cucumberplayground.common.model.User
 import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 interface AuthService {
     suspend fun login(email: String, pass: String): AuthResponse
     suspend fun logout()
     suspend fun signUp(email: String, pass: String): AuthResponse
-    fun getCurrentUserIfAny(): User?
+    fun observeUser(): Flow<User?>
 }
 
 class AuthServiceImpl : AuthService {
 
-    private var currentUser: User? = null
+    private var currentUser: MutableStateFlow<User?> = MutableStateFlow(null)
 
     private val users = mutableListOf(
         User("alex@alex.com", "1234"),
@@ -26,14 +29,14 @@ class AuthServiceImpl : AuthService {
         if (pass.isEmpty()) return AuthResponse.Error("Password can not empty")
         val user = users.find { it.email == email && it.pass == pass }
         return user?.let {
-            currentUser = it
+            currentUser.value = it
             AuthResponse.Success
         } ?: AuthResponse.Error("Invalid credentials")
     }
 
     override suspend fun logout() {
         delay(1000)
-        currentUser = null
+        currentUser.value = null
     }
 
     override suspend fun signUp(email: String, pass: String): AuthResponse {
@@ -50,7 +53,7 @@ class AuthServiceImpl : AuthService {
         }
     }
 
-    override fun getCurrentUserIfAny(): User? {
-        return currentUser
+    override fun observeUser(): Flow<User?> {
+        return currentUser.asStateFlow()
     }
 }
