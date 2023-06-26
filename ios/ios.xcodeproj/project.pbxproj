@@ -295,7 +295,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/../\"\necho \"Building cucumberShared framework 🔥\"\n./gradlew :cucumberShared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "cd \"$SRCROOT/../\"\n\n./gradlew :cucumberShared:embedAndSignAppleFrameworkForXcode\n";
 		};
 		693FEEC8CBD656800AEB356B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -361,9 +361,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
 					"$(inherited)",
-					"\"${PODS_ROOT}/../../shared/build/cocoapods/framework\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Cucumberish\"",
 					"$(SRCROOT)/../cucumberShared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -403,6 +403,7 @@
 					"$(inherited)",
 					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(SRCROOT)/../cucumberShared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -554,7 +555,6 @@
 					"$(inherited)",
 					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Cucumberish\"",
-					"\"${PODS_ROOT}/../../shared/build/cocoapods/framework\"",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = ios/Info.plist;

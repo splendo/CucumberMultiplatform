@@ -82,9 +82,6 @@ android {
     }
 }
 
-private val rootPath = "/build/cocoapods"
-private val splitRegex = "(\" )?\"".toRegex()
-
 val KotlinNativeTarget.targetType: String get() {
     val isSimulatorTarget: Boolean =
         konanTarget is org.jetbrains.kotlin.konan.target.KonanTarget.IOS_X64 || konanTarget is org.jetbrains.kotlin.konan.target.KonanTarget.IOS_SIMULATOR_ARM64
@@ -92,7 +89,7 @@ val KotlinNativeTarget.targetType: String get() {
 }
 
 fun Properties.getPropertyOrNull(key: String) = if (hasProperty(key)) getProperty(key) else null
-fun Properties.getListProperty(key: String) = getPropertyOrNull(key).orEmpty().split(splitRegex).filter { it.isNotEmpty() }
+fun Properties.getListProperty(key: String) = getPropertyOrNull(key).orEmpty().split("(\" )?\"".toRegex()).filter { it.isNotEmpty() }
 
 fun Properties.getFrameworkSearchPaths() = (getListProperty("FRAMEWORK_SEARCH_PATHS") + getPropertyOrNull("CONFIGURATION_BUILD_DIR")).filterNotNull()
 
@@ -103,7 +100,7 @@ fun Properties.getFrameworkSearchPaths() = (getListProperty("FRAMEWORK_SEARCH_PA
  * @return the [Properties] file of the dependency
  */
 fun KotlinNativeTarget.getPropertiesForDependency(dependency: String, pathToIosDependencies: String): Properties {
-    val path = "$pathToIosDependencies$rootPath/buildSettings/build-settings-$targetType-$dependency.properties"
+    val path = "$pathToIosDependencies/build/cocoapods/buildSettings/build-settings-$targetType-$dependency.properties"
     val file = org.jetbrains.kotlin.konan.file.File(path)
     return file.loadProperties()
 }
@@ -117,7 +114,7 @@ fun KotlinNativeTarget.getPropertiesForDependency(dependency: String, pathToIosD
  */
 fun Project.dependenciesFromDefs(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }): List<String> {
     // Load all .def files from the defs folder to determine the list of dependencies
-    val defs = File("$pathToIosDependencies$rootPath/defs")
+    val defs = File("$pathToIosDependencies/build/cocoapods/defs")
     return defs.listFilesOrEmpty.mapNotNull { dependency ->
         val fileName = dependency.name.removeSuffix(".${dependency.extension}")
         when {
