@@ -10,7 +10,6 @@ plugins {
 }
 
 kotlin {
-    val kalugaVersion: String by project
 
     android {
         compilations.all {
@@ -26,12 +25,6 @@ kotlin {
                 export(project(":shared"))
                 export(project(":cucumber"))
                 baseName = "shared"
-
-                export("com.splendo.kaluga:alerts:$kalugaVersion")
-                export("com.splendo.kaluga:architecture:$kalugaVersion")
-                export("com.splendo.kaluga:hud:$kalugaVersion")
-                export("com.splendo.kaluga:keyboard:$kalugaVersion")
-                export("com.splendo.kaluga:resources:$kalugaVersion")
 
                 linkFrameworkSearchPaths("$projectDir/../cucumber")
 
@@ -51,14 +44,6 @@ kotlin {
             dependencies {
                 api(project(":shared"))
                 api(project(":cucumber"))
-                api("com.splendo.kaluga:alerts:$kalugaVersion")
-                api("com.splendo.kaluga:architecture:$kalugaVersion")
-                api("com.splendo.kaluga:base:$kalugaVersion")
-                api("com.splendo.kaluga:hud:$kalugaVersion")
-                api("com.splendo.kaluga:keyboard:$kalugaVersion")
-                api("com.splendo.kaluga:resources:$kalugaVersion")
-                api("com.splendo.kaluga:service:$kalugaVersion")
-                api("com.splendo.kaluga:system:$kalugaVersion")
             }
         }
         val commonTest by getting {

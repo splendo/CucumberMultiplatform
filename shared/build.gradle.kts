@@ -6,11 +6,18 @@ plugins {
 }
 
 kotlin {
+    val kalugaVersion: String by project
 
     val target: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit = {
         binaries {
             framework {
                 baseName = "shared"
+
+                export("com.splendo.kaluga:alerts:$kalugaVersion")
+                export("com.splendo.kaluga:architecture:$kalugaVersion")
+                export("com.splendo.kaluga:hud:$kalugaVersion")
+                export("com.splendo.kaluga:keyboard:$kalugaVersion")
+                export("com.splendo.kaluga:resources:$kalugaVersion")
             }
         }
     }
@@ -31,6 +38,14 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+                api("com.splendo.kaluga:alerts:$kalugaVersion")
+                api("com.splendo.kaluga:architecture:$kalugaVersion")
+                api("com.splendo.kaluga:base:$kalugaVersion")
+                api("com.splendo.kaluga:hud:$kalugaVersion")
+                api("com.splendo.kaluga:keyboard:$kalugaVersion")
+                api("com.splendo.kaluga:resources:$kalugaVersion")
+                api("com.splendo.kaluga:service:$kalugaVersion")
+                api("com.splendo.kaluga:system:$kalugaVersion")
             }
         }
         val commonTest by getting {
