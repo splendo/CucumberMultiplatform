@@ -150,8 +150,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 640DFEF32A370DA300ABF2DD /* Build configuration list for PBXNativeTarget "CucumberTests" */;
 			buildPhases = (
-				648329012A43377A00E5A4A8 /* Embed framework */,
 				693FEEC8CBD656800AEB356B /* [CP] Check Pods Manifest.lock */,
+				648329012A43377A00E5A4A8 /* Embed framework */,
 				640DFEE52A370DA300ABF2DD /* Sources */,
 				640DFEE62A370DA300ABF2DD /* Frameworks */,
 				640DFEE72A370DA300ABF2DD /* Resources */,

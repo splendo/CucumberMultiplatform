@@ -1,6 +1,4 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.AbstractExecutable
-import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBinary
 import org.jetbrains.kotlin.konan.file.File
 import org.jetbrains.kotlin.konan.properties.Properties
 import org.jetbrains.kotlin.konan.properties.hasProperty
@@ -84,6 +82,9 @@ android {
     }
 }
 
+private val rootPath = "/build/cocoapods"
+private val splitRegex = "(\" )?\"".toRegex()
+
 val KotlinNativeTarget.targetType: String get() {
     val isSimulatorTarget: Boolean =
         konanTarget is org.jetbrains.kotlin.konan.target.KonanTarget.IOS_X64 || konanTarget is org.jetbrains.kotlin.konan.target.KonanTarget.IOS_SIMULATOR_ARM64
@@ -91,7 +92,7 @@ val KotlinNativeTarget.targetType: String get() {
 }
 
 fun Properties.getPropertyOrNull(key: String) = if (hasProperty(key)) getProperty(key) else null
-fun Properties.getListProperty(key: String) = getPropertyOrNull(key).orEmpty().split("(\" )?\"".toRegex()).filter { it.isNotEmpty() }
+fun Properties.getListProperty(key: String) = getPropertyOrNull(key).orEmpty().split(splitRegex).filter { it.isNotEmpty() }
 
 fun Properties.getFrameworkSearchPaths() = (getListProperty("FRAMEWORK_SEARCH_PATHS") + getPropertyOrNull("CONFIGURATION_BUILD_DIR")).filterNotNull()
 
@@ -102,8 +103,8 @@ fun Properties.getFrameworkSearchPaths() = (getListProperty("FRAMEWORK_SEARCH_PA
  * @return the [Properties] file of the dependency
  */
 fun KotlinNativeTarget.getPropertiesForDependency(dependency: String, pathToIosDependencies: String): Properties {
-    val path = "$pathToIosDependencies/build/cocoapods/buildSettings/build-settings-$targetType-$dependency.properties"
-    val file = File(path)
+    val path = "$pathToIosDependencies$rootPath/buildSettings/build-settings-$targetType-$dependency.properties"
+    val file = org.jetbrains.kotlin.konan.file.File(path)
     return file.loadProperties()
 }
 
@@ -116,7 +117,7 @@ fun KotlinNativeTarget.getPropertiesForDependency(dependency: String, pathToIosD
  */
 fun Project.dependenciesFromDefs(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }): List<String> {
     // Load all .def files from the defs folder to determine the list of dependencies
-    val defs = File("$pathToIosDependencies/build/cocoapods/defs")
+    val defs = File("$pathToIosDependencies$rootPath/defs")
     return defs.listFilesOrEmpty.mapNotNull { dependency ->
         val fileName = dependency.name.removeSuffix(".${dependency.extension}")
         when {
@@ -146,18 +147,20 @@ fun KotlinNativeTarget.createFrameworkSearchPath(pathToIosDependencies: String, 
  * @param pathToIosDependencies the absolute path to the root folder of the health-ios-dependencies module
  * @param includeDependency returns whether a dependency with a given name should be added to the `NativeBinary`.
  */
-fun NativeBinary.linkFrameworkSearchPaths(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }) {
+fun org.jetbrains.kotlin.gradle.plugin.mpp.NativeBinary.linkFrameworkSearchPaths(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }) {
     val frameworkSearchPaths = target.createFrameworkSearchPath(pathToIosDependencies, includeDependency)
     // Add all framework search paths
     linkerOpts(frameworkSearchPaths.map { "-F$it" })
 
     // Add all frameworks specified by the framework search paths
     dependenciesFromDefs(pathToIosDependencies, includeDependency).forEach { dependency ->
-        val frameworkFileExists = frameworkSearchPaths.any { dir -> File("$dir/$dependency.framework").exists }
+        val frameworkFileExists = frameworkSearchPaths.any { dir -> org.jetbrains.kotlin.konan.file.File(
+            "$dir/$dependency.framework"
+        ).exists }
         if (frameworkFileExists) linkerOpts("-framework", dependency)
     }
     // For executable we should set the rpath so the framework is included in the build
-    if (this is AbstractExecutable) {
+    if (this is org.jetbrains.kotlin.gradle.plugin.mpp.AbstractExecutable) {
         frameworkSearchPaths.forEach {
             linkerOpts("-rpath", it)
         }

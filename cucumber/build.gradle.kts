@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -24,9 +26,7 @@ kotlin {
         framework {
             baseName = "cucumber"
         }
-        pod("Cucumberish") {
-            version = "1.4.0"
-        }
+        pod("Cucumberish")
     }
     
     sourceSets {
@@ -74,7 +74,6 @@ android {
 
 tasks.withType<org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask>().configureEach {
     doLast {
-
         val xcodeprojFiles = listOf(
             "Pods/Pods.xcodeproj",
             "synthetic.xcodeproj",
