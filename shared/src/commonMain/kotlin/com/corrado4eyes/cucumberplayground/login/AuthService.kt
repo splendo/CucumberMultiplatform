@@ -21,7 +21,8 @@ class AuthServiceImpl : AuthService {
 
     private val users = mutableListOf(
         User("alex@alex.com", "1234"),
-        User("corrado@corrado.com", "1234")
+        User("corrado@corrado.com", "1234"),
+        User("test@test.com", "1234")
     )
 
     override suspend fun login(email: String, pass: String): AuthResponse {
