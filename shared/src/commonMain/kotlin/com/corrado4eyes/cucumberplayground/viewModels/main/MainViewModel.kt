@@ -1,6 +1,6 @@
-package com.corrado4eyes.cucumberplayground.home
+package com.corrado4eyes.cucumberplayground.main
 
-import com.corrado4eyes.cucumberplayground.home.HomeViewState.Loading
+import com.corrado4eyes.cucumberplayground.main.HomeViewState.Loading
 import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
 import com.splendo.kaluga.architecture.observable.toInitializedObservable
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
@@ -13,7 +13,7 @@ sealed class HomeViewState {
     object Loading : HomeViewState()
 }
 
-class HomeViewModel() : BaseLifecycleViewModel() {
+class MainViewModel() : BaseLifecycleViewModel() {
 
     private val authService = AuthServiceImpl()
 
