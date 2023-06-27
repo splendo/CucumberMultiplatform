@@ -10,7 +10,7 @@ kotlin {
     android {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
@@ -28,7 +28,7 @@ kotlin {
         }
         pod("Cucumberish")
     }
-    
+
     sourceSets {
         val commonMain by getting
         val commonTest by getting {
@@ -70,9 +70,13 @@ android {
     defaultConfig {
         minSdk = 29
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask>().configureEach {
+tasks.withType<PodGenTask>().configureEach {
     doLast {
         val xcodeprojFiles = listOf(
             "Pods/Pods.xcodeproj",
