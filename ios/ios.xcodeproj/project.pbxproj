@@ -32,6 +32,32 @@
 		648329022A43391500E5A4A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		648329032A43391500E5A4A8 /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		6483290D2A4AE1C000E5A4A8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483290C2A4AE1C000E5A4A8 /* LoginView.swift */; };
+		6483290E2A4AE69D00E5A4A8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6483290C2A4AE1C000E5A4A8 /* LoginView.swift */; };
+		6483290F2A4AE6B200E5A4A8 /* Color+Color.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76088B1B2130282DA6BB6E45 /* Color+Color.generated.swift */; };
+		648329102A4AE6B600E5A4A8 /* ContainerView.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE43767F0B59D440634298D /* ContainerView.generated.swift */; };
+		648329112A4AE6BB00E5A4A8 /* LazyView.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CBAFDA191747DE6BFB4B0 /* LazyView.generated.swift */; };
+		648329122A4AE6BB00E5A4A8 /* ListSubject.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6188C0AEA563E5E4D3E7AB /* ListSubject.generated.swift */; };
+		648329132A4AE6BB00E5A4A8 /* LifecycleViewModel.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CADD6A42A7B9222F7B30AA6 /* LifecycleViewModel.generated.swift */; };
+		648329142A4AE6BB00E5A4A8 /* KalugaStyledString+SwiftUI.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D963EF3C4F0C141A4A80C891 /* KalugaStyledString+SwiftUI.generated.swift */; };
+		648329152A4AE6BB00E5A4A8 /* Subject.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45727342CFD5BEA57D61051 /* Subject.generated.swift */; };
+		648329162A4AE6BB00E5A4A8 /* NavigationBarColor.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5416DF2E8BB6BE190C0431AF /* NavigationBarColor.generated.swift */; };
+		648329172A4AE6BB00E5A4A8 /* PlatformValueMapper.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E798EA8B136B833082411B4 /* PlatformValueMapper.generated.swift */; };
+		648329182A4AE6BB00E5A4A8 /* RoutingState.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA39B482E4B46EDBEF4E573 /* RoutingState.generated.swift */; };
+		648329192A4AE6BB00E5A4A8 /* KalugaBackgroundStyle+SwiftUI.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91AE96E17B56B56CB7AF766 /* KalugaBackgroundStyle+SwiftUI.generated.swift */; };
+		6483291A2A4AE6BB00E5A4A8 /* ListObservable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140577234C8D9C9BD309475E /* ListObservable.generated.swift */; };
+		6483291B2A4AE6BB00E5A4A8 /* Navigation.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A492DFDE55EF1239A015ECBA /* Navigation.generated.swift */; };
+		6483291C2A4AE6BB00E5A4A8 /* PlatformMappers.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7A62257F00AFBB12B8616B /* PlatformMappers.generated.swift */; };
+		6483291D2A4AE6BB00E5A4A8 /* Shape+Helpers.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F764B357F53351DA1C5F453 /* Shape+Helpers.generated.swift */; };
+		6483291E2A4AE6BB00E5A4A8 /* UninitializedObservable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B350D3EB640C8B7B253753 /* UninitializedObservable.generated.swift */; };
+		6483291F2A4AE6BB00E5A4A8 /* KalugaDate+Extensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D787A9CEB2779127CD15B6F /* KalugaDate+Extensions.generated.swift */; };
+		648329202A4AE6BB00E5A4A8 /* TintedImage+Image.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52FF51F397E317F81326758 /* TintedImage+Image.generated.swift */; };
+		648329212A4AE6BB00E5A4A8 /* UninitializedSubject.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191BB22D1226AD539DDC6631 /* UninitializedSubject.generated.swift */; };
+		648329222A4AE6BB00E5A4A8 /* KalugaButton+SwiftUI.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5DBA2F73F7FE042D3B40A /* KalugaButton+SwiftUI.generated.swift */; };
+		648329232A4AE6BB00E5A4A8 /* Observable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69246E55BCB962279D2220E0 /* Observable.generated.swift */; };
+		648329242A4AE6BB00E5A4A8 /* KeyboardManager.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0771BA10F31A50A9BC22A18 /* KeyboardManager.generated.swift */; };
+		648329252A4AE6BB00E5A4A8 /* KalugaLabel+SwiftUI.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A826344DD859D1A70A50DA /* KalugaLabel+SwiftUI.generated.swift */; };
+		648329262A4AE6BB00E5A4A8 /* DefaultValues.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC158DB5DDE249A03B2F51AC /* DefaultValues.generated.swift */; };
+		648329272A4AE6BB00E5A4A8 /* HasDefaultValue.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FBD06B4210EBAC91D0F6B4 /* HasDefaultValue.generated.swift */; };
 		649B6F942A388AC600C40DCC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 649B6F932A388AC600C40DCC /* XCTest.framework */; platformFilter = ios; };
 		649B6F9A2A389F5F00C40DCC /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B6F992A389F5F00C40DCC /* XCUIElement.swift */; };
 		649B6F9C2A389F9300C40DCC /* Timeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B6F9B2A389F9300C40DCC /* Timeout.swift */; };
@@ -362,13 +388,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CucumberTests/Pods-CucumberTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CucumberTests/Pods-CucumberTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -441,9 +463,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				648329022A43391500E5A4A8 /* ContentView.swift in Sources */,
+				648329192A4AE6BB00E5A4A8 /* KalugaBackgroundStyle+SwiftUI.generated.swift in Sources */,
+				6483291B2A4AE6BB00E5A4A8 /* Navigation.generated.swift in Sources */,
+				6483290E2A4AE69D00E5A4A8 /* LoginView.swift in Sources */,
+				648329172A4AE6BB00E5A4A8 /* PlatformValueMapper.generated.swift in Sources */,
+				648329132A4AE6BB00E5A4A8 /* LifecycleViewModel.generated.swift in Sources */,
+				6483291A2A4AE6BB00E5A4A8 /* ListObservable.generated.swift in Sources */,
+				648329122A4AE6BB00E5A4A8 /* ListSubject.generated.swift in Sources */,
+				648329252A4AE6BB00E5A4A8 /* KalugaLabel+SwiftUI.generated.swift in Sources */,
+				648329162A4AE6BB00E5A4A8 /* NavigationBarColor.generated.swift in Sources */,
+				648329102A4AE6B600E5A4A8 /* ContainerView.generated.swift in Sources */,
+				648329242A4AE6BB00E5A4A8 /* KeyboardManager.generated.swift in Sources */,
+				6483291C2A4AE6BB00E5A4A8 /* PlatformMappers.generated.swift in Sources */,
+				648329222A4AE6BB00E5A4A8 /* KalugaButton+SwiftUI.generated.swift in Sources */,
+				6483291F2A4AE6BB00E5A4A8 /* KalugaDate+Extensions.generated.swift in Sources */,
+				648329182A4AE6BB00E5A4A8 /* RoutingState.generated.swift in Sources */,
+				648329262A4AE6BB00E5A4A8 /* DefaultValues.generated.swift in Sources */,
+				6483291D2A4AE6BB00E5A4A8 /* Shape+Helpers.generated.swift in Sources */,
 				648329032A43391500E5A4A8 /* iOSApp.swift in Sources */,
 				640DFEF82A370F5C00ABF2DD /* CucumberTests.m in Sources */,
+				648329152A4AE6BB00E5A4A8 /* Subject.generated.swift in Sources */,
+				648329272A4AE6BB00E5A4A8 /* HasDefaultValue.generated.swift in Sources */,
+				648329212A4AE6BB00E5A4A8 /* UninitializedSubject.generated.swift in Sources */,
+				648329232A4AE6BB00E5A4A8 /* Observable.generated.swift in Sources */,
+				6483290F2A4AE6B200E5A4A8 /* Color+Color.generated.swift in Sources */,
+				648329142A4AE6BB00E5A4A8 /* KalugaStyledString+SwiftUI.generated.swift in Sources */,
 				649B6F9A2A389F5F00C40DCC /* XCUIElement.swift in Sources */,
+				648329202A4AE6BB00E5A4A8 /* TintedImage+Image.generated.swift in Sources */,
+				648329112A4AE6BB00E5A4A8 /* LazyView.generated.swift in Sources */,
+				6483291E2A4AE6BB00E5A4A8 /* UninitializedObservable.generated.swift in Sources */,
 				640DFEEC2A370DA300ABF2DD /* CucumberTests.swift in Sources */,
 				649B6F9C2A389F9300C40DCC /* Timeout.swift in Sources */,
 			);
@@ -501,8 +549,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
 					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Cucumberish\"",
 					"$(SRCROOT)/../cucumberShared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Cucumberish\"",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;

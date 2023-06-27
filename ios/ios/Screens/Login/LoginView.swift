@@ -38,25 +38,35 @@ struct LoginView: SwiftUI.View {
     
     var body: some View {
         viewModel.lifecycleView { viewModel in
-            VStack {
-                TextField(viewModel.emailPlaceholder, text: $emailText.value)
-                    .autocapitalization(.none)
-                Text(emailErrorText.value)
-                TextField(viewModel.passwordPlaceholder, text: $passwordText.value)
-                    .autocapitalization(.none)
-                Text(passwordErrorText.value)
-                
-                Text(formFooterErrorText.value)
-                
-                if isLoading.value {
-                    ProgressView()
+            NavigationView {
+                VStack {
+                    TextField(viewModel.emailPlaceholder, text: $emailText.value)
+                        .autocapitalization(.none)
+                        .accessibilityLabel(viewModel.emailPlaceholder)
+                    Text(emailErrorText.value)
+                    SecureField(viewModel.passwordPlaceholder, text: $passwordText.value)
+                        .autocapitalization(.none)
+                        .accessibilityLabel(viewModel.passwordPlaceholder)
+                    Text(passwordErrorText.value)
+                    
+                    Text(formFooterErrorText.value)
+                    
+                    if isLoading.value {
+                        ProgressView()
+                    }
+                    
+                    Button(action: viewModel.login) {
+                        Text(viewModel.buttonTitle)
+                    }.disabled(!isButtonEnabled.value)
+                    Spacer()
                 }
-                
-                Button(action: viewModel.login) {
-                    Text(viewModel.buttonTitle)
-                }.disabled(!isButtonEnabled.value)
-                Spacer()
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(viewModel.screenTitle)
+                    }
+                }.navigationBarTitleDisplayMode(.inline)
             }
+            
         }
     }
 }
