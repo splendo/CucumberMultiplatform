@@ -11,22 +11,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.corrado4eyes.cucumberplayground.android.home.HomeLayout
 import com.corrado4eyes.cucumberplayground.android.login.LoginLayout
 import com.corrado4eyes.cucumberplayground.common.model.main.MainViewModel
-import com.corrado4eyes.cucumberplayground.common.model.main.Navigator
+import com.corrado4eyes.cucumberplayground.common.model.main.AppNavigator
+import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
 import com.splendo.kaluga.architecture.compose.state
 
 @Composable
 fun MainActivityLayout() {
     MyApplicationTheme {
-        val mainViewModel = remember { MainViewModel() }
+        val authService = AuthServiceImpl()
+        val mainViewModel = remember { MainViewModel(authService) }
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
             val navState by mainViewModel.navState.state()
             when(val state = navState) {
-                is Navigator.Home -> HomeLayout(state.email, state.logoutEvent)
-                Navigator.Loading -> {}
-                is Navigator.Login -> LoginLayout(state.loginEvent)
+                is AppNavigator.Home -> HomeLayout(state.user, authService)
+                is AppNavigator.Loading -> {}
+                is AppNavigator.Login -> LoginLayout(authService)
             }
         }
     }
