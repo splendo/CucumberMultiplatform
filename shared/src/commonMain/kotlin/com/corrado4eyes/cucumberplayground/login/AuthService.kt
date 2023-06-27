@@ -11,12 +11,13 @@ interface AuthService {
     suspend fun login(email: String, pass: String): AuthResponse
     suspend fun logout()
     suspend fun signUp(email: String, pass: String): AuthResponse
-    fun observeUser(): Flow<User?>
+    val user: Flow<User?>
 }
 
 class AuthServiceImpl : AuthService {
 
     private var currentUser: MutableStateFlow<User?> = MutableStateFlow(null)
+    override val user: Flow<User?> = currentUser.asStateFlow()
 
     private val users = mutableListOf(
         User("alex@alex.com", "1234"),
@@ -49,9 +50,5 @@ class AuthServiceImpl : AuthService {
             users.add(User(email, pass))
             AuthResponse.Success
         }
-    }
-
-    override fun observeUser(): Flow<User?> {
-        return currentUser.asStateFlow()
     }
 }

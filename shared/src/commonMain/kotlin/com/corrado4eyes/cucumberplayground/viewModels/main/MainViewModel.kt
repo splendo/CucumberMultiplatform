@@ -1,6 +1,9 @@
 package com.corrado4eyes.cucumberplayground.viewModels.main
 
+import com.corrado4eyes.cucumberplayground.login.AuthService
+import com.corrado4eyes.cucumberplayground.models.User
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
+import kotlinx.coroutines.launch
 
 sealed class HomeViewState {
     data class Valid(val userEmail: String) : HomeViewState()
@@ -9,10 +12,13 @@ sealed class HomeViewState {
 }
 
 class HomeViewModel(
-    val userMail: String,
-    private val logoutEvent: () -> Unit
+    val user: User,
+    private val authService: AuthService
 ) : BaseLifecycleViewModel() {
+
     fun logout() {
-        logoutEvent()
+        coroutineScope.launch {
+            authService.logout()
+        }
     }
 }

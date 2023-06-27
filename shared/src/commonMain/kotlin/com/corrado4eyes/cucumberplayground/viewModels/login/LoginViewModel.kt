@@ -1,5 +1,6 @@
 package com.corrado4eyes.cucumberplayground.viewModels.login
 
+import com.corrado4eyes.cucumberplayground.login.AuthService
 import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
 import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import com.splendo.kaluga.architecture.observable.toInitializedObservable
@@ -13,7 +14,7 @@ import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class LoginViewModel : BaseLifecycleViewModel() {
+class LoginViewModel(private val authService: AuthService) : BaseLifecycleViewModel() {
 
     sealed class LoginViewState {
         object Idle : LoginViewState()
@@ -26,8 +27,6 @@ class LoginViewModel : BaseLifecycleViewModel() {
         }
         object Loading : LoginViewState()
     }
-
-    private val authService = AuthServiceImpl()
 
     private val viewState = MutableStateFlow<LoginViewState>(LoginViewState.Idle)
 
@@ -93,7 +92,7 @@ class LoginViewModel : BaseLifecycleViewModel() {
                     return@launch
                 }
             }
-            delay(2000)
+            delay(1000)
             when(authService.login(email.value, password.value)) {
                 is AuthResponse.Success -> viewState.value = LoginViewState.Idle // navigate to Home screen
                 is AuthResponse.Error -> {
@@ -101,7 +100,6 @@ class LoginViewModel : BaseLifecycleViewModel() {
                     return@launch
                 }
             }
-            viewState.value = LoginViewState.Idle
         }
     }
 }
