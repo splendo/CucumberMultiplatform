@@ -22,6 +22,7 @@ kotlin {
     val target: KotlinNativeTarget.() -> Unit = {
         binaries {
             framework {
+                transitiveExport = true
                 export(project(":shared"))
                 export(project(":cucumber"))
                 baseName = "shared"
