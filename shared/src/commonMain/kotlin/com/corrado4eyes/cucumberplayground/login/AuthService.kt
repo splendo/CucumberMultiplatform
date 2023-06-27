@@ -1,6 +1,6 @@
 package com.corrado4eyes.cucumberplayground.login
 
-import com.corrado4eyes.cucumberplayground.common.model.User
+import com.corrado4eyes.cucumberplayground.models.User
 import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import kotlinx.coroutines.delay
 
@@ -21,7 +21,6 @@ class AuthServiceImpl : AuthService {
     )
 
     override suspend fun login(email: String, pass: String): AuthResponse {
-        delay(2000)
         if (email.isEmpty()) return AuthResponse.Error("Invalid email")
         if (pass.isEmpty()) return AuthResponse.Error("Password can not empty")
         val user = users.find { it.email == email && it.pass == pass }
@@ -32,7 +31,6 @@ class AuthServiceImpl : AuthService {
     }
 
     override suspend fun logout() {
-        delay(1000)
         currentUser = null
     }
 
