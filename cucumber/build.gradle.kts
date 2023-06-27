@@ -72,7 +72,7 @@ android {
     }
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask>().configureEach {
+tasks.withType<PodGenTask>().configureEach {
     doLast {
         val xcodeprojFiles = listOf(
             "Pods/Pods.xcodeproj",

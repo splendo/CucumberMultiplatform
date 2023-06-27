@@ -27,13 +27,42 @@ abstract class BaseGherkinTestCase : GherkinTestCase {
 }
 
 sealed class TestCase : BaseGherkinTestCase() {
+    companion object {
+        const val EXPECT_VALUE_STRING = "\\\"(.*)\\\""
+    }
     sealed class Common : TestCase() {
         class ScreenIsVisible(override val lambda: GherkinLambda) : Common() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Given("I am in the \\\"(.*)\\\" screen")
+            override val step: CucumberDefinition = CucumberDefinition.Step.Given("I am in the $EXPECT_VALUE_STRING screen")
         }
 
         class TitleIsVisible(override val lambda: GherkinLambda) : Common() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see \\\"(.*)\\\" text")
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see $EXPECT_VALUE_STRING text")
+        }
+
+        class IsUserAuthenticated(override val lambda: GherkinLambda) : Common() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Given("I am logged $EXPECT_VALUE_STRING")
+        }
+
+        class ButtonIsVisible(override val lambda: GherkinLambda) : Common() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING button")
+        }
+    }
+
+    sealed class Login : TestCase() {
+        sealed class Common : Login() {
+            class TextFieldIsVisible(override val lambda: GherkinLambda) : Common() {
+                override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING textfield with text $EXPECT_VALUE_STRING")
+            }
+        }
+        class FillEmailTextField(override val lambda: GherkinLambda) : Login() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I type an email in the email field")
+        }
+        class FillPasswordTextField(override val lambda: GherkinLambda) : Login() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I type a password in the password field")
+        }
+
+        class PressLoginButton(override val lambda: GherkinLambda) : Login() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I press the login button")
         }
     }
 }
