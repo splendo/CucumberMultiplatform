@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.corrado4eyes.cucumberplayground.login.AuthService
 import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
 import com.corrado4eyes.cucumberplayground.models.User
-import com.corrado4eyes.cucumberplayground.viewModels.main.HomeViewModel
+import com.corrado4eyes.cucumberplayground.viewModels.home.HomeViewModel
 
 @Composable
 fun HomeLayout(
