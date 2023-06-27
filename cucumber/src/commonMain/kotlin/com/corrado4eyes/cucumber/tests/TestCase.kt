@@ -39,12 +39,12 @@ sealed class TestCase : BaseGherkinTestCase() {
             override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see $EXPECT_VALUE_STRING text")
         }
 
-        class IsUserAuthenticated(override val lambda: GherkinLambda) : Common() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Given("I am logged $EXPECT_VALUE_STRING")
-        }
-
         class ButtonIsVisible(override val lambda: GherkinLambda) : Common() {
             override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING button")
+        }
+
+        class NavigateToScreen(override val lambda: GherkinLambda) : Common() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING screen")
         }
     }
 
@@ -55,14 +55,23 @@ sealed class TestCase : BaseGherkinTestCase() {
             }
         }
         class FillEmailTextField(override val lambda: GherkinLambda) : Login() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I type an email in the email field")
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I type $EXPECT_VALUE_STRING in the email field")
         }
         class FillPasswordTextField(override val lambda: GherkinLambda) : Login() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I type a password in the password field")
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I type $EXPECT_VALUE_STRING in the password field")
         }
 
         class PressLoginButton(override val lambda: GherkinLambda) : Login() {
             override val step: CucumberDefinition = CucumberDefinition.Step.Then("I press the login button")
+        }
+    }
+
+    sealed class Home : TestCase() {
+        class LoggedInEmail(override val lambda: GherkinLambda) : Home() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Given("Email is $EXPECT_VALUE_STRING")
+        }
+        class PressLogoutButton(override val lambda: GherkinLambda) : Login() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I press the logout button")
         }
     }
 }
