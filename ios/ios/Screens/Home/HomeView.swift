@@ -18,12 +18,19 @@ struct HomeView: SwiftUI.View {
  
     var body: some View {
         viewModel.lifecycleView { viewModel in
-            VStack {
-                Text(viewModel.user.email)
-                
-                Button(action: viewModel.logout) {
-                    Text("Logout")
-                }
+            NavigationView {
+                VStack {
+                    Text(viewModel.user.email)
+                    
+                    Button(action: viewModel.logout) {
+                        Text(viewModel.buttonTitle)
+                    }
+                    .accessibilityLabel(viewModel.buttonTitle)
+                }.toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(viewModel.screenTitle)
+                    }
+                }.navigationBarTitleDisplayMode(.inline)
             }
         }
     }

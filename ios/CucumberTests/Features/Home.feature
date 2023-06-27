@@ -1,9 +1,8 @@
 Feature: Home
-  Scenario: Login screen
-    Given I am logged "in"
-    Given My email is "email@email.com"
-    Then I see the "Home" screen
-    Then I see the "email@email.com" text
+  Scenario: Home screen
+    Given Email is "test@test.com"
+    Given I am in the "Home" screen
+    Then I see "test@test.com" text
     Then I see the "Logout" button
-    Then I press the "Logout" button
+    Then I press the logout button
     Then I see the "Login" screen

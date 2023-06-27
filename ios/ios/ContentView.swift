@@ -14,17 +14,28 @@ struct ContentView: View {
     @ObservedObject var navState: ObjectObservable<AppNavigator>
     
     init() {
-        let mainViewModel = MainViewModel(authService: authService)
+        let testConfiguration: TestConfiguration? = {
+            let arguments = CommandLine.arguments
+            guard arguments.contains("test") else {
+                return nil
+            }
+            let tc = TestConfiguration(configuration: ProcessInfo.processInfo.environment)
+            print(tc)
+            return tc
+        }()
+        let mainViewModel = MainViewModel(testConfiguration: testConfiguration, authService: authService)
         viewModel = LifecycleViewModel(mainViewModel)
         navState = ObjectObservable(mainViewModel.navState)
     }
     var body: some View {
-        if navState.value is AppNavigator.Home {
-            HomeView(user: (navState.value as! AppNavigator.Home).user, authService: authService)
-        } else  if navState.value is AppNavigator.Login{
-            LoginView(authService: authService)
-        } else {
-            ProgressView()
+        NavigationView {
+            if navState.value is AppNavigator.Home {
+                HomeView(user: (navState.value as! AppNavigator.Home).user, authService: authService)
+            } else if navState.value is AppNavigator.Login{
+                LoginView(authService: authService)
+            } else {
+                ProgressView()
+            }
         }
     }
 }

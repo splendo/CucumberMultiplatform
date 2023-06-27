@@ -99,6 +99,7 @@
 		640DFEFC2A371F6300ABF2DD /* Cucumberish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cucumberish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6483290C2A4AE1C000E5A4A8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		648329292A4B0C4C00E5A4A8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6483292C2A4B2A5600E5A4A8 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		649B6F932A388AC600C40DCC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		649B6F992A389F5F00C40DCC /* XCUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		649B6F9B2A389F9300C40DCC /* Timeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeout.swift; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 				640DFEEB2A370DA300ABF2DD /* CucumberTests.swift */,
 				640DFEF72A370F5C00ABF2DD /* CucumberTests.m */,
 				640DFEF62A370F5C00ABF2DD /* CucumberTests-Bridging-Header.h */,
+				6483292C2A4B2A5600E5A4A8 /* TestPlan.xctestplan */,
 			);
 			path = CucumberTests;
 			sourceTree = "<group>";

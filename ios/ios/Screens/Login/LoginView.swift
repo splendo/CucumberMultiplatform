@@ -60,7 +60,9 @@ struct LoginView: SwiftUI.View {
                     
                     Button(action: viewModel.login) {
                         Text(viewModel.buttonTitle)
-                    }.disabled(!isButtonEnabled.value)
+                    }
+                    .disabled(!isButtonEnabled.value)
+                    .accessibilityLabel(viewModel.buttonTitle)
                     Spacer()
                 }
                 .toolbar {
