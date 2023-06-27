@@ -38,16 +38,19 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
+        freeCompilerArgs = freeCompilerArgs + "-Xjvm-default=all"
     }
 }
 
 dependencies {
+    val kalugaVersion: String by project
+
     implementation(project(":shared"))
     implementation(project(":cucumber"))
     implementation("androidx.compose.ui:ui:1.4.3")
@@ -60,8 +63,12 @@ dependencies {
     androidTestImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-    androidTestImplementation("io.cucumber:cucumber-android:4.10.0")
 
+    implementation("com.splendo.kaluga:architecture-compose:$kalugaVersion")
+    implementation("com.splendo.kaluga:resources-compose:$kalugaVersion")
+    implementation("com.splendo.kaluga:keyboard-compose:$kalugaVersion")
+
+    androidTestImplementation("io.cucumber:cucumber-android:4.10.0")
     androidTestImplementation("io.cucumber:cucumber-java8:7.12.1")
     androidTestImplementation("io.cucumber:cucumber-junit:7.12.1")
     androidTestImplementation(kotlin("test"))

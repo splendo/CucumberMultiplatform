@@ -1,11 +1,6 @@
-package com.corrado4eyes.cucumberplayground.main
+package com.corrado4eyes.cucumberplayground.viewModels.main
 
-import com.corrado4eyes.cucumberplayground.main.HomeViewState.Loading
-import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
-import com.splendo.kaluga.architecture.observable.toInitializedObservable
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 
 sealed class HomeViewState {
     data class Valid(val userEmail: String) : HomeViewState()
@@ -13,26 +8,11 @@ sealed class HomeViewState {
     object Loading : HomeViewState()
 }
 
-class MainViewModel() : BaseLifecycleViewModel() {
-
-    private val authService = AuthServiceImpl()
-
-    private val _homeViewState: MutableStateFlow<HomeViewState> = MutableStateFlow(Loading)
-    val homeViewState = _homeViewState.toInitializedObservable(Loading, coroutineScope)
-
-    init {
-        val user = authService.getCurrentUserIfAny()
-        user?.let {
-            _homeViewState.value = HomeViewState.Valid(it.email)
-        } ?: run {
-            _homeViewState.value = HomeViewState.Error("User not found")
-        }
-    }
-
+class HomeViewModel(
+    val userMail: String,
+    private val logoutEvent: () -> Unit
+) : BaseLifecycleViewModel() {
     fun logout() {
-        coroutineScope.launch {
-            authService.logout()
-            // TODO redirect back to login
-        }
+        logoutEvent()
     }
 }
