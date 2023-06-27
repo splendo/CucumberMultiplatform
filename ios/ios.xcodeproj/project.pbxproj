@@ -58,6 +58,8 @@
 		648329252A4AE6BB00E5A4A8 /* KalugaLabel+SwiftUI.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A826344DD859D1A70A50DA /* KalugaLabel+SwiftUI.generated.swift */; };
 		648329262A4AE6BB00E5A4A8 /* DefaultValues.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC158DB5DDE249A03B2F51AC /* DefaultValues.generated.swift */; };
 		648329272A4AE6BB00E5A4A8 /* HasDefaultValue.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FBD06B4210EBAC91D0F6B4 /* HasDefaultValue.generated.swift */; };
+		6483292A2A4B0C4C00E5A4A8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648329292A4B0C4C00E5A4A8 /* HomeView.swift */; };
+		6483292B2A4B0C4D00E5A4A8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648329292A4B0C4C00E5A4A8 /* HomeView.swift */; };
 		649B6F942A388AC600C40DCC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 649B6F932A388AC600C40DCC /* XCTest.framework */; platformFilter = ios; };
 		649B6F9A2A389F5F00C40DCC /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B6F992A389F5F00C40DCC /* XCUIElement.swift */; };
 		649B6F9C2A389F9300C40DCC /* Timeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649B6F9B2A389F9300C40DCC /* Timeout.swift */; };
@@ -96,6 +98,7 @@
 		640DFEF72A370F5C00ABF2DD /* CucumberTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CucumberTests.m; sourceTree = "<group>"; };
 		640DFEFC2A371F6300ABF2DD /* Cucumberish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cucumberish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6483290C2A4AE1C000E5A4A8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		648329292A4B0C4C00E5A4A8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		649B6F932A388AC600C40DCC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		649B6F992A389F5F00C40DCC /* XCUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		649B6F9B2A389F9300C40DCC /* Timeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeout.swift; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		6483290A2A4AE1AE00E5A4A8 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				648329282A4B0C3E00E5A4A8 /* Home */,
 				6483290B2A4AE1B400E5A4A8 /* Login */,
 			);
 			path = Screens;
@@ -184,6 +188,14 @@
 				6483290C2A4AE1C000E5A4A8 /* LoginView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		648329282A4B0C3E00E5A4A8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				648329292A4B0C4C00E5A4A8 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		649B6F982A389F4C00C40DCC /* Util */ = {
@@ -489,6 +501,7 @@
 				6483290F2A4AE6B200E5A4A8 /* Color+Color.generated.swift in Sources */,
 				648329142A4AE6BB00E5A4A8 /* KalugaStyledString+SwiftUI.generated.swift in Sources */,
 				649B6F9A2A389F5F00C40DCC /* XCUIElement.swift in Sources */,
+				6483292B2A4B0C4D00E5A4A8 /* HomeView.swift in Sources */,
 				648329202A4AE6BB00E5A4A8 /* TintedImage+Image.generated.swift in Sources */,
 				648329112A4AE6BB00E5A4A8 /* LazyView.generated.swift in Sources */,
 				6483291E2A4AE6BB00E5A4A8 /* UninitializedObservable.generated.swift in Sources */,
@@ -513,6 +526,7 @@
 				4D7D41A3A4FA6F91C431D068 /* KalugaDate+Extensions.generated.swift in Sources */,
 				04754A9886060761775E2E1B /* KalugaLabel+SwiftUI.generated.swift in Sources */,
 				1569BED948AEEC91EC1737E4 /* KalugaStyledString+SwiftUI.generated.swift in Sources */,
+				6483292A2A4B0C4C00E5A4A8 /* HomeView.swift in Sources */,
 				019B36888F555E147DF0B2B3 /* KeyboardManager.generated.swift in Sources */,
 				1CCC742CFE45D506AD452E4E /* LazyView.generated.swift in Sources */,
 				11559CDEE3603AD2A26594A5 /* LifecycleViewModel.generated.swift in Sources */,

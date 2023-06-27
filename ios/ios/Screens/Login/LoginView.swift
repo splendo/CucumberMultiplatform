@@ -22,8 +22,8 @@ struct LoginView: SwiftUI.View {
     
     private let viewModel: LifecycleViewModel<LoginViewModel>
     
-    init() {
-        let loginViewModel = LoginViewModel()
+    init(authService: AuthService) {
+        let loginViewModel = LoginViewModel(authService: authService)
         viewModel = LifecycleViewModel(loginViewModel)
         
         emailText = StringSubject(loginViewModel.emailText)
@@ -44,12 +44,15 @@ struct LoginView: SwiftUI.View {
                         .autocapitalization(.none)
                         .accessibilityLabel(viewModel.emailPlaceholder)
                     Text(emailErrorText.value)
+                        .foregroundColor(Color.red)
                     SecureField(viewModel.passwordPlaceholder, text: $passwordText.value)
                         .autocapitalization(.none)
                         .accessibilityLabel(viewModel.passwordPlaceholder)
                     Text(passwordErrorText.value)
+                        .foregroundColor(Color.red)
                     
                     Text(formFooterErrorText.value)
+                        .foregroundColor(Color.red)
                     
                     if isLoading.value {
                         ProgressView()

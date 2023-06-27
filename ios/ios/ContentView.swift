@@ -1,10 +1,32 @@
 import SwiftUI
 import shared
 
+extension AppNavigator : HasDefaultValue {
+    static func `default`() -> Self {
+        return AppNavigator.Loading() as! Self
+    }
+}
+
 struct ContentView: View {
-	var body: some View {
-        LoginView()
-	}
+    private let viewModel: LifecycleViewModel<MainViewModel>
+    
+    private let authService = AuthServiceImpl()
+    @ObservedObject var navState: ObjectObservable<AppNavigator>
+    
+    init() {
+        let mainViewModel = MainViewModel(authService: authService)
+        viewModel = LifecycleViewModel(mainViewModel)
+        navState = ObjectObservable(mainViewModel.navState)
+    }
+    var body: some View {
+        if navState.value is AppNavigator.Home {
+            HomeView(user: (navState.value as! AppNavigator.Home).user, authService: authService)
+        } else  if navState.value is AppNavigator.Login{
+            LoginView(authService: authService)
+        } else {
+            ProgressView()
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
