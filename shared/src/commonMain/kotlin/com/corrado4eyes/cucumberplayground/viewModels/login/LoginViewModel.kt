@@ -31,6 +31,7 @@ class LoginViewModel : BaseLifecycleViewModel() {
 
     private val viewState = MutableStateFlow<LoginViewState>(LoginViewState.Idle)
 
+    val screenTitle = "Login"
     private val emailTextFieldState = MutableStateFlow("")
     val emailText  = emailTextFieldState.toInitializedSubject(coroutineScope)
     val emailPlaceholder = "Email"
