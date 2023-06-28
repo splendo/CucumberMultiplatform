@@ -2,9 +2,11 @@ package com.corrado4eyes.cucumber
 
 import io.cucumber.java8.En
 
-actual class GherkinLambda (private val lambda: (List<String>) -> Unit) : (List<String>) -> Unit {
+actual val EXPECT_VALUE_STRING = "{string}"
+
+actual class GherkinLambda (private val lambda: (String) -> Unit) : (String) -> Unit {
     actual constructor() : this({ throw IllegalArgumentException("Should call the primary constructor") })
-    override fun invoke(p0: List<String>) {
+    override fun invoke(p0: String) {
         lambda(p0)
     }
 }

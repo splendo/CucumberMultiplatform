@@ -42,6 +42,8 @@ interface GherkinRunner {
     fun buildFeature()
 }
 
+expect val EXPECT_VALUE_STRING: String
+
 expect class GherkinLambda constructor()
 expect class DefaultGherkinRunner(lambdaMaps: TestCases) : GherkinRunner
 

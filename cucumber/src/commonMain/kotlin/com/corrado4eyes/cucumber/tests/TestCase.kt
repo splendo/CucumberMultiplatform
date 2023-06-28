@@ -1,6 +1,7 @@
 package com.corrado4eyes.cucumber.tests
 
 import com.corrado4eyes.cucumber.CucumberDefinition
+import com.corrado4eyes.cucumber.EXPECT_VALUE_STRING
 import com.corrado4eyes.cucumber.GherkinLambda
 import com.corrado4eyes.cucumber.Given
 import com.corrado4eyes.cucumber.Then
@@ -30,9 +31,6 @@ abstract class BaseGherkinTestCase : GherkinTestCase {
 }
 
 sealed class TestCase : BaseGherkinTestCase() {
-    companion object {
-        const val EXPECT_VALUE_STRING = "\\\"(.*)\\\""
-    }
     sealed class Common : TestCase() {
         class ScreenIsVisible(override val lambda: GherkinLambda) : Common() {
             override val step: CucumberDefinition = CucumberDefinition.Step.Given("I am in the $EXPECT_VALUE_STRING screen")
