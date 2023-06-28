@@ -11,15 +11,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.corrado4eyes.cucumberplayground.android.home.HomeLayout
 import com.corrado4eyes.cucumberplayground.android.login.LoginLayout
 import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
+import com.corrado4eyes.cucumberplayground.models.TestConfiguration
 import com.corrado4eyes.cucumberplayground.viewModels.main.AppNavigator
 import com.corrado4eyes.cucumberplayground.viewModels.main.MainViewModel
 import com.splendo.kaluga.architecture.compose.state
 
 @Composable
-fun MainActivityLayout() {
+fun MainActivityLayout(testConfiguration: TestConfiguration? = null) {
     MyApplicationTheme {
         val authService = AuthServiceImpl()
-        val mainViewModel = remember { MainViewModel(null, authService) }
+        val mainViewModel = remember { MainViewModel(testConfiguration, authService) }
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
@@ -38,6 +39,6 @@ fun MainActivityLayout() {
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        MainActivityLayout()
+        MainActivityLayout(TestConfiguration(mapOf()))
     }
 }

@@ -14,7 +14,7 @@ android {
         versionName = "1.0"
 
         testApplicationId = "com.corrado4eyes.cucumberplayground.test"
-        testInstrumentationRunner = "io.cucumber.android.runner.CucumberAndroidJUnitRunner"
+        testInstrumentationRunner = "com.corrado4eyes.cucumberplayground.test.CucumberTests"
     }
 
     buildFeatures {
