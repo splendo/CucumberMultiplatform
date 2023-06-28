@@ -35,7 +35,7 @@ kotlin {
             }
         }
     }
-    
+
     iosX64(configure = target)
     iosArm64(configure = target)
     iosSimulatorArm64(configure = target)
@@ -80,6 +80,10 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 29
+    }
+    compileOptions {
+        sourceCompatibility =  JavaVersion.VERSION_11
+        targetCompatibility =  JavaVersion.VERSION_11
     }
 }
 

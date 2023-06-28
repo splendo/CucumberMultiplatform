@@ -5,6 +5,9 @@ import com.corrado4eyes.cucumber.GherkinLambda
 import com.corrado4eyes.cucumber.Given
 import com.corrado4eyes.cucumber.Then
 import com.corrado4eyes.cucumber.When
+import com.corrado4eyes.cucumber.given
+import com.corrado4eyes.cucumber.then
+import com.corrado4eyes.cucumber.`when`
 
 interface GherkinTestCase {
     val step: CucumberDefinition
@@ -15,9 +18,9 @@ interface GherkinTestCase {
 abstract class BaseGherkinTestCase : GherkinTestCase {
     override fun toGherkin() {
         when (step) {
-            is CucumberDefinition.Step.Given -> lambda Given step.regex
-            is CucumberDefinition.Step.Then -> step.regex Then lambda
-            is CucumberDefinition.Step.When -> lambda When step.regex
+            is CucumberDefinition.Step.Given -> given(step.regex, lambda)
+            is CucumberDefinition.Step.Then -> then(step.regex, lambda)
+            is CucumberDefinition.Step.When -> `when`(step.regex, lambda)
             is CucumberDefinition.Descriptive.Example,
             is CucumberDefinition.Descriptive.Feature,
             is CucumberDefinition.Descriptive.Rule,

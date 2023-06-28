@@ -38,8 +38,8 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("io.cucumber:cucumber-java8:7.12.1")
-                implementation("io.cucumber:cucumber-junit:7.12.1")
+                implementation("io.cucumber:cucumber-java8:4.8.1")
+                implementation("io.cucumber:cucumber-junit:4.8.1")
             }
         }
         val androidUnitTest by getting
@@ -103,5 +103,12 @@ fun Project.setIosDeploymentTarget(
             out.write(line.replace("IPHONEOS_DEPLOYMENT_TARGET = $source;", "IPHONEOS_DEPLOYMENT_TARGET = $target;"))
             out.write(("\n"))
         }
+    }
+}
+
+android {
+    compileOptions {
+        sourceCompatibility =  JavaVersion.VERSION_11
+        targetCompatibility =  JavaVersion.VERSION_11
     }
 }
