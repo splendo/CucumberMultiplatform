@@ -1,0 +1,3 @@
+[submodule "dependencies/kaluga-swiftui"]
+	path = dependencies/kaluga-swiftui
+	url = https://github.com/splendo/kaluga-swiftui.git

@@ -1,8 +1,13 @@
-import org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask
-
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
+}
+
+android {
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 kotlin {
@@ -14,10 +19,16 @@ kotlin {
                 baseName = "shared"
 
                 export("com.splendo.kaluga:alerts:$kalugaVersion")
-                export("com.splendo.kaluga:architecture:$kalugaVersion")
                 export("com.splendo.kaluga:hud:$kalugaVersion")
+                export("com.splendo.kaluga:architecture:$kalugaVersion")
                 export("com.splendo.kaluga:keyboard:$kalugaVersion")
                 export("com.splendo.kaluga:resources:$kalugaVersion")
+                export("com.splendo.kaluga:base:$kalugaVersion")
+
+                getTest("DEBUG").apply {
+                    freeCompilerArgs = freeCompilerArgs + "-e"
+                    freeCompilerArgs = freeCompilerArgs + "com.splendo.kaluga.test.mainBackground"
+                }
             }
         }
     }
@@ -33,7 +44,7 @@ kotlin {
             }
         }
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -44,13 +55,12 @@ kotlin {
                 api("com.splendo.kaluga:hud:$kalugaVersion")
                 api("com.splendo.kaluga:keyboard:$kalugaVersion")
                 api("com.splendo.kaluga:resources:$kalugaVersion")
-                api("com.splendo.kaluga:service:$kalugaVersion")
-                api("com.splendo.kaluga:system:$kalugaVersion")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation("com.splendo.kaluga:test-utils:$kalugaVersion")
             }
         }
         val androidMain by getting

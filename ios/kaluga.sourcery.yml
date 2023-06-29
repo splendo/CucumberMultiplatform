@@ -1,0 +1,21 @@
+project:
+  file: ./ios.xcodeproj
+  target:
+    name: ios
+templates:
+  - ../dependencies/
+output:
+  path: ./Generated/KalugaSwiftUI
+  link:
+    project: ./ios.xcodeproj
+    ## Add extra whitelabel targets here
+    targets: [ios]
+    group: Generated/KalugaSwiftUI
+args:
+  sharedFrameworkName: shared
+  includeResources: true
+  includeAlerts: true
+  includeHud: false
+  includeDatePicker: false
+  includeKeyboard: true
+  includePartialSheet: false

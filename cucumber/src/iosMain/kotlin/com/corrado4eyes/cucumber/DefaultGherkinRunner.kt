@@ -5,29 +5,59 @@ import cocoapods.Cucumberish.Given
 import cocoapods.Cucumberish.Then
 import cocoapods.Cucumberish.When
 
-actual class GherkinLambda(private val lambda: CCIStepBody) : CCIStepBody {
-    actual constructor() : this({_, _ -> throw IllegalArgumentException("Should call the primary constructor")})
+actual val EXPECT_VALUE_STRING = "\\\"(.*)\\\""
+
+actual class GherkinLambda0(private val lambda: CCIStepBody) : CCIStepBody, GherkinLambda {
     override fun invoke(p1: List<*>?, p2: Map<Any?, *>?) {
         lambda?.let { it(p1, p2) }
     }
 }
 
-actual class DefaultGherkinRunner actual constructor(
-    private val lambdaMaps: TestCases
-): GherkinRunner {
-    override fun buildFeature() {
-        lambdaMaps.forEach { it.toGherkin() }
+actual class GherkinLambda1(private val lambda: CCIStepBody) : CCIStepBody, GherkinLambda {
+    override fun invoke(p1: List<*>?, p2: Map<Any?, *>?) {
+        lambda?.let { it(p1, p2) }
     }
 }
 
-actual fun given(regex: String, lambda: GherkinLambda) {
+actual class GherkinLambda2(private val lambda: CCIStepBody) : CCIStepBody, GherkinLambda {
+    override fun invoke(p1: List<*>?, p2: Map<Any?, *>?) {
+        lambda?.let { it(p1, p2) }
+    }
+}
+//actual typealias GherkinLambda2 = GherkinLambda1
+
+actual fun given(regex: String, lambda: GherkinLambda0) {
     Given(regex, lambda)
 }
 
-actual fun then(regex: String, lambda: GherkinLambda) {
+actual fun given(regex: String, lambda: GherkinLambda1) {
+    Given(regex, lambda)
+}
+
+actual fun given(regex: String, lambda: GherkinLambda2) {
+    Given(regex, lambda)
+}
+
+actual fun then(regex: String, lambda: GherkinLambda0) {
     Then(regex, lambda)
 }
 
-actual fun `when`(regex: String, lambda: GherkinLambda) {
+actual fun then(regex: String, lambda: GherkinLambda1) {
+    Then(regex, lambda)
+}
+
+actual fun then(regex: String, lambda: GherkinLambda2) {
+    Then(regex, lambda)
+}
+
+actual fun `when`(regex: String, lambda: GherkinLambda0) {
+    When(regex, lambda)
+}
+
+actual fun `when`(regex: String, lambda: GherkinLambda1) {
+    When(regex, lambda)
+}
+
+actual fun `when`(regex: String, lambda: GherkinLambda2) {
     When(regex, lambda)
 }

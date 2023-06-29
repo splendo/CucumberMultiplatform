@@ -22,6 +22,7 @@ kotlin {
     val target: KotlinNativeTarget.() -> Unit = {
         binaries {
             framework {
+                transitiveExport = true
                 export(project(":shared"))
                 export(project(":cucumber"))
                 baseName = "shared"
@@ -34,7 +35,7 @@ kotlin {
             }
         }
     }
-    
+
     iosX64(configure = target)
     iosArm64(configure = target)
     iosSimulatorArm64(configure = target)
@@ -79,6 +80,10 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 29
+    }
+    compileOptions {
+        sourceCompatibility =  JavaVersion.VERSION_11
+        targetCompatibility =  JavaVersion.VERSION_11
     }
 }
 

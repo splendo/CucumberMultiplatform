@@ -7,18 +7,23 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
-import com.corrado4eyes.cucumberplayground.home.HomeViewModel
+import com.corrado4eyes.cucumberplayground.login.AuthService
+import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
+import com.corrado4eyes.cucumberplayground.models.User
+import com.corrado4eyes.cucumberplayground.viewModels.home.HomeViewModel
 
 @Composable
 fun HomeLayout(
-    userMail: String,
-    logoutEvent: () -> Unit
+    user: User,
+    authService: AuthService
 ) {
-    val homeViewModel = remember { HomeViewModel(userMail, logoutEvent) }
+    val homeViewModel = remember { HomeViewModel(user, authService) }
     Column(modifier = Modifier.fillMaxSize()) {
-        Text(homeViewModel.userMail)
-        Button(logoutEvent) {
+        Text(homeViewModel.screenTitle, modifier = Modifier.testTag("Home screen"))
+        Text(homeViewModel.user.email)
+        Button(homeViewModel::logout, modifier = Modifier.testTag("Logout")) {
             Text("Logout")
         }
     }
@@ -27,7 +32,5 @@ fun HomeLayout(
 @Composable
 @Preview
 fun HomeLayoutPreview() {
-    HomeLayout(
-        "test@test.com"
-    ) {}
+    HomeLayout(User("test@test.com", "1234"), AuthServiceImpl())
 }

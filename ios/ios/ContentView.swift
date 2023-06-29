@@ -1,13 +1,43 @@
 import SwiftUI
 import shared
 
-struct ContentView: View {
-//	let greet = Greeting().greet()
+extension AppNavigator : HasDefaultValue {
+    static func `default`() -> Self {
+        return AppNavigator.Loading() as! Self
+    }
+}
 
-	var body: some View {
-        Text(Greeting().greet())
-        Text("Home")
-	}
+struct ContentView: View {
+    private let viewModel: LifecycleViewModel<MainViewModel>
+    
+    private let authService = AuthServiceImpl()
+    @ObservedObject var navState: ObjectObservable<AppNavigator>
+    
+    init() {
+        let testConfiguration: TestConfiguration? = {
+            let arguments = CommandLine.arguments
+            guard arguments.contains("test") else {
+                return nil
+            }
+            let tc = DefaultTestConfiguration(configuration: ProcessInfo.processInfo.environment)
+            print(tc)
+            return tc
+        }()
+        let mainViewModel = MainViewModel(testConfiguration: testConfiguration, authService: authService)
+        viewModel = LifecycleViewModel(mainViewModel)
+        navState = ObjectObservable(mainViewModel.navState)
+    }
+    var body: some View {
+        NavigationView {
+            if navState.value is AppNavigator.Home {
+                HomeView(user: (navState.value as! AppNavigator.Home).user, authService: authService)
+            } else if navState.value is AppNavigator.Login{
+                LoginView(authService: authService)
+            } else {
+                ProgressView()
+            }
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

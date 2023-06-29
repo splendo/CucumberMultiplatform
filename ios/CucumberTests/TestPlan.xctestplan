@@ -1,0 +1,19 @@
+{
+  "configurations" : [
+    {
+      "id" : "437917A8-B65A-45A5-8D34-B8C13877CC13",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "repeatInNewRunnerProcess" : true,
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+
+  ],
+  "version" : 1
+}

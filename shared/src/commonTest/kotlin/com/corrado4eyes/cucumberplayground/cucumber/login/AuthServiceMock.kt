@@ -1,6 +1,6 @@
 package com.corrado4eyes.cucumberplayground.cucumber.login
 
-import com.corrado4eyes.cucumberplayground.common.model.User
+import com.corrado4eyes.cucumberplayground.models.User
 import com.corrado4eyes.cucumberplayground.login.AuthService
 import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import kotlinx.coroutines.delay

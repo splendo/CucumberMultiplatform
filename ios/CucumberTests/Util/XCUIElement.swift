@@ -16,4 +16,11 @@ extension XCUIElement {
         let result = XCTWaiter().wait(for: [expectation], timeout: timeout.rawValue)
         return result == .completed
     }
+    
+    func isEnabled(timeout: Timeout) -> Bool {
+        let predicate = NSPredicate(format: "enabled == true")
+        let expectation = XCTestCase().expectation(for: predicate, evaluatedWith: self)
+        let result = XCTWaiter().wait(for: [expectation], timeout: timeout.rawValue)
+        return result == .completed
+    }
 }
