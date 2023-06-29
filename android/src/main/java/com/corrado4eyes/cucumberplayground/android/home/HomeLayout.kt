@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import com.corrado4eyes.cucumberplayground.login.AuthService
 import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
@@ -21,7 +22,7 @@ fun HomeLayout(
     val homeViewModel = remember { HomeViewModel(user, authService) }
     Column(modifier = Modifier.fillMaxSize()) {
         Text(homeViewModel.user.email)
-        Button(homeViewModel::logout) {
+        Button(homeViewModel::logout, modifier = Modifier.testTag("Logout")) {
             Text("Logout")
         }
     }

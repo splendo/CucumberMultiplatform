@@ -9,7 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import com.corrado4eyes.cucumberplayground.login.AuthService
@@ -25,13 +27,15 @@ fun LoginLayout(authService: AuthService) {
     Column {
         CustomTextField(
             value = viewModel.emailText,
-            label = "Email"
+            label = "Email",
+            modifier = Modifier.testTag("Email")
         )
         val emailErrorText by viewModel.emailErrorText.state()
         Text(text = emailErrorText, color = Color.Red)
         CustomTextField(
             value = viewModel.passwordText,
-            label = "Password"
+            label = "Password",
+            modifier = Modifier.testTag("Password")
         )
         val passwordErrorText by viewModel.passwordErrorText.state()
         Text(text = passwordErrorText, color = Color.Red)
@@ -51,7 +55,8 @@ fun LoginLayout(authService: AuthService) {
 @Composable
 fun CustomTextField(
     value: StateFlowInitializedSubject<String>,
-    label: String
+    label: String,
+    modifier: Modifier = Modifier
 ) {
     val text = value.state()
     val textValue = remember { mutableStateOf(TextFieldValue(text.value)) }
@@ -63,7 +68,8 @@ fun CustomTextField(
         },
         label = {
             Text(label)
-        }
+        },
+        modifier = modifier
     )
 }
 
