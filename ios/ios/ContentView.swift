@@ -19,7 +19,7 @@ struct ContentView: View {
             guard arguments.contains("test") else {
                 return nil
             }
-            let tc = TestConfiguration(configuration: ProcessInfo.processInfo.environment)
+            let tc = DefaultTestConfiguration(configuration: ProcessInfo.processInfo.environment)
             print(tc)
             return tc
         }()

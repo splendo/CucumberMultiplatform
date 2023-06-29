@@ -28,9 +28,10 @@ import Cucumberish
             switch(screenName) {
             case "Home":
                 app.launchEnvironment["isLoggedIn"] = "true"
-                text = app.staticTexts["Home"]
+                text = app.staticTexts["Home screen"]
             case "Login":
-                text = app.staticTexts["Login"]
+                app.launchEnvironment["isLoggedIn"] = "false"
+                text = app.staticTexts["Login screen"]
                 
             default:
                 text = app.staticTexts["Fail"]
@@ -118,10 +119,10 @@ import Cucumberish
             guard let screenName = args?[0] as? String else { return KotlinUnit() }
             switch(screenName) {
             case "Home":
-                let text = app.staticTexts["Home"]
+                let text = app.staticTexts["Home screen"]
                 XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
             case "Login":
-                let text = app.staticTexts["Login"]
+                let text = app.staticTexts["Login screen"]
                 XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
             default: XCTFail("Couldn't find \(screenName) screen")
             }
