@@ -11,7 +11,7 @@ interface TestConfiguration {
 
 class DefaultTestConfiguration(private val configuration: TestConfigurationMap) : TestConfiguration {
     override val isLoggedIn: Boolean = getValue("isLoggedIn") == "true"
-    override val testEmail = getValue("testEmail")
+    override val testEmail = getValue("testEmail") ?: ""
 
-    private fun getValue(key: String): String = configuration[key] ?: throw ConfigurationNotFoundException("Couldn't find configuration named $key")
+    private fun getValue(key: String): String? = configuration[key]
 }
