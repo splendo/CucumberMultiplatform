@@ -1,7 +1,17 @@
 package com.corrado4eyes.cucumberplayground.models
 
-typealias TestConfigurationMap = Map<String, String>
-data class TestConfiguration(val configuration: TestConfigurationMap) {
-    val isLoggedIn = configuration["isLoggedIn"] == "true"
-    val testEmail = configuration["testEmail"] ?: "test@test.com"
+typealias TestConfigurationMap = Map<String, String?>
+
+class ConfigurationNotFoundException(message: String) : Throwable(message)
+
+interface TestConfiguration {
+    val isLoggedIn: Boolean
+    val testEmail: String
+}
+
+class DefaultTestConfiguration(private val configuration: TestConfigurationMap) : TestConfiguration {
+    override val isLoggedIn: Boolean = getValue("isLoggedIn") == "true"
+    override val testEmail = getValue("testEmail")
+
+    private fun getValue(key: String): String = configuration[key] ?: throw ConfigurationNotFoundException("Couldn't find configuration named $key")
 }

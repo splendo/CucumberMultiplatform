@@ -1,7 +1,6 @@
-import org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask
-
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
 }
 

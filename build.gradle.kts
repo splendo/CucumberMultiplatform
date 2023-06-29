@@ -6,6 +6,16 @@ plugins {
     kotlin("multiplatform").version("1.8.21").apply(false)
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath(kotlin("serialization"))
+    }
+}
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

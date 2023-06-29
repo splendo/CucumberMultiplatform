@@ -1,7 +1,6 @@
 package com.corrado4eyes.cucumberplayground.viewModels.login
 
 import com.corrado4eyes.cucumberplayground.login.AuthService
-import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
 import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import com.splendo.kaluga.architecture.observable.toInitializedObservable
 import com.splendo.kaluga.architecture.observable.toInitializedSubject
@@ -9,8 +8,6 @@ import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
 import com.splendo.kaluga.resources.KalugaColor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -30,7 +27,7 @@ class LoginViewModel(private val authService: AuthService) : BaseLifecycleViewMo
 
     private val viewState = MutableStateFlow<LoginViewState>(LoginViewState.Idle)
 
-    val screenTitle = "Login"
+    val screenTitle = "Login screen"
     private val emailTextFieldState = MutableStateFlow("")
     val emailText  = emailTextFieldState.toInitializedSubject(coroutineScope)
     val emailPlaceholder = "Email"

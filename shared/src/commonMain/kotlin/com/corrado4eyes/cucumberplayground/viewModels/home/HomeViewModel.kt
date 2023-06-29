@@ -10,7 +10,7 @@ class HomeViewModel(
     private val authService: AuthService
 ) : BaseLifecycleViewModel() {
 
-    val screenTitle = "Home"
+    val screenTitle = "Home screen"
     val buttonTitle = "Logout"
 
     fun logout() {
