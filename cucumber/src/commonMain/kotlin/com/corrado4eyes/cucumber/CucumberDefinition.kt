@@ -41,32 +41,32 @@ sealed class CucumberDefinition(val regex: String) {
         }
         class When(regex: String, lambda: GherkinLambda0) : Step(regex) {
             init {
-                given(regex, lambda)
+                `when`(regex, lambda)
             }
         }
         class WhenSingle(regex: String, lambda: GherkinLambda1) : Step(regex) {
             init {
-                given(regex, lambda)
+                `when`(regex, lambda)
             }
         }
         class WhenMultiple(regex: String, lambda: GherkinLambda2) : Step(regex) {
             init {
-                given(regex, lambda)
+                `when`(regex, lambda)
             }
         }
         class Then(regex: String, lambda: GherkinLambda0) : Step(regex) {
             init {
-                given(regex, lambda)
+                then(regex, lambda)
             }
         }
         class ThenSingle(regex: String, lambda: GherkinLambda1) : Step(regex) {
             init {
-                given(regex, lambda)
+                then(regex, lambda)
             }
         }
         class ThenMultiple(regex: String, lambda: GherkinLambda2) : Step(regex) {
             init {
-                given(regex, lambda)
+                then(regex, lambda)
             }
         }
     }
