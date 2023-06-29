@@ -60,8 +60,8 @@ dependencies {
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.activity:activity-compose:1.7.2")
 
-    androidTestImplementation("junit:junit:4.12")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation(project(":cucumberShared"))
+
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$1.4.3")
 
@@ -69,10 +69,8 @@ dependencies {
     implementation("com.splendo.kaluga:resources-compose:$kalugaVersion")
     implementation("com.splendo.kaluga:keyboard-compose:$kalugaVersion")
 
-    androidTestImplementation("io.cucumber:cucumber-core:4.8.1")
-    androidTestImplementation("io.cucumber:cucumber-android:4.9.0")
+    androidTestImplementation("io.cucumber:cucumber-android:4.10.0")
     androidTestImplementation("io.cucumber:cucumber-java8:4.8.1")
-    androidTestImplementation("io.cucumber:cucumber-java:4.8.1")
-    androidTestImplementation("io.cucumber:cucumber-junit:4.8.1")
+
     androidTestImplementation(kotlin("test"))
 }
