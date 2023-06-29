@@ -1,88 +1,56 @@
-package com.corrado4eyes.cucumber.tests
+package com.corrado4eyes.cucumbershared.tests
 
 import com.corrado4eyes.cucumber.CucumberDefinition
 import com.corrado4eyes.cucumber.EXPECT_VALUE_STRING
 import com.corrado4eyes.cucumber.GherkinLambda
-import com.corrado4eyes.cucumber.GherkinLambdaMultiple
-import com.corrado4eyes.cucumber.GherkinLambdaSingle
-import com.corrado4eyes.cucumber.given
-import com.corrado4eyes.cucumber.then
-import com.corrado4eyes.cucumber.`when`
-
-interface GherkinTestCase<T: GherkinLambda> {
-    val step: CucumberDefinition
-    val lambda: T
-    fun toGherkin()
-}
-
-//abstract class BaseGherkinTestCase<T: GherkinLambda> : GherkinTestCase<T> {
-//    override fun toGherkin() {
-//        when (step) {
-//            is CucumberDefinition.Step.Given -> given(this, lambda)
-//            is CucumberDefinition.Step.Then -> then(step, lambda)
-//            is CucumberDefinition.Step.When -> `when`(step, lambda)
-//            is CucumberDefinition.Descriptive.Example,
-//            is CucumberDefinition.Descriptive.Feature,
-//            is CucumberDefinition.Descriptive.Rule,
-//            is CucumberDefinition.SubStep.And -> TODO()
-//        }
-//    }
-//}
+import com.corrado4eyes.cucumber.GherkinLambda0
+import com.corrado4eyes.cucumber.GherkinLambda2
+import com.corrado4eyes.cucumber.GherkinLambda1
+import com.corrado4eyes.cucumber.GherkinTestCase
 
 sealed class TestCase<T: GherkinLambda> : GherkinTestCase<T> {
-    override fun toGherkin() {
-        when (step) {
-            is CucumberDefinition.Descriptive.Example -> TODO()
-            is CucumberDefinition.Descriptive.Feature -> TODO()
-            is CucumberDefinition.Descriptive.Rule -> TODO()
-            is CucumberDefinition.Step.Given -> given(this, lambda)
-            is CucumberDefinition.Step.Then -> TODO()
-            is CucumberDefinition.Step.When -> TODO()
-            is CucumberDefinition.SubStep.And -> TODO()
-        }
-    }
     sealed class Common<T: GherkinLambda> : TestCase<T>() {
-        class ScreenIsVisible(override val lambda: GherkinLambdaSingle) : Common<GherkinLambdaSingle>() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Given("I am in the $EXPECT_VALUE_STRING screen")
+        class ScreenIsVisible(override val lambda: GherkinLambda1) : Common<GherkinLambda1>() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.GivenSingle("I am in the $EXPECT_VALUE_STRING screen", lambda)
         }
 
-        class TitleIsVisible(override val lambda: GherkinLambdaSingle) : Common<GherkinLambdaSingle>() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see $EXPECT_VALUE_STRING text")
+        class TitleIsVisible(override val lambda: GherkinLambda1) : Common<GherkinLambda1>() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.ThenSingle("I see $EXPECT_VALUE_STRING text", lambda)
         }
 
-        class ButtonIsVisible(override val lambda: GherkinLambdaSingle) : Common<GherkinLambdaSingle>() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING button")
+        class ButtonIsVisible(override val lambda: GherkinLambda1) : Common<GherkinLambda1>() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.ThenSingle("I see the $EXPECT_VALUE_STRING button", lambda)
         }
 
-        class NavigateToScreen(override val lambda: GherkinLambdaSingle) : Common<GherkinLambdaSingle>() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING screen")
+        class NavigateToScreen(override val lambda: GherkinLambda1) : Common<GherkinLambda1>() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.ThenSingle("I see the $EXPECT_VALUE_STRING screen", lambda)
         }
     }
 
     sealed class Login <T: GherkinLambda> : TestCase<T>() {
         sealed class Common <T: GherkinLambda> : Login<T>() {
-            class TextFieldIsVisible(override val lambda: GherkinLambdaMultiple) : Common<GherkinLambdaMultiple>() {
-                override val step: CucumberDefinition = CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING textfield with text $EXPECT_VALUE_STRING")
+            class TextFieldIsVisible(override val lambda: GherkinLambda2) : Common<GherkinLambda2>() {
+                override val step: CucumberDefinition = CucumberDefinition.Step.ThenMultiple("I see the $EXPECT_VALUE_STRING textfield with text $EXPECT_VALUE_STRING", lambda)
             }
         }
-        class FillEmailTextField(override val lambda: GherkinLambdaSingle) : Login<GherkinLambdaSingle>() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I type $EXPECT_VALUE_STRING in the email field")
+        class FillEmailTextField(override val lambda: GherkinLambda1) : Login<GherkinLambda1>() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.ThenSingle("I type $EXPECT_VALUE_STRING in the email field", lambda)
         }
-        class FillPasswordTextField(override val lambda: GherkinLambdaSingle) : Login<GherkinLambdaSingle>() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I type $EXPECT_VALUE_STRING in the password field")
+        class FillPasswordTextField(override val lambda: GherkinLambda1) : Login<GherkinLambda1>() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.ThenSingle("I type $EXPECT_VALUE_STRING in the password field", lambda)
         }
 
-        class PressLoginButton(override val lambda: GherkinLambdaSingle) : Login<GherkinLambdaSingle>() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I press the login button")
+        class PressLoginButton(override val lambda: GherkinLambda0) : Login<GherkinLambda0>() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I press the login button", lambda)
         }
     }
 
     sealed class Home <T: GherkinLambda> : TestCase<T>() {
-        class LoggedInEmail(override val lambda: GherkinLambdaSingle) : Home<GherkinLambdaSingle>() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Given("Email is $EXPECT_VALUE_STRING")
+        class LoggedInEmail(override val lambda: GherkinLambda1) : Home<GherkinLambda1>() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.GivenSingle("Email is $EXPECT_VALUE_STRING", lambda)
         }
-        class PressLogoutButton(override val lambda: GherkinLambdaSingle) : Login<GherkinLambdaSingle>() {
-            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I press the logout button")
+        class PressLogoutButton(override val lambda: GherkinLambda0) : Login<GherkinLambda0>() {
+            override val step: CucumberDefinition = CucumberDefinition.Step.Then("I press the logout button", lambda)
         }
     }
 }
