@@ -21,6 +21,7 @@ fun HomeLayout(
 ) {
     val homeViewModel = remember { HomeViewModel(user, authService) }
     Column(modifier = Modifier.fillMaxSize()) {
+        Text(homeViewModel.screenTitle, modifier = Modifier.testTag("Home screen"))
         Text(homeViewModel.user.email)
         Button(homeViewModel::logout, modifier = Modifier.testTag("Logout")) {
             Text("Logout")

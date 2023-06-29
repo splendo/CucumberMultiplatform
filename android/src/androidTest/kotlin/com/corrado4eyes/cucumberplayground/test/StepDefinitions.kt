@@ -13,8 +13,8 @@ import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import com.corrado4eyes.cucumber.GherkinLambda0
-import com.corrado4eyes.cucumber.GherkinLambda2
 import com.corrado4eyes.cucumber.GherkinLambda1
+import com.corrado4eyes.cucumber.GherkinLambda2
 import com.corrado4eyes.cucumberplayground.android.MainActivity
 import com.corrado4eyes.cucumbershared.tests.TestCase
 import io.cucumber.java8.En
@@ -37,8 +37,8 @@ class StepDefinitions : En {
             GherkinLambda1 { screenName ->
                 setLaunchScreen(screenName)
                 when (screenName) {
-                    "Login" -> testRule.onNodeWithText("Login").assertIsDisplayed()
-                    "Home" -> testRule.onNodeWithText("Home").assertIsDisplayed()
+                    "Login" -> testRule.onNodeWithTag("Login screen").assertIsDisplayed()
+                    "Home" -> testRule.onNodeWithTag("Home screen").assertIsDisplayed()
                 }
             }
         )
@@ -83,9 +83,10 @@ class StepDefinitions : En {
         )
         TestCase.Common.NavigateToScreen(
             GherkinLambda1 {
+                Thread.sleep(1000)
                 when (it) {
-                    "Login" -> testRule.onNodeWithText("Login").assertIsDisplayed()
-                    "Home" -> testRule.onNodeWithText("Home").assertIsDisplayed()
+                    "Login" -> testRule.onNodeWithTag("Login screen").assertIsDisplayed()
+                    "Home" -> testRule.onNodeWithTag("Home screen").assertIsDisplayed()
                 }
             }
         )
@@ -96,9 +97,13 @@ class StepDefinitions : En {
         )
     }
 
-    private fun setLaunchScreen(screenName: String) {
+    private fun setLaunchScreen(screenName: String, arguments: Map<String, String> = mapOf()) {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
-        launch<MainActivity>(Intent(instrumentation.targetContext, MainActivity::class.java))
+        launch<MainActivity>(
+            Intent(instrumentation.targetContext, MainActivity::class.java)
+                .putExtra("isLoggedIn", "false")
+                .putExtra("testEmail", "")
+        )
 
 //        when (screenName) {
 //            "Home" -> {

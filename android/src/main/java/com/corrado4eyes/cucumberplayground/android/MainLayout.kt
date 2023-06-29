@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.corrado4eyes.cucumberplayground.android.home.HomeLayout
 import com.corrado4eyes.cucumberplayground.android.login.LoginLayout
 import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
+import com.corrado4eyes.cucumberplayground.models.DefaultTestConfiguration
 import com.corrado4eyes.cucumberplayground.models.TestConfiguration
 import com.corrado4eyes.cucumberplayground.viewModels.main.AppNavigator
 import com.corrado4eyes.cucumberplayground.viewModels.main.MainViewModel
@@ -39,6 +40,6 @@ fun MainActivityLayout(testConfiguration: TestConfiguration? = null) {
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        MainActivityLayout(TestConfiguration(mapOf()))
+        MainActivityLayout(DefaultTestConfiguration(mapOf()))
     }
 }

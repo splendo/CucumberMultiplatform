@@ -25,6 +25,7 @@ fun LoginLayout(authService: AuthService) {
     val viewModel = remember { LoginViewModel(authService) }
     val isLoading by viewModel.isLoading.state()
     Column {
+        Text(text = viewModel.screenTitle, modifier = Modifier.testTag("Login screen"))
         CustomTextField(
             value = viewModel.emailText,
             label = "Email",
