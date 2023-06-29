@@ -1,23 +1,34 @@
-package com.corrado4eyes.cucumberplayground.test.definitions
+package com.corrado4eyes.cucumberplayground.test
 
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextContains
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
+import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import com.corrado4eyes.cucumber.GherkinLambda0
 import com.corrado4eyes.cucumber.GherkinLambda1
+import com.corrado4eyes.cucumber.GherkinLambda2
 import com.corrado4eyes.cucumberplayground.android.MainActivity
-import com.corrado4eyes.cucumberplayground.test.utils.BaseScenarioHolder
 import com.corrado4eyes.cucumbershared.tests.TestCase
+import io.cucumber.java8.En
 import io.cucumber.junit.WithJunitRule
+import org.junit.Rule
 
 @WithJunitRule
-class StepDefinitions : BaseScenarioHolder() {
+class StepDefinitions : En {
 
     private val arguments = mutableMapOf<String, String>()
+    private var scenario: ActivityScenario<*>? = null
+
+    @get:Rule(order = 0)
+    val testRule = createComposeRule()
 
     init {
         TestCase.Common.ScreenIsVisible(
@@ -64,6 +75,26 @@ class StepDefinitions : BaseScenarioHolder() {
                 }
             }
         )
+        TestCase.Login.Common.TextFieldIsVisible(
+            GherkinLambda2 { tag, text ->
+                testRule.onNodeWithTag(tag).assertIsDisplayed().assertTextContains(text)
+            }
+        )
+        TestCase.Login.FillEmailTextField(
+            GherkinLambda1 {
+                testRule.onNodeWithText("Email").performTextInput(it)
+            }
+        )
+        TestCase.Login.FillPasswordTextField(
+            GherkinLambda1 {
+                testRule.onNodeWithText("Password").performTextInput(it)
+            }
+        )
+        TestCase.Login.PressLoginButton(
+            GherkinLambda0 {
+                testRule.onNodeWithText("Login").assertIsDisplayed().performClick()
+            }
+        )
         TestCase.Home.PressLogoutButton(
             GherkinLambda0 {
                 testRule.onNodeWithTag("Logout").assertIsDisplayed().performClick()
@@ -83,5 +114,9 @@ class StepDefinitions : BaseScenarioHolder() {
                 .putExtra("isLoggedIn", arguments["isLoggedIn"])
                 .putExtra("testEmail", arguments["testEmail"])
         )
+    }
+
+    private fun <T: Activity> launch(intent: Intent) {
+        scenario = ActivityScenario.launch<T>(intent)
     }
 }
