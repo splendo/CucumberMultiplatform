@@ -24,7 +24,6 @@ actual class GherkinLambda2(private val lambda: CCIStepBody) : CCIStepBody, Gher
         lambda?.let { it(p1, p2) }
     }
 }
-//actual typealias GherkinLambda2 = GherkinLambda1
 
 actual fun given(regex: String, lambda: GherkinLambda0) {
     Given(regex, lambda)

@@ -3,72 +3,149 @@ package com.corrado4eyes.cucumber
 
 typealias Scenario = CucumberDefinition.Descriptive.Example
 
-sealed class CucumberDefinition(val regex: String) {
-
-    sealed class Descriptive(regex: String) : CucumberDefinition(regex) {
+sealed interface CucumberDefinitionI {
+    val regex: String
+    sealed interface Descriptive : CucumberDefinitionI {
 
         /**
          * Represents a whole feature to be described. It groups the other descriptive keywords.
          */
-        class Feature(message: String) : Descriptive(message)
+        interface Feature : Descriptive {
+            val message: String
+        }
 
         /**
          * Groups more scenerio that tests a similar flow with a certain rule
          */
-        class Rule(regex: String) : Descriptive(regex)
+        interface Rule : Descriptive {
+            override val regex: String
+        }
 
         /**
          * Represents a Scenario, hence a group of steps.
          */
-        class Example(message: String) : Descriptive(message)
+        interface Example : Descriptive {
+            val message: String
+        }
     }
 
-    sealed class Step(regex: String) : CucumberDefinition(regex) {
-        class Given(regex: String, lambda: GherkinLambda0) : Step(regex) {
-            init {
-                given(regex, lambda)
-            }
-        }
-        class GivenSingle(regex: String, lambda: GherkinLambda1) : Step(regex) {
-            init {
-                given(regex, lambda)
-            }
-        }
-        class GivenMultiple(regex: String, lambda: GherkinLambda2) : Step(regex) {
-            init {
-                given(regex, lambda)
-            }
-        }
-        class When(regex: String, lambda: GherkinLambda0) : Step(regex) {
-            init {
-                `when`(regex, lambda)
-            }
-        }
-        class WhenSingle(regex: String, lambda: GherkinLambda1) : Step(regex) {
-            init {
-                `when`(regex, lambda)
-            }
-        }
-        class WhenMultiple(regex: String, lambda: GherkinLambda2) : Step(regex) {
-            init {
-                `when`(regex, lambda)
-            }
-        }
-        class Then(regex: String, lambda: GherkinLambda0) : Step(regex) {
-            init {
-                then(regex, lambda)
-            }
-        }
-        class ThenSingle(regex: String, lambda: GherkinLambda1) : Step(regex) {
-            init {
-                then(regex, lambda)
-            }
-        }
-        class ThenMultiple(regex: String, lambda: GherkinLambda2) : Step(regex) {
-            init {
-                then(regex, lambda)
-            }
-        }
+    sealed interface Step : CucumberDefinitionI {
+        override val regex: String
+        val lambda: GherkinLambda
+
+        interface Given : Step
+        interface GivenSingle : Step
+        interface GivenMultiple : Step
+
+        interface When : Step
+        interface WhenSingle : Step
+        interface WhenMultiple : Step
+
+        interface Then : Step
+        interface ThenSingle : Step
+        interface ThenMultiple : Step
+    }
+}
+
+abstract class BaseCucumberDefinition(execute: () -> Unit) {
+    init {
+        execute()
+    }
+}
+
+sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): BaseCucumberDefinition(execute) {
+
+    sealed class Descriptive(regex: String) : CucumberDefinitionI.Descriptive, CucumberDefinition(regex) {
+
+        /**
+         * Represents a whole feature to be described. It groups the other descriptive keywords.
+         */
+        class Feature(override val message: String) : CucumberDefinitionI.Descriptive.Feature, Descriptive(message)
+
+        /**
+         * Groups more scenerio that tests a similar flow with a certain rule
+         */
+        class Rule(regex: String) : CucumberDefinitionI.Descriptive.Rule, Descriptive(regex)
+
+        /**
+         * Represents a Scenario, hence a group of steps.
+         */
+        class Example(override val message: String) : CucumberDefinitionI.Descriptive.Example,  Descriptive(message)
+    }
+
+    sealed class Step(regex: String, execute: () -> Unit) : CucumberDefinitionI.Step, CucumberDefinition(regex, execute) {
+        class Given(
+            regex: String,
+            override val lambda: GherkinLambda0
+        ) : CucumberDefinitionI.Step.Given,
+            Step(
+                regex,
+                { given(regex, lambda) }
+            )
+        class GivenSingle(
+            regex: String,
+            override val lambda: GherkinLambda1
+        ) : CucumberDefinitionI.Step.GivenSingle,
+            Step(
+                regex,
+                { given(regex, lambda) }
+            )
+        class GivenMultiple(
+            regex: String,
+            override val lambda: GherkinLambda2
+        ) : CucumberDefinitionI.Step.GivenMultiple,
+            Step(
+                regex,
+                { given(regex, lambda) }
+            )
+        class When(
+            regex: String,
+            override val lambda: GherkinLambda0
+        ) : CucumberDefinitionI.Step.When,
+            Step(
+                regex,
+                { `when`(regex, lambda) }
+            )
+        class WhenSingle(
+            regex: String,
+            override val lambda: GherkinLambda1
+        ) :  CucumberDefinitionI.Step.WhenSingle,
+             Step(
+                 regex,
+                 { `when`(regex, lambda) }
+             )
+        class WhenMultiple(
+            regex: String,
+            override val lambda: GherkinLambda2
+        ) :  CucumberDefinitionI.Step.WhenMultiple,
+             Step(
+                 regex,
+                 { `when`(regex, lambda) }
+             )
+        class Then(
+            regex: String,
+            override val lambda: GherkinLambda0
+        ) : CucumberDefinitionI.Step.Then,
+            Step(
+                regex,
+                { then(regex, lambda) }
+            )
+        class ThenSingle(
+            regex: String,
+            override val lambda: GherkinLambda1
+        ) : CucumberDefinitionI.Step.ThenSingle,
+            Step(
+                regex,
+                { then(regex, lambda) }
+            )
+        class ThenMultiple(
+            regex: String,
+            override val lambda: GherkinLambda2
+        ) : CucumberDefinitionI.Step.ThenMultiple,
+            Step(
+                regex,
+                { then(regex, lambda) }
+            )
     }
 
     sealed class SubStep(regex: String) : CucumberDefinition(regex) {
@@ -76,8 +153,8 @@ sealed class CucumberDefinition(val regex: String) {
     }
 }
 
-interface GherkinTestCase<T: GherkinLambda> {
-    val step: CucumberDefinition
+interface GherkinTestCase<CD: CucumberDefinitionI, T: GherkinLambda> {
+    val step: CD
     val lambda: T
 }
 
@@ -101,23 +178,10 @@ expect fun given(regex: String, lambda: GherkinLambda0)
 expect fun given(regex: String, lambda: GherkinLambda1)
 expect fun given(regex: String, lambda: GherkinLambda2)
 
-//infix fun GherkinLambdaMultiple.Given(regex: String) {
-//    given(regex, this)
-//}
-
 expect fun then(regex: String, lambda: GherkinLambda0)
 expect fun then(regex: String, lambda: GherkinLambda1)
 expect fun then(regex: String, lambda: GherkinLambda2)
 
-
-//infix fun String.Then(lambda: GherkinLambdaMultiple) {
-//    then(this, lambda)
-//}
-
 expect fun `when`(regex: String, lambda: GherkinLambda0)
 expect fun `when`(regex: String, lambda: GherkinLambda1)
 expect fun `when`(regex: String, lambda: GherkinLambda2)
-
-//infix fun GherkinLambdaMultiple.When(regex: String) {
-//    `when`(regex, this)
-//}
