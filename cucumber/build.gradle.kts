@@ -39,7 +39,6 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.cucumber:cucumber-java8:4.8.1")
-                implementation("io.cucumber:cucumber-junit:4.8.1")
             }
         }
         val androidUnitTest by getting
