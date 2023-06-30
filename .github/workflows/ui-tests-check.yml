@@ -16,7 +16,7 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
-      - name: Run Android Emulator
+      - name: Run Android Emulator and execute tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
@@ -31,9 +31,8 @@ jobs:
           profile: 3.4in WQVGA
           channel: canary
           cores: 6
-
-      - name: Run Android UI tests
-        run: ./gradlew :android:connectedCheck
+          script:
+            ./gradlew :android:connectedCheck
 
   run-iOS-ui-tests:
     env:
