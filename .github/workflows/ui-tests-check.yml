@@ -16,6 +16,22 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
+      - name: Run Android Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: google_apis
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          arch: x86_64
+          disk-size: 3G
+          ram-size: 3G
+          heap-size: 1500M
+          profile: 3.4in WQVGA
+          channel: canary
+          cores: 6
+
       - name: Run Android UI tests
         run: ./gradlew :android:connectedCheck
 
