@@ -1,3 +1,5 @@
+@file:JvmName("AndroidDependencyInjection")
+
 package com.corrado4eyes.cucumberplayground.di
 
 import com.corrado4eyes.cucumberplayground.viewModels.home.HomeViewModel
