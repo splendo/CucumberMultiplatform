@@ -7,7 +7,6 @@ on:
 jobs:
   run-android-ui-tests:
     runs-on: ubuntu-latest
-    needs: [uses-checkout, install-java-17]
     steps:
       - uses: actions/checkout@v3
 
@@ -24,7 +23,6 @@ jobs:
     env:
       WORKING_DIRECTORY: ./ios
     runs-on: macos-13
-    needs: [uses-checkout, install-java-17]
     steps:
       - uses: actions/checkout@v3
 
