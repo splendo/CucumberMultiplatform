@@ -33,7 +33,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Run iOS UI tests
-        working-directory: $WORKING_DIRECTORY
+        working-directory: ${{env.WORKING_DIRECTORY}}
         run: xcodebuild \
           -workspace ios.xcworkspace \
           -scheme ios \
