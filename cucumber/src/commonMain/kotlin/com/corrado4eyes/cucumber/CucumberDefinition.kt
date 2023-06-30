@@ -1,11 +1,10 @@
 package com.corrado4eyes.cucumber
 
-
 typealias Scenario = CucumberDefinition.Descriptive.Example
 
-sealed interface CucumberDefinitionI {
+sealed interface Definition {
     val regex: String
-    sealed interface Descriptive : CucumberDefinitionI {
+    sealed interface Descriptive : Definition {
 
         /**
          * Represents a whole feature to be described. It groups the other descriptive keywords.
@@ -29,7 +28,7 @@ sealed interface CucumberDefinitionI {
         }
     }
 
-    sealed interface Step : CucumberDefinitionI {
+    sealed interface Step : Definition {
         override val regex: String
         val lambda: GherkinLambda
 
@@ -47,6 +46,11 @@ sealed interface CucumberDefinitionI {
     }
 }
 
+/**
+ * Base class that takes care of taking a method to run on the initialization. The method is passed as parameter
+ * instead of having it as an open method to be overriden to avoid calling a method in the base class init block while the
+ * class that is extending it is probably partially initialized.
+ */
 abstract class BaseCucumberDefinition(execute: () -> Unit) {
     init {
         execute()
@@ -55,29 +59,29 @@ abstract class BaseCucumberDefinition(execute: () -> Unit) {
 
 sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): BaseCucumberDefinition(execute) {
 
-    sealed class Descriptive(regex: String) : CucumberDefinitionI.Descriptive, CucumberDefinition(regex) {
+    sealed class Descriptive(regex: String) : Definition.Descriptive, CucumberDefinition(regex) {
 
         /**
          * Represents a whole feature to be described. It groups the other descriptive keywords.
          */
-        class Feature(override val message: String) : CucumberDefinitionI.Descriptive.Feature, Descriptive(message)
+        class Feature(override val message: String) : Definition.Descriptive.Feature, Descriptive(message)
 
         /**
          * Groups more scenerio that tests a similar flow with a certain rule
          */
-        class Rule(regex: String) : CucumberDefinitionI.Descriptive.Rule, Descriptive(regex)
+        class Rule(regex: String) : Definition.Descriptive.Rule, Descriptive(regex)
 
         /**
          * Represents a Scenario, hence a group of steps.
          */
-        class Example(override val message: String) : CucumberDefinitionI.Descriptive.Example,  Descriptive(message)
+        class Example(override val message: String) : Definition.Descriptive.Example,  Descriptive(message)
     }
 
-    sealed class Step(regex: String, execute: () -> Unit) : CucumberDefinitionI.Step, CucumberDefinition(regex, execute) {
+    sealed class Step(regex: String, execute: () -> Unit) : Definition.Step, CucumberDefinition(regex, execute) {
         class Given(
             regex: String,
             override val lambda: GherkinLambda0
-        ) : CucumberDefinitionI.Step.Given,
+        ) : Definition.Step.Given,
             Step(
                 regex,
                 { given(regex, lambda) }
@@ -85,7 +89,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class GivenSingle(
             regex: String,
             override val lambda: GherkinLambda1
-        ) : CucumberDefinitionI.Step.GivenSingle,
+        ) : Definition.Step.GivenSingle,
             Step(
                 regex,
                 { given(regex, lambda) }
@@ -93,7 +97,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class GivenMultiple(
             regex: String,
             override val lambda: GherkinLambda2
-        ) : CucumberDefinitionI.Step.GivenMultiple,
+        ) : Definition.Step.GivenMultiple,
             Step(
                 regex,
                 { given(regex, lambda) }
@@ -101,7 +105,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class When(
             regex: String,
             override val lambda: GherkinLambda0
-        ) : CucumberDefinitionI.Step.When,
+        ) : Definition.Step.When,
             Step(
                 regex,
                 { `when`(regex, lambda) }
@@ -109,7 +113,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class WhenSingle(
             regex: String,
             override val lambda: GherkinLambda1
-        ) :  CucumberDefinitionI.Step.WhenSingle,
+        ) :  Definition.Step.WhenSingle,
              Step(
                  regex,
                  { `when`(regex, lambda) }
@@ -117,7 +121,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class WhenMultiple(
             regex: String,
             override val lambda: GherkinLambda2
-        ) :  CucumberDefinitionI.Step.WhenMultiple,
+        ) :  Definition.Step.WhenMultiple,
              Step(
                  regex,
                  { `when`(regex, lambda) }
@@ -125,7 +129,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class Then(
             regex: String,
             override val lambda: GherkinLambda0
-        ) : CucumberDefinitionI.Step.Then,
+        ) : Definition.Step.Then,
             Step(
                 regex,
                 { then(regex, lambda) }
@@ -133,7 +137,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class ThenSingle(
             regex: String,
             override val lambda: GherkinLambda1
-        ) : CucumberDefinitionI.Step.ThenSingle,
+        ) : Definition.Step.ThenSingle,
             Step(
                 regex,
                 { then(regex, lambda) }
@@ -141,7 +145,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class ThenMultiple(
             regex: String,
             override val lambda: GherkinLambda2
-        ) : CucumberDefinitionI.Step.ThenMultiple,
+        ) : Definition.Step.ThenMultiple,
             Step(
                 regex,
                 { then(regex, lambda) }
@@ -153,7 +157,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
     }
 }
 
-interface GherkinTestCase<CD: CucumberDefinitionI, T: GherkinLambda> {
+interface GherkinTestCase<CD: Definition, T: GherkinLambda> {
     val step: CD
     val lambda: T
 }

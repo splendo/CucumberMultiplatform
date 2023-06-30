@@ -19,10 +19,10 @@ sealed class CucumberDefinitionMock(execute: () -> Unit) : BaseCucumberDefinitio
     class GivenMock(
         override val regex: String,
         override val lambda: MockGherkinLambda
-    ) : CucumberDefinitionI.Step.Given, CucumberDefinitionMock({ lambda() })
+    ) : Definition.Step.Given, CucumberDefinitionMock({ lambda() })
 }
 
-sealed class StubTestCase<CD: CucumberDefinitionI, T: GherkinLambda> : GherkinTestCase<CD, T>  {
+sealed class StubTestCase<CD: Definition, T: GherkinLambda> : GherkinTestCase<CD, T>  {
     class TestGivenCase(override val lambda: MockGherkinLambda) : StubTestCase<CucumberDefinitionMock.GivenMock, MockGherkinLambda>() {
         override val step: CucumberDefinitionMock.GivenMock = CucumberDefinitionMock.GivenMock("Test Given with GherkinLambda0", lambda)
     }

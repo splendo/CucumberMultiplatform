@@ -1,7 +1,7 @@
 package com.corrado4eyes.cucumbershared.tests
 
 import com.corrado4eyes.cucumber.CucumberDefinition
-import com.corrado4eyes.cucumber.CucumberDefinitionI
+import com.corrado4eyes.cucumber.Definition
 import com.corrado4eyes.cucumber.EXPECT_VALUE_STRING
 import com.corrado4eyes.cucumber.GherkinLambda
 import com.corrado4eyes.cucumber.GherkinLambda0
@@ -9,8 +9,8 @@ import com.corrado4eyes.cucumber.GherkinLambda1
 import com.corrado4eyes.cucumber.GherkinLambda2
 import com.corrado4eyes.cucumber.GherkinTestCase
 
-sealed class TestCase<CD: CucumberDefinitionI, T: GherkinLambda> : GherkinTestCase<CD, T> {
-    sealed class Common<CD: CucumberDefinitionI, T: GherkinLambda> : TestCase<CD, T>() {
+sealed class TestCase<CD: Definition, T: GherkinLambda> : GherkinTestCase<CD, T> {
+    sealed class Common<CD: Definition, T: GherkinLambda> : TestCase<CD, T>() {
         class ScreenIsVisible(override val lambda: GherkinLambda1) : Common<CucumberDefinition.Step.GivenSingle, GherkinLambda1>() {
             override val step: CucumberDefinition.Step.GivenSingle = CucumberDefinition.Step.GivenSingle("I am in the $EXPECT_VALUE_STRING screen", lambda)
         }
@@ -28,8 +28,8 @@ sealed class TestCase<CD: CucumberDefinitionI, T: GherkinLambda> : GherkinTestCa
         }
     }
 
-    sealed class Login <CD: CucumberDefinitionI, T: GherkinLambda> : TestCase<CD, T>() {
-        sealed class Common <CD: CucumberDefinitionI, T: GherkinLambda> : Login<CD, T>() {
+    sealed class Login <CD: Definition, T: GherkinLambda> : TestCase<CD, T>() {
+        sealed class Common <CD: Definition, T: GherkinLambda> : Login<CD, T>() {
             class TextFieldIsVisible(override val lambda: GherkinLambda2) : Common<CucumberDefinition.Step.ThenMultiple, GherkinLambda2>() {
                 override val step: CucumberDefinition.Step.ThenMultiple = CucumberDefinition.Step.ThenMultiple("I see the $EXPECT_VALUE_STRING textfield with text $EXPECT_VALUE_STRING", lambda)
             }
@@ -46,7 +46,7 @@ sealed class TestCase<CD: CucumberDefinitionI, T: GherkinLambda> : GherkinTestCa
         }
     }
 
-    sealed class Home <CD: CucumberDefinitionI, T: GherkinLambda> : TestCase<CD, T>() {
+    sealed class Home <CD: Definition, T: GherkinLambda> : TestCase<CD, T>() {
         class LoggedInEmail(override val lambda: GherkinLambda1) : Home<CucumberDefinition.Step.GivenSingle, GherkinLambda1>() {
             override val step: CucumberDefinition.Step.GivenSingle = CucumberDefinition.Step.GivenSingle("Email is $EXPECT_VALUE_STRING", lambda)
         }
