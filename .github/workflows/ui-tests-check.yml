@@ -2,7 +2,7 @@ name: ui-tests-check
 env:
   PR_NUMBER: ${{ github.event.number }}
   ACTOR: ${{ github.actor }}
-run-name: $ACTOR is running the UI tests check for PR $PR_NUMBER
+run-name: ${{ env.ACTOR }} is running the UI tests check for PR ${{env.PR_NUMBER}}
 on:
   pull_request:
     branches:
