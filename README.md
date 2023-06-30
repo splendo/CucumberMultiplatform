@@ -194,9 +194,13 @@ In order to run the Android test a developer can do that in 2 ways:
 
 - Or run the `:android:connectedCheck` gradle task 
 
+## Resourceful links
+- https://cucumber.io/docs/gherkin/ in order to learn how Gherkin Syntax works and extract keyword to implement
+- https://github.com/cucumber/cucumber-android library for android with example where different approach are used, e.g DI using Hilt, usage of Compose-UI views and Android Views.
+- https://github.com/Ahmed-Ali/Cucumberish iOS SDK with examples
+
 ## Errors
 
 I've been experiencing a bunch of error since I started working on this project, so I will list them there and beside I will write what I did to circumvent the error or to solve it.
 
 - Running the Android tests from the TestRunner will show no logs or test result whatsoever? Didn't really find a solution for this issue, but I started running the gradle task directly.
-- 
