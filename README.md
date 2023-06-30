@@ -162,3 +162,41 @@ and those step definition would be ignored.
 
 - `testRule: ComposeTestRule` is used to either launch a specific Composable or assert Composables values and state
 - `arguments` is a map used to mock certain values and its passed to the activity through the intent. The launched activity should take care of getting this values and setup the environment to reflect what one wants to test.
+
+## How to setup Cucumber?
+
+### iOS
+Follow the manual setup for Cucumberish on [iOS](https://github.com/Ahmed-Ali/Cucumberish/wiki/Install-manually-for-Swift).
+Then on the test target you just created, set the FRAMEWORK_SEARCH_PATH as `$(SRCROOT)/../cucumberShared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)`.
+
+Once everything is setup, the developer can run ⌘ + U to run the tests from Xcode.
+
+
+### Android
+On Android add the following dependencies in the `android/build.gradle.kts` file:
+
+```
+androidTestImplementation(project(":cucumberShared"))
+androidTestImplementation("io.cucumber:cucumber-android:4.10.0")
+androidTestImplementation("io.cucumber:cucumber-java8:4.8.1")
+```
+Even though there are major versions available for cucumber-java8, `4.8.1` is the maximum version supported by `cucumber-android`.
+
+Sync and create an `androidTest` folder inside the `android/src`. The `androidTest` folder will contain:
+- `assets` folder where the developer can create other sub folder that contains the feature files
+- `kotlin` folder where there will be a package like folder structure and 2+ files:
+  - the cucumber test runner
+  - one or more files where the `TestCase`s will be called.
+
+In order to run the Android test a developer can do that in 2 ways:
+- Navigate to the Test runner class and press the play button like its shown in the screenshot
+![TestRunner.jpg](screenshots%2FTestRunner.jpg)
+
+- Or run the `:android:connectedCheck` task from the terminal
+
+## Errors
+
+I've been experiencing a bunch of error since I started working on this project, so I will list them there and beside I will write what I did to circumvent the error or to solve it.
+
+- Running the Android tests from the TestRunner will show no logs or test result whatsoever? Didn't really find a solution for this issue, but I started using the gradle task from the terminal.
+- 
