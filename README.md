@@ -192,11 +192,11 @@ In order to run the Android test a developer can do that in 2 ways:
 - Navigate to the Test runner class and press the play button like its shown in the screenshot
 ![TestRunner.jpg](screenshots%2FTestRunner.jpg)
 
-- Or run the `:android:connectedCheck` task from the terminal
+- Or run the `:android:connectedCheck` gradle task 
 
 ## Errors
 
 I've been experiencing a bunch of error since I started working on this project, so I will list them there and beside I will write what I did to circumvent the error or to solve it.
 
-- Running the Android tests from the TestRunner will show no logs or test result whatsoever? Didn't really find a solution for this issue, but I started using the gradle task from the terminal.
+- Running the Android tests from the TestRunner will show no logs or test result whatsoever? Didn't really find a solution for this issue, but I started running the gradle task directly.
 - 
