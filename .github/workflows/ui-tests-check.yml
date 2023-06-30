@@ -2,7 +2,7 @@ name: ui-tests-check
 env:
   PR_NUMBER: ${{ github.event.number }}
   ACTOR: ${{ github.actor }}
-run-name: ${{ env.ACTOR }} is running the UI tests check for PR ${{env.PR_NUMBER}}
+run-name: "$ACTOR is running the UI tests check for PR $PR_NUMBER"
 on:
   pull_request:
     branches:
@@ -33,7 +33,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Run iOS UI tests
-        working-directory: ${{env.WORKING_DIRECTORY}}
+        working-directory: "$WORKING_DIRECTORY"
         run: xcodebuild \
           -workspace ios.xcworkspace \
           -scheme ios \
