@@ -12,6 +12,7 @@ android {
 
 kotlin {
     val kalugaVersion: String by project
+    val koinVersion: String by project
 
     val target: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit = {
         binaries {
@@ -55,17 +56,23 @@ kotlin {
                 api("com.splendo.kaluga:hud:$kalugaVersion")
                 api("com.splendo.kaluga:keyboard:$kalugaVersion")
                 api("com.splendo.kaluga:resources:$kalugaVersion")
+                api("io.insert-koin:koin-core:$koinVersion")
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
-                implementation("com.splendo.kaluga:test-utils:$kalugaVersion")
+                api(kotlin("test"))
+                api(kotlin("test-junit"))
+                api("com.splendo.kaluga:test-utils:$kalugaVersion")
+                api("io.insert-koin:koin-test:$koinVersion")
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                api("io.insert-koin:koin-android:$koinVersion")
+            }
+        }
         val androidUnitTest by getting
-
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting

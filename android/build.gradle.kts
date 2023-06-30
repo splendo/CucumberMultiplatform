@@ -60,8 +60,7 @@ dependencies {
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.activity:activity-compose:1.7.2")
 
-    androidTestImplementation(project(":cucumberShared"))
-
+    androidTestImplementation(kotlin("test"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$1.4.3")
 
@@ -69,8 +68,10 @@ dependencies {
     implementation("com.splendo.kaluga:resources-compose:$kalugaVersion")
     implementation("com.splendo.kaluga:keyboard-compose:$kalugaVersion")
 
+    androidTestImplementation(project(":cucumberShared"))
     androidTestImplementation("io.cucumber:cucumber-android:4.10.0")
+    // TODO figure out how it can be updated without breeaking the project
     androidTestImplementation("io.cucumber:cucumber-java8:4.8.1")
 
-    androidTestImplementation(kotlin("test"))
+    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
 }

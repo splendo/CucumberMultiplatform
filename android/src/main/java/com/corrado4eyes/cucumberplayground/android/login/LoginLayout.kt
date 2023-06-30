@@ -14,41 +14,43 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import com.corrado4eyes.cucumberplayground.login.AuthService
-import com.corrado4eyes.cucumberplayground.login.AuthServiceImpl
 import com.corrado4eyes.cucumberplayground.viewModels.login.LoginViewModel
 import com.splendo.kaluga.architecture.compose.state
+import com.splendo.kaluga.architecture.compose.viewModel.ViewModelComposable
 import com.splendo.kaluga.architecture.observable.StateFlowInitializedSubject
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun LoginLayout(authService: AuthService) {
-    val viewModel = remember { LoginViewModel(authService) }
-    val isLoading by viewModel.isLoading.state()
-    Column {
-        Text(text = viewModel.screenTitle, modifier = Modifier.testTag("Login screen"))
-        CustomTextField(
-            value = viewModel.emailText,
-            label = "Email",
-            modifier = Modifier.testTag("Email")
-        )
-        val emailErrorText by viewModel.emailErrorText.state()
-        Text(text = emailErrorText, color = Color.Red)
-        CustomTextField(
-            value = viewModel.passwordText,
-            label = "Password",
-            modifier = Modifier.testTag("Password")
-        )
-        val passwordErrorText by viewModel.passwordErrorText.state()
-        Text(text = passwordErrorText, color = Color.Red)
+fun LoginLayout() {
+    val viewModel = koinViewModel<LoginViewModel>()
+    ViewModelComposable(viewModel) {
+        val isLoading by this.isLoading.state()
+        Column {
+            Text(text = this@ViewModelComposable.screenTitle, modifier = Modifier.testTag("Login screen"))
+            CustomTextField(
+                value = this@ViewModelComposable.emailText,
+                label = "Email",
+                modifier = Modifier.testTag("Email")
+            )
+            val emailErrorText by this@ViewModelComposable.emailErrorText.state()
+            Text(text = emailErrorText, color = Color.Red)
+            CustomTextField(
+                value = this@ViewModelComposable.passwordText,
+                label = "Password",
+                modifier = Modifier.testTag("Password")
+            )
+            val passwordErrorText by this@ViewModelComposable.passwordErrorText.state()
+            Text(text = passwordErrorText, color = Color.Red)
 
-        val formFooterErrorText by viewModel.formFooterError.state()
-        Text(text = formFooterErrorText, color = Color.Red)
-        if (isLoading) {
-            CircularProgressIndicator()
-        }
+            val formFooterErrorText by this@ViewModelComposable.formFooterError.state()
+            Text(text = formFooterErrorText, color = Color.Red)
+            if (isLoading) {
+                CircularProgressIndicator()
+            }
 
-        Button(viewModel::login) {
-            Text("Login")
+            Button(this@ViewModelComposable::login) {
+                Text("Login")
+            }
         }
     }
 }
@@ -77,5 +79,5 @@ fun CustomTextField(
 @Preview
 @Composable
 fun LoginLayoutPreview(loginEvent: (String, String) -> Unit) {
-    LoginLayout(AuthServiceImpl())
+    LoginLayout()
 }

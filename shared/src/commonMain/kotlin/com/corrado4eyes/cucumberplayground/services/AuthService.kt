@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumberplayground.login
+package com.corrado4eyes.cucumberplayground.services
 
 import com.corrado4eyes.cucumberplayground.models.User
 import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
@@ -11,19 +11,22 @@ interface AuthService {
     suspend fun login(email: String, pass: String): AuthResponse
     suspend fun logout()
     suspend fun signUp(email: String, pass: String): AuthResponse
-    val user: Flow<User?>
+    val observeUser: Flow<User?>
+    var user: User?
 }
 
 class AuthServiceImpl : AuthService {
 
     private var currentUser: MutableStateFlow<User?> = MutableStateFlow(null)
-    override val user: Flow<User?> = currentUser.asStateFlow()
+    override val observeUser: Flow<User?> = currentUser.asStateFlow()
 
     private val users = mutableListOf(
         User("alex@alex.com", "1234"),
         User("corrado@corrado.com", "1234"),
         User("test@test.com", "1234")
     )
+    override var user: User? = null
+        get() = currentUser.value
 
     override suspend fun login(email: String, pass: String): AuthResponse {
         if (email.isEmpty()) return AuthResponse.Error("Invalid email")
