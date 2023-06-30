@@ -157,9 +157,9 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
     }
 }
 
-interface GherkinTestCase<CD: Definition, T: GherkinLambda> {
-    val step: CD
-    val lambda: T
+interface GherkinTestCase<D: Definition, L: GherkinLambda> {
+    val step: D
+    val lambda: L
 }
 
 expect val EXPECT_VALUE_STRING: String
