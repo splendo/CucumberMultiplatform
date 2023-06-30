@@ -1,29 +1,29 @@
 package com.corrado4eyes.cucumber
 
+import com.splendo.kaluga.test.base.mock.call
+import com.splendo.kaluga.test.base.mock.parameters.mock
+import com.splendo.kaluga.test.base.mock.verification.VerificationRule
+import com.splendo.kaluga.test.base.mock.verify
 import kotlin.test.Test
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
-abstract class BaseMockGherkinLambda : () -> Unit, GherkinLambda {
-    var wasCalled: Boolean = false
-}
+class GherkinLambdaMock(private val lambda: () -> Unit) : () -> Unit, GherkinLambda {
+    val mockedMethod = ::invoke.mock()
 
-class MockGherkinLambda(private val mockLambda: () -> Unit) : BaseMockGherkinLambda() {
     override fun invoke() {
-        mockLambda()
-        wasCalled = true
+        lambda()
+        mockedMethod.call()
     }
 }
 
 sealed class CucumberDefinitionMock(execute: () -> Unit) : BaseCucumberDefinition(execute) {
     class GivenMock(
         override val regex: String,
-        override val lambda: MockGherkinLambda
+        override val lambda: GherkinLambdaMock
     ) : Definition.Step.Given, CucumberDefinitionMock({ lambda() })
 }
 
 sealed class StubTestCase<D: Definition, L: GherkinLambda> : GherkinTestCase<D, L>  {
-    class TestGivenCase(override val lambda: MockGherkinLambda) : StubTestCase<CucumberDefinitionMock.GivenMock, MockGherkinLambda>() {
+    class TestGivenCase(override val lambda: GherkinLambdaMock) : StubTestCase<CucumberDefinitionMock.GivenMock, GherkinLambdaMock>() {
         override val step: CucumberDefinitionMock.GivenMock = CucumberDefinitionMock.GivenMock("Test Given with MockGherkinLambda", lambda)
     }
 }
@@ -31,12 +31,12 @@ sealed class StubTestCase<D: Definition, L: GherkinLambda> : GherkinTestCase<D, 
 class CucumberRunnerTest {
     @Test
     fun test_given_case() {
-        val mockLambda = MockGherkinLambda {}
+        val lambda = GherkinLambdaMock {}
 
-        assertFalse(mockLambda.wasCalled)
+        lambda.mockedMethod.verify(rule = VerificationRule.never())
         StubTestCase.TestGivenCase(
-            mockLambda
+            lambda
         )
-        assertTrue(mockLambda.wasCalled)
+        lambda.mockedMethod.verify()
     }
 }
