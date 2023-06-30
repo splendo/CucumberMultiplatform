@@ -19,8 +19,8 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        summary = "Wrapper for Cucumberish"
+        homepage = "https://github.com/splendo/CucumberMultiplatform"
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
@@ -33,7 +33,10 @@ kotlin {
         val commonMain by getting
         val commonTest by getting {
             dependencies {
+                val kalugaVersion: String by project
+
                 implementation(kotlin("test"))
+                implementation("com.splendo.kaluga:test-utils-base:$kalugaVersion")
             }
         }
         val androidMain by getting {
@@ -75,6 +78,10 @@ android {
     }
 }
 
+/**
+ * Custom gradle task since Cucumberish library targets iOS 8. User running on the latest macOS version will have errors when syncing since iOS 8 won't be a valid target anymore.
+ * This script will override the target version to the given string.
+ */
 tasks.withType<PodGenTask>().configureEach {
     doLast {
         val xcodeprojFiles = listOf(
