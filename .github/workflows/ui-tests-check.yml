@@ -64,6 +64,10 @@ jobs:
       - name: Compile modules
         run: ./gradlew compileKotlinIosX64
 
+      - name: Run pod install
+        working-directory: ${{env.WORKING_DIRECTORY}}
+        uses: ty0x2333/cocoapods-action@master
+
       - name: Run iOS UI tests
         working-directory: ${{env.WORKING_DIRECTORY}}
         run: xcodebuild -workspace ios.xcworkspace -scheme ios -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2' test
