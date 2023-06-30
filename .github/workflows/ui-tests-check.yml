@@ -54,6 +54,8 @@ jobs:
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -61,12 +63,16 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
-      - name: Compile modules
-        run: ./gradlew compileKotlinIosX64
+      - name: Install sourcery
+        run: brew install sourcery
+
+      - name: Configure sourcery
+        working-directory: ${{env.WORKING_DIRECTORY}}
+        run: sourcery --config kaluga.sourcery.yml
 
       - name: Run pod install
         working-directory: ${{env.WORKING_DIRECTORY}}
-        uses: ty0x2333/cocoapods-action@master
+        run: pod install
 
       - name: Run iOS UI tests
         working-directory: ${{env.WORKING_DIRECTORY}}
