@@ -81,3 +81,8 @@ jobs:
         working-directory: ${{env.WORKING_DIRECTORY}}
         run: xcodebuild -workspace ios.xcworkspace -scheme ios -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2' -resultBundlePath TestResults test
 
+      - name: Upload test result artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-without-markdown
+          path: /TestResults*
