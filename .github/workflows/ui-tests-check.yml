@@ -82,6 +82,7 @@ jobs:
         run: xcodebuild -workspace ios.xcworkspace -scheme ios -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.2' -resultBundlePath TestResults test
 
       - name: Upload test result artifacts
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: dist-without-markdown
