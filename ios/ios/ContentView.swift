@@ -23,7 +23,7 @@ struct ContentView: View {
             print(tc)
             return tc
         }()
-        let mainViewModel = MainViewModel(testConfiguration: testConfiguration, authService: authService)
+        let mainViewModel = MainViewModel(testConfiguration: testConfiguration)
         viewModel = LifecycleViewModel(mainViewModel)
         navState = ObjectObservable(mainViewModel.navState)
     }
