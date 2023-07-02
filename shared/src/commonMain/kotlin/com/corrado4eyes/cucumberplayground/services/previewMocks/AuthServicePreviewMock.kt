@@ -10,16 +10,17 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class AuthServicePreviewMock : AuthService {
 
-    private var currentUser: MutableStateFlow<User?> = MutableStateFlow(User("test@test.com", "1234"))
+    private var currentUser: MutableStateFlow<User?> =
+        MutableStateFlow(User("test@test.com", "1234"))
     override val observeUser: Flow<User?> = currentUser.asStateFlow()
-    override var user: User? = null
-        get() = currentUser.value
 
     private val databaseUsers = mutableListOf(
         User("alex@alex.com", "1234"),
         User("corrado@corrado.com", "1234"),
         User("test@test.com", "1234")
     )
+
+    override fun getCurrentUserIfAny(): User? = currentUser.value
 
     override suspend fun login(email: String, pass: String): AuthResponse {
         if (email.isEmpty()) return AuthResponse.Error("Invalid email")

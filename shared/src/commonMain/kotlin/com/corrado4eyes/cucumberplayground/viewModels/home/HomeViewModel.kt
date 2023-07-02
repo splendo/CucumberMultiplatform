@@ -2,8 +2,6 @@ package com.corrado4eyes.cucumberplayground.viewModels.home
 
 import com.corrado4eyes.cucumberplayground.services.AuthService
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -14,7 +12,9 @@ class HomeViewModel : BaseLifecycleViewModel(), KoinComponent {
 
     val screenTitle = "Home screen"
     val buttonTitle = "Logout"
-    val user = authService.user!!
+
+    fun getCurrentUser() = authService.getCurrentUserIfAny()!!
+    val user = authService.getCurrentUserIfAny()!!
 
     fun logout() {
         coroutineScope.launch {

@@ -12,7 +12,7 @@ interface AuthService {
     suspend fun logout()
     suspend fun signUp(email: String, pass: String): AuthResponse
     val observeUser: Flow<User?>
-    var user: User?
+    fun getCurrentUserIfAny(): User?
 }
 
 class AuthServiceImpl : AuthService {
@@ -25,8 +25,8 @@ class AuthServiceImpl : AuthService {
         User("corrado@corrado.com", "1234"),
         User("test@test.com", "1234")
     )
-    override var user: User? = null
-        get() = currentUser.value
+
+    override fun getCurrentUserIfAny(): User? = currentUser.value
 
     override suspend fun login(email: String, pass: String): AuthResponse {
         if (email.isEmpty()) return AuthResponse.Error("Invalid email")

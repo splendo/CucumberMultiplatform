@@ -19,8 +19,9 @@ sealed class AppNavigator {
     ) : AppNavigator()
 }
 
-class MainViewModel(private val testConfiguration: TestConfiguration? = null) :
-    BaseLifecycleViewModel(), KoinComponent {
+class MainViewModel(
+    private val testConfiguration: TestConfiguration? = null
+) : BaseLifecycleViewModel(), KoinComponent {
 
     private val authService: AuthService by inject()
 
@@ -37,7 +38,9 @@ class MainViewModel(private val testConfiguration: TestConfiguration? = null) :
             authService.observeUser.collect { user ->
                 user?.let {
                     _navState.value = AppNavigator.Home(it)
-                } ?: run { _navState.value = AppNavigator.Login }
+                } ?: run {
+                    _navState.value = AppNavigator.Login
+                }
             }
         }
     }

@@ -2,6 +2,7 @@
 
 package com.corrado4eyes.cucumberplayground.di
 
+import com.corrado4eyes.cucumberplayground.models.TestConfiguration
 import com.corrado4eyes.cucumberplayground.viewModels.home.HomeViewModel
 import com.corrado4eyes.cucumberplayground.viewModels.login.LoginViewModel
 import com.corrado4eyes.cucumberplayground.viewModels.main.MainViewModel
@@ -23,8 +24,8 @@ internal actual object PlatformModuleFactory : BasePlatformModuleFactory() {
         viewModel {
             HomeViewModel()
         }
-        viewModel {
-            MainViewModel()
+        viewModel { (testConfig: TestConfiguration?) ->
+            MainViewModel(testConfig)
         }
     }
 
