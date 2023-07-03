@@ -62,7 +62,6 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 api(kotlin("test"))
-                api(kotlin("test-junit"))
                 api("com.splendo.kaluga:test-utils:$kalugaVersion")
                 api("io.insert-koin:koin-test:$koinVersion")
             }

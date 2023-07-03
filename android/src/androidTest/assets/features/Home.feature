@@ -1,5 +1,6 @@
 Feature: Home
-  Scenario: Home screen
+
+  Scenario: Logout
     Given Email is "test@test.com"
     Given I am in the "Home" screen
     Then I see "test@test.com" text

@@ -19,14 +19,13 @@ class LoginViewModelTest : KoinUIThreadViewModelTest<LoginViewModelTest.KoinCont
         }
     ) {
         val authService = get<AuthService>() as AuthServiceMock
-        override val viewModel: LoginViewModel = LoginViewModel(authService)
+        override val viewModel: LoginViewModel = LoginViewModel()
     }
 
     @Test
     fun test_on_login_button_pressed_fail_with_empty_email() = testOnUIThread {
         viewModel.login()
         assertTrue(viewModel.emailText.stateFlow.value.isEmpty())
-//        assertEquals(Colors.red, viewModel.emailTextFieldBorderColor.stateFlow.value)
         assertEquals("Missing email", viewModel.emailErrorText.stateFlow.value)
     }
 
@@ -54,7 +53,7 @@ class LoginViewModelTest : KoinUIThreadViewModelTest<LoginViewModelTest.KoinCont
         viewModel.passwordText.stateFlow.value = "1234"
 
         viewModel.login()
-//        assertEquals() Navigation goes to Home
+        // assertEquals() Navigation goes to Home
     }
 
     private inline fun KoinContext.fillCredentials(withPassword: Boolean) {

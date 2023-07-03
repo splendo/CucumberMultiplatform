@@ -17,6 +17,11 @@ import com.corrado4eyes.cucumber.GherkinLambda1
 import com.corrado4eyes.cucumber.GherkinLambda2
 import com.corrado4eyes.cucumberplayground.android.MainActivity
 import com.corrado4eyes.cucumbershared.tests.TestCase
+import io.cucumber.core.api.Scenario
+import io.cucumber.java.After
+import io.cucumber.java.AfterStep
+import io.cucumber.java.Before
+import io.cucumber.java.BeforeStep
 import io.cucumber.java8.En
 import io.cucumber.junit.WithJunitRule
 import org.junit.Rule
@@ -30,6 +35,41 @@ class StepDefinitions : En {
     @get:Rule(order = 0)
     val testRule = createComposeRule()
 
+    @Before(order = 0)
+    fun beforeScenarioStart(scenario: Scenario) {
+        // Will run before each scenario
+        println("-----------------Start of Scenario ${scenario.name}-----------------")
+    }
+
+    @Before(order = 1)
+    fun beforeScenario(scenario: Scenario) {
+        // Will run before each scenario but second in order
+        println("Running steps:")
+    }
+
+    @After(order = 1)
+    fun afterScenarioFinish(scenario: Scenario) {
+        // Will run after each scenario
+        println("Steps completed")
+    }
+
+    @After(order = 0)
+    fun afterScenario(scenario: Scenario) {
+        // Will run after each scenario but second in order
+        println("-----------------End of Scenario ${scenario.name}-----------------")
+    }
+
+    // TODO figure out for specific step, crashes the app with exception if you try @BeforeStep("some step")
+    @BeforeStep
+    fun beforeStep(scenario: Scenario) {
+        // Run stuff before each scenario step
+    }
+
+    @AfterStep
+    fun afterStep(scenario: Scenario) {
+        // Run stuff after each scenario step
+    }
+
     init {
         TestCase.Common.ScreenIsVisible(
             GherkinLambda1 { screenName ->
@@ -39,6 +79,7 @@ class StepDefinitions : En {
                         arguments["testEmail"] = ""
                         "Login screen"
                     }
+
                     "Home" -> {
                         arguments["isLoggedIn"] = "true"
                         "Home screen"
@@ -116,7 +157,7 @@ class StepDefinitions : En {
         )
     }
 
-    private fun <T: Activity> launch(intent: Intent) {
+    private fun <T : Activity> launch(intent: Intent) {
         scenario = ActivityScenario.launch<T>(intent)
     }
 }
