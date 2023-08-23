@@ -206,6 +206,9 @@ I've been experiencing a bunch of error since I started working on this project,
 
 - Running the Android tests from the TestRunner will show no logs or test result whatsoever? 
   - Didn't really find a solution for this issue, but I started running the gradle task directly.
+  ```shell
+      ./gradlew connectedDebugAndroidTest
+  ```
 
 - When creating the iOS test target with the cucumber files, the .m file doesn't find the Cucumber.swift file or its methods. 
   - Be sure that the class and the method you want to use in the .m file are marked with `@objc` annotation and they have `public` visibility.
