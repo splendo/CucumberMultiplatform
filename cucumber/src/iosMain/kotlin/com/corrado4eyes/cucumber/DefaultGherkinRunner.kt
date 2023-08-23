@@ -7,24 +7,17 @@ import cocoapods.Cucumberish.When
 
 actual val EXPECT_VALUE_STRING = "\\\"(.*)\\\""
 
-actual class GherkinLambda0(private val lambda: CCIStepBody) : CCIStepBody, GherkinLambda {
+abstract class BaseGherkinLambda(private val lambda: CCIStepBody) : CCIStepBody {
     override fun invoke(p1: List<*>?, p2: Map<Any?, *>?) {
         lambda?.let { it(p1, p2) }
     }
 }
 
-actual class GherkinLambda1(private val lambda: CCIStepBody) : CCIStepBody, GherkinLambda {
-    override fun invoke(p1: List<*>?, p2: Map<Any?, *>?) {
-        lambda?.let { it(p1, p2) }
-    }
-}
+actual class GherkinLambda0(lambda: CCIStepBody) : BaseGherkinLambda(lambda), GherkinLambda
 
-actual class GherkinLambda2(private val lambda: CCIStepBody) : CCIStepBody, GherkinLambda {
-    override fun invoke(p1: List<*>?, p2: Map<Any?, *>?) {
-        lambda?.let { it(p1, p2) }
-    }
-}
-//actual typealias GherkinLambda2 = GherkinLambda1
+actual class GherkinLambda1(lambda: CCIStepBody) : BaseGherkinLambda(lambda), GherkinLambda
+
+actual class GherkinLambda2(lambda: CCIStepBody) : BaseGherkinLambda(lambda), GherkinLambda
 
 actual fun given(regex: String, lambda: GherkinLambda0) {
     Given(regex, lambda)
