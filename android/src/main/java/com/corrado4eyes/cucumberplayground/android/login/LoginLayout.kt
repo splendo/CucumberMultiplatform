@@ -29,15 +29,15 @@ fun LoginLayout() {
             Text(text = this@ViewModelComposable.screenTitle, modifier = Modifier.testTag("Login screen"))
             CustomTextField(
                 value = this@ViewModelComposable.emailText,
-                label = "Email",
-                modifier = Modifier.testTag("Email")
+                label = viewModel.emailPlaceholder,
+                modifier = Modifier.testTag(viewModel.emailPlaceholder)
             )
             val emailErrorText by this@ViewModelComposable.emailErrorText.state()
             Text(text = emailErrorText, color = Color.Red)
             CustomTextField(
                 value = this@ViewModelComposable.passwordText,
-                label = "Password",
-                modifier = Modifier.testTag("Password")
+                label = viewModel.passwordPlaceholder,
+                modifier = Modifier.testTag(viewModel.passwordPlaceholder)
             )
             val passwordErrorText by this@ViewModelComposable.passwordErrorText.state()
             Text(text = passwordErrorText, color = Color.Red)
