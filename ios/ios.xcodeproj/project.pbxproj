@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		019B36888F555E147DF0B2B3 /* KeyboardManager.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0771BA10F31A50A9BC22A18 /* KeyboardManager.generated.swift */; };
 		04754A9886060761775E2E1B /* KalugaLabel+SwiftUI.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A826344DD859D1A70A50DA /* KalugaLabel+SwiftUI.generated.swift */; };
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
@@ -117,6 +118,7 @@
 		D963EF3C4F0C141A4A80C891 /* KalugaStyledString+SwiftUI.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = "KalugaStyledString+SwiftUI.generated.swift"; sourceTree = "<group>"; };
 		E52FF51F397E317F81326758 /* TintedImage+Image.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = "TintedImage+Image.generated.swift"; sourceTree = "<group>"; };
 		EA6CBAFDA191747DE6BFB4B0 /* LazyView.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = LazyView.generated.swift; sourceTree = "<group>"; };
+		F0771BA10F31A50A9BC22A18 /* KeyboardManager.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = KeyboardManager.generated.swift; path = KeyboardManager.generated.swift; sourceTree = "<group>"; };
 		F3A826344DD859D1A70A50DA /* KalugaLabel+SwiftUI.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = "KalugaLabel+SwiftUI.generated.swift"; sourceTree = "<group>"; };
 		F45727342CFD5BEA57D61051 /* Subject.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Subject.generated.swift; sourceTree = "<group>"; };
 		F91AE96E17B56B56CB7AF766 /* KalugaBackgroundStyle+SwiftUI.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = "KalugaBackgroundStyle+SwiftUI.generated.swift"; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				E52FF51F397E317F81326758 /* TintedImage+Image.generated.swift */,
 				48B350D3EB640C8B7B253753 /* UninitializedObservable.generated.swift */,
 				191BB22D1226AD539DDC6631 /* UninitializedSubject.generated.swift */,
+				F0771BA10F31A50A9BC22A18 /* KeyboardManager.generated.swift */,
 			);
 			path = KalugaSwiftUI;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				A0E41188A70FBC3218884E58 /* TintedImage+Image.generated.swift in Sources */,
 				E0B3E5622CB67E29A284CAAC /* UninitializedObservable.generated.swift in Sources */,
 				FAF26C36EFC614CD413B9488 /* UninitializedSubject.generated.swift in Sources */,
+				019B36888F555E147DF0B2B3 /* KeyboardManager.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
