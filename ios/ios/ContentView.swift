@@ -27,12 +27,13 @@ struct ContentView: View {
         viewModel = LifecycleViewModel(mainViewModel)
         navState = ObjectObservable(mainViewModel.navState)
     }
+    
     var body: some View {
         NavigationView {
             if navState.value is AppNavigator.Home {
-                HomeView(user: (navState.value as! AppNavigator.Home).user, authService: authService)
+                HomeView()
             } else if navState.value is AppNavigator.Login{
-                LoginView(authService: authService)
+                LoginView()
             } else {
                 ProgressView()
             }

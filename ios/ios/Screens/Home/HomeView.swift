@@ -11,9 +11,16 @@ import shared
 
 struct HomeView: SwiftUI.View {
     private let viewModel: LifecycleViewModel<HomeViewModel>
+    private let containerView = ContainerView(.alert, .hud)
     
-    init(user: User, authService: AuthService) {
-        viewModel = LifecycleViewModel(HomeViewModel())
+    init() {
+        viewModel = LifecycleViewModel(
+            HomeViewModel(
+                alertPresenterBuilder: containerView.alertBuilder,
+                hudBuilder: containerView.hudBuilder
+            ),
+            containerView: containerView
+        )
     }
  
     var body: some View {
@@ -29,6 +36,7 @@ struct HomeView: SwiftUI.View {
                 }.toolbar {
                     ToolbarItem(placement: .principal) {
                         Text(viewModel.screenTitle)
+                            .accessibilityLabel(viewModel.screenTitle)
                     }
                 }.navigationBarTitleDisplayMode(.inline)
             }
