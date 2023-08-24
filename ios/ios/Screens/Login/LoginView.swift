@@ -23,9 +23,8 @@ struct LoginView: SwiftUI.View {
     private let viewModel: LifecycleViewModel<LoginViewModel>
     
     init(authService: AuthService) {
-        let loginViewModel = LoginViewModel(authService: authService)
+        let loginViewModel = LoginViewModel()
         viewModel = LifecycleViewModel(loginViewModel)
-        
         emailText = StringSubject(loginViewModel.emailText)
         passwordText = StringSubject(loginViewModel.passwordText)
         emailErrorText = StringObservable(loginViewModel.emailErrorText)

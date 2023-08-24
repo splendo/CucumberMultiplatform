@@ -13,7 +13,7 @@ struct HomeView: SwiftUI.View {
     private let viewModel: LifecycleViewModel<HomeViewModel>
     
     init(user: User, authService: AuthService) {
-        viewModel = LifecycleViewModel(HomeViewModel(user: user, authService: authService))
+        viewModel = LifecycleViewModel(HomeViewModel())
     }
  
     var body: some View {
