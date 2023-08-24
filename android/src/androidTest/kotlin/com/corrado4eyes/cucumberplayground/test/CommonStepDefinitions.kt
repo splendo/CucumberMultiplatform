@@ -77,7 +77,7 @@ class CommonStepDefinitions : En {
                 testRule.onNodeWithText(it).assertIsDisplayed()
             }
         )
-        TestCase.Common.GivenTextIsVisible(
+        TestCase.Common.ScreenIsVisible(
             GherkinLambda1 {
                 testRule.onNodeWithText(it).assertIsDisplayed()
             }

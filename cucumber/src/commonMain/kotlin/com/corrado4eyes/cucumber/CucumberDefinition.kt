@@ -157,8 +157,8 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
     }
 }
 
-interface GherkinTestCase<D: Definition, L: GherkinLambda> {
-    val step: D
+interface GherkinTestCase<L: GherkinLambda> {
+    val step: CucumberDefinition
     val lambda: L
 }
 
