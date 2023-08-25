@@ -37,10 +37,6 @@ sealed class TestCase<T: GherkinLambda> : GherkinTestCase<T> {
             override val step: CucumberDefinition = CucumberDefinition.Step.ThenMultiple("I type $EXPECT_VALUE_STRING in the password field called $EXPECT_VALUE_STRING", lambda)
         }
 
-        class NavigateToScreen(override val lambda: GherkinLambda1) : Common<GherkinLambda1>() {
-            override val step: CucumberDefinition.Step.ThenSingle = CucumberDefinition.Step.ThenSingle("I see the $EXPECT_VALUE_STRING screen", lambda)
-        }
-
         class LoggedInEmail(override val lambda: GherkinLambda1) : Common<GherkinLambda1>() {
             override val step: CucumberDefinition.Step.GivenSingle = CucumberDefinition.Step.GivenSingle("Email is $EXPECT_VALUE_STRING", lambda)
         }
