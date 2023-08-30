@@ -33,7 +33,7 @@ class CommonStepDefinitions : En {
     val testRule = createComposeRule()
 
     @Before(order = 0)
-    fun beforeScenarioStart1(scenario: io.cucumber.core.api.Scenario) {
+    fun beforeScenarioStart(scenario: io.cucumber.core.api.Scenario) {
         // Will run before each scenario
         println("-----------------Start of Scenario ${scenario.name}-----------------")
         when (val scenarioName = scenario.name) {
@@ -55,7 +55,7 @@ class CommonStepDefinitions : En {
     }
 
     @After(order = 0)
-    fun afterScenarioFinish2(cucuScenario: io.cucumber.core.api.Scenario) {
+    fun afterScenarioFinish(cucuScenario: io.cucumber.core.api.Scenario) {
         // Will run after each scenario but first in order
         println("-----------------End of Scenario ${cucuScenario.name}-----------------")
     }
@@ -78,8 +78,9 @@ class CommonStepDefinitions : En {
             }
         )
         TestCase.Common.ScreenIsVisible(
+            // TODO consider using UI tags for this as it is not necessary the view will contain text
             GherkinLambda1 {
-                testRule.onNodeWithText(it).assertIsDisplayed()
+                testRule.onNodeWithTag(it).assertIsDisplayed()
             }
         )
         TestCase.Common.ButtonIsVisible(
@@ -95,12 +96,12 @@ class CommonStepDefinitions : En {
         )
         TestCase.Common.FillTextField(
             GherkinLambda2 { input, tag ->
-                testRule.onNodeWithText(tag).assertIsDisplayed().performTextInput(input)
+                testRule.onNodeWithTag(tag).assertIsDisplayed().performTextInput(input)
             }
         )
         TestCase.Common.PressButton(
             GherkinLambda1 {
-                testRule.onNodeWithText(it).assertIsDisplayed().performClick()
+                testRule.onNodeWithTag(it).assertIsDisplayed().performClick()
             }
         )
     }

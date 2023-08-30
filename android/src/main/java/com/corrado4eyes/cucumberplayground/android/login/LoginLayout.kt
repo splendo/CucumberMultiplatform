@@ -26,7 +26,10 @@ fun LoginLayout() {
     ViewModelComposable(viewModel) {
         val isLoading by this.isLoading.state()
         Column {
-            Text(text = this@ViewModelComposable.screenTitle, modifier = Modifier.testTag("Login screen"))
+            Text(
+                text = this@ViewModelComposable.screenTitle,
+                modifier = Modifier.testTag("Login screen")
+            )
             CustomTextField(
                 value = this@ViewModelComposable.emailText,
                 label = viewModel.emailPlaceholder,
@@ -48,7 +51,10 @@ fun LoginLayout() {
                 CircularProgressIndicator()
             }
 
-            Button(this@ViewModelComposable::login) {
+            Button(
+                onClick = this@ViewModelComposable::login,
+                modifier = Modifier.testTag("Login")
+            ) {
                 Text("Login")
             }
         }
