@@ -4,19 +4,19 @@ Feature: Login
   Background:
     Given I see the "Login screen" screen
     Then I see the "Email" textfield with text "Email"
-    Then I see the "Password" textfield with text "Password"
-    Then I see the "Login" button
+    And I see the "Password" textfield with text "Password"
+    And I see the "Login" button
 
   Scenario: Failed attempt with wrong credentials
     Then I type "test@test.fail" in the "Email" field
-    Then I type "1234" in the "Password" field
-    Then I press the "Login" button
-    Then I see the "Incorrect email or password" text
+    And I type "1234" in the "Password" field
+    And I press the "Login" button
+    And I see the "Incorrect email or password" text
 
   Scenario: Failed attempt with empty email
     Then I type "1234" in the "Password" field
-    Then I press the "Login" button
-    Then I see the "Missing email" text
+    And I press the "Login" button
+    And I see the "Missing email" text
 
   Scenario: Failed attempt with empty password
     Then I type "alex@alex" in the "Email" field
