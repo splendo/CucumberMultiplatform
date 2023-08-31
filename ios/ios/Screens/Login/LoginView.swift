@@ -22,7 +22,7 @@ struct LoginView: SwiftUI.View {
     
     private let viewModel: LifecycleViewModel<LoginViewModel>
     
-    init(authService: AuthService) {
+    init() {
         let loginViewModel = LoginViewModel()
         viewModel = LifecycleViewModel(loginViewModel)
         emailText = StringSubject(loginViewModel.emailText)
@@ -67,6 +67,7 @@ struct LoginView: SwiftUI.View {
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Text(viewModel.screenTitle)
+                            .accessibilityLabel(viewModel.screenTitle)
                     }
                 }.navigationBarTitleDisplayMode(.inline)
             }

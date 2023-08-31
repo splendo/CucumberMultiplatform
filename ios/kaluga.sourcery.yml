@@ -15,8 +15,7 @@ args:
   sharedFrameworkName: shared
   includeResources: true
   includeAlerts: true
-  includeHud: false
+  includeHud: true
   includeDatePicker: false
-  includeKeyboard: true
   includePartialSheet: false
   includeKeyboard: false

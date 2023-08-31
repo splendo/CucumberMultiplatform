@@ -17,6 +17,7 @@ kotlin {
     val target: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget.() -> Unit = {
         binaries {
             framework {
+                transitiveExport = true
                 baseName = "shared"
 
                 export("com.splendo.kaluga:alerts:$kalugaVersion")
@@ -62,7 +63,6 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 api(kotlin("test"))
-                api(kotlin("test-junit"))
                 api("com.splendo.kaluga:test-utils:$kalugaVersion")
                 api("io.insert-koin:koin-test:$koinVersion")
             }

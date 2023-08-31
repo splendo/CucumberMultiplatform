@@ -82,33 +82,25 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
 
     fun login() {
         viewState.value = LoginViewState.Loading
-        coroutineScope.launch {
-            val password by passwordText
-            val email by emailText
-
-            when {
-                email.value.isEmpty() -> {
-                    viewState.value = LoginViewState.Error.EmptyField(
-                        LoginViewState.Error.MissingField.EMAIL
-                    )
-                    return@launch
-                }
-
-                password.value.isEmpty() -> {
-                    viewState.value = LoginViewState.Error.EmptyField(
-                        LoginViewState.Error.MissingField.PASSWORD
-                    )
-                    return@launch
-                }
+        val password by passwordText
+        val email by emailText
+        when {
+            email.value.isEmpty() -> {
+                viewState.value = LoginViewState.Error.EmptyField(
+                    LoginViewState.Error.MissingField.EMAIL
+                )
+                return
             }
-            delay(1000)
-            when (authService.login(email.value, password.value)) {
-                is AuthResponse.Success -> viewState.value =
-                    LoginViewState.Idle // navigate to Home screen
-                is AuthResponse.Error -> {
-                    viewState.value = LoginViewState.Error.IncorrectEmailOrPassword
-                    return@launch
-                }
+            password.value.isEmpty() -> {
+                viewState.value = LoginViewState.Error.EmptyField(
+                    LoginViewState.Error.MissingField.PASSWORD
+                )
+                return
+            }
+        }
+        coroutineScope.launch {
+            if (authService.login(email.value, password.value) is AuthResponse.Error) {
+                viewState.value = LoginViewState.Error.IncorrectEmailOrPassword
             }
         }
     }

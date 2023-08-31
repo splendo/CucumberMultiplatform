@@ -21,15 +21,16 @@ import Cucumberish
             app.launchArguments.append("test")
         }
         
+        
         TestCaseCommonScreenIsVisible { args, userInfo in
             guard let screenName = args?[0] as? String else { return KotlinUnit() }
             
             let text: XCUIElement
             switch(screenName) {
-            case "Home":
+            case "Home screen":
                 app.launchEnvironment["isLoggedIn"] = "true"
                 text = app.staticTexts["Home screen"]
-            case "Login":
+            case "Login screen":
                 app.launchEnvironment["isLoggedIn"] = "false"
                 text = app.staticTexts["Login screen"]
                 
@@ -40,18 +41,18 @@ import Cucumberish
             
             app.launch()
             
-            XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
+            XCTAssert(text.exists(timeout: .long), "Couldn't validate to be in \(screenName)")
             return KotlinUnit()
         }
         
-        TestCaseCommonTitleIsVisible { args, userInfo in
+        TestCaseCommonTextIsVisible { args, userInfo in
             guard let textString = args?[0] as? String else { return KotlinUnit() }
             let text = app.staticTexts[textString]
             XCTAssert(text.exists(timeout: .short), "Couldn't find \(text) text")
             return KotlinUnit()
         }
         
-        TestCaseLoginCommonTextFieldIsVisible { args, userInfo in
+        TestCaseCommonTextFieldIsVisible { args, userInfo in
             guard let textfieldName = args?[0] as? String else { return KotlinUnit() }
             guard let textfieldText = args?[1] as? String else { return KotlinUnit() }
             let textfield: XCUIElement? = {
@@ -73,15 +74,16 @@ import Cucumberish
             return KotlinUnit()
         }
         
-        TestCaseLoginFillEmailTextField { args, userInfo in
-            guard let email = args?[0] as? String else { return KotlinUnit() }
-            let textfield = app.textFields["Email"]
+        TestCaseCommonFillTextField { args, userInfo in
+            guard let textFieldText = args?[1] as? String else { return KotlinUnit() }
+            guard let text = args?[0] as? String else { return KotlinUnit() }
+            let textfield = app.textFields[textFieldText]
             textfield.tap()
-            textfield.typeText(email)
+            textfield.typeText(text)
             return KotlinUnit()
         }
         
-        TestCaseLoginFillPasswordTextField { args, userInfo in
+        TestCaseCommonFillPasswordTextField { args, userInfo in
             guard let password = args?[0] as? String else { return KotlinUnit() }
             let textfield = app.secureTextFields["Password"]
             textfield.tap()
@@ -96,20 +98,21 @@ import Cucumberish
             return KotlinUnit()
         }
         
-        TestCaseLoginPressLoginButton { args, userInfo in
-            let button = app.buttons["Login"]
-            let link = app.links["Login"]
+        TestCaseCommonPressButton { args, userInfo in
+            guard let buttonString = args?[0] as? String else { return KotlinUnit() }
+            let button = app.buttons[buttonString]
+            let link = app.links[buttonString]
             if button.exists(timeout: .medium) && button.isEnabled(timeout: .short) {
                 button.tap()
             } else if link.exists(timeout: .medium) && link.isEnabled(timeout: .short) {
                 link.tap()
             } else {
-                XCTFail("I press Login button failed")
+                XCTFail("I press \(buttonString) button failed")
             }
             return KotlinUnit()
         }
         
-        TestCaseHomeLoggedInEmail { args, userInfo in
+        TestCaseCommonLoggedInEmail { args, userInfo in
             guard let email = args?[0] as? String else { return KotlinUnit() }
             app.launchEnvironment["testEmail"] = email
             return KotlinUnit()
@@ -125,19 +128,6 @@ import Cucumberish
                 let text = app.staticTexts["Login screen"]
                 XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
             default: XCTFail("Couldn't find \(screenName) screen")
-            }
-            return KotlinUnit()
-        }
-        
-        TestCaseHomePressLogoutButton { args, userInfo in
-            let button = app.buttons["Logout"]
-            let link = app.links["Logout"]
-            if button.exists(timeout: .medium) && button.isEnabled(timeout: .short) {
-                button.tap()
-            } else if link.exists(timeout: .medium) && link.isEnabled(timeout: .short) {
-                link.tap()
-            } else {
-                XCTFail("I press Logout button failed")
             }
             return KotlinUnit()
         }

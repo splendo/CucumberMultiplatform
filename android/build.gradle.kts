@@ -70,7 +70,7 @@ dependencies {
 
     androidTestImplementation(project(":cucumberShared"))
     androidTestImplementation("io.cucumber:cucumber-android:4.10.0")
-    // TODO figure out how it can be updated without breeaking the project
+    // TODO figure out how it can be updated without breaking the project
     androidTestImplementation("io.cucumber:cucumber-java8:4.8.1")
 
     implementation("io.insert-koin:koin-androidx-compose:3.4.1")

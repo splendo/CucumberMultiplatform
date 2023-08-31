@@ -14,9 +14,7 @@ sealed class AppNavigator {
     object Loading : AppNavigator()
     object Login : AppNavigator()
 
-    data class Home(
-        val user: User,
-    ) : AppNavigator()
+    object Home : AppNavigator()
 }
 
 class MainViewModel(
@@ -37,7 +35,7 @@ class MainViewModel(
             }
             authService.observeUser.collect { user ->
                 user?.let {
-                    _navState.value = AppNavigator.Home(it)
+                    _navState.value = AppNavigator.Home
                 } ?: run {
                     _navState.value = AppNavigator.Login
                 }
