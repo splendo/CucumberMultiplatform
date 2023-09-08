@@ -8,4 +8,4 @@ Feature: Login
     Then I see the "Login" button
     Then I press the login button
     Then I see the "Home" screen
-    Then I see "test@test.com" text
+    Then I see "test@test.com1" text
