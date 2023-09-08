@@ -34,17 +34,29 @@ actual fun given(regex: String, lambda: GherkinLambda2) {
 
 @Throws(ForeignException::class)
 actual fun then(regex: String, lambda: GherkinLambda0) {
-    Then(regex, lambda)
+    try {
+        Then(regex, lambda)
+    } catch(e: ForeignException) {
+        println("Exception is $e")
+    }
 }
 
 @Throws(ForeignException::class)
 actual fun then(regex: String, lambda: GherkinLambda1) {
-    Then(regex, lambda)
+    try {
+        Then(regex, lambda)
+    } catch(e: ForeignException) {
+        println("Exception is $e")
+    }
 }
 
 @Throws(ForeignException::class)
 actual fun then(regex: String, lambda: GherkinLambda2) {
-    Then(regex, lambda)
+    try {
+        Then(regex, lambda)
+    } catch(e: ForeignException) {
+        println("Exception is $e")
+    }
 }
 
 actual fun `when`(regex: String, lambda: GherkinLambda0) {
