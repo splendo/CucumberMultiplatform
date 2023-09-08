@@ -1,4 +1,6 @@
+
 import org.jetbrains.kotlin.gradle.targets.native.tasks.PodGenTask
+import org.jetbrains.kotlin.gradle.tasks.DefFileTask
 
 plugins {
     kotlin("multiplatform")
@@ -14,6 +16,7 @@ kotlin {
             }
         }
     }
+
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -75,6 +78,22 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+tasks.named<DefFileTask>("generateDefCucumberish").configure {
+    doLast {
+        println("DefFileTask named: $name")
+        val file = project.buildDir.resolve("cocoapods/defs/Cucumberish.def")
+        val writer = file.bufferedWriter()
+        writer.use {
+            it.write("""
+            language = Objective-C
+            modules = Cucumberish
+            linkerOpts = -framework Cucumberish
+            foreignExceptionMode = objc-wrap
+        """.trimIndent())
+        }
     }
 }
 
