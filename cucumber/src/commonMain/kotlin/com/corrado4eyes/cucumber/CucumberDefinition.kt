@@ -3,7 +3,7 @@ package com.corrado4eyes.cucumber
 typealias Scenario = CucumberDefinition.Descriptive.Example
 
 sealed interface Definition {
-    val regex: String
+    val definitionString: String
     sealed interface Descriptive : Definition {
 
         /**
@@ -17,7 +17,7 @@ sealed interface Definition {
          * Groups more scenerio that tests a similar flow with a certain rule
          */
         interface Rule : Descriptive {
-            override val regex: String
+            override val definitionString: String
         }
 
         /**
@@ -29,25 +29,17 @@ sealed interface Definition {
     }
 
     sealed interface Step : Definition {
-        override val regex: String
+        override val definitionString: String
 
         interface Given : Step
-        interface GivenSingle : Step
-        interface GivenMultiple : Step
-
         interface When : Step
-        interface WhenSingle : Step
-        interface WhenMultiple : Step
-
         interface Then : Step
-        interface ThenSingle : Step
-        interface ThenMultiple : Step
     }
 }
 
-sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}) {
+sealed class CucumberDefinition(val definitionString: String) {
 
-    sealed class Descriptive(regex: String) : Definition.Descriptive, CucumberDefinition(regex) {
+    sealed class Descriptive(definitionString: String) : Definition.Descriptive, CucumberDefinition(definitionString) {
 
         /**
          * Represents a whole feature to be described. It groups the other descriptive keywords.
@@ -57,7 +49,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}) {
         /**
          * Groups more scenerio that tests a similar flow with a certain rule
          */
-        class Rule(regex: String) : Definition.Descriptive.Rule, Descriptive(regex)
+        class Rule(definitionString: String) : Definition.Descriptive.Rule, Descriptive(definitionString)
 
         /**
          * Represents a Scenario, hence a group of steps.
@@ -65,25 +57,19 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}) {
         class Example(override val message: String) : Definition.Descriptive.Example,  Descriptive(message)
     }
 
-    sealed class Step(regex: String) : Definition.Step, CucumberDefinition(regex) {
-        class Given(regex: String) : Definition.Step.Given, Step(regex)
-//        class GivenSingle(regex: String) : Definition.Step.GivenSingle, Step(regex)
-//        class GivenMultiple(regex: String) : Definition.Step.GivenMultiple, Step(regex)
-        class When(regex: String) : Definition.Step.When, Step(regex)
-//        class WhenSingle(regex: String) :  Definition.Step.WhenSingle, Step(regex)
-//        class WhenMultiple(regex: String) :  Definition.Step.WhenMultiple, Step(regex)
-        class Then(regex: String) : Definition.Step.Then, Step(regex)
-//        class ThenSingle(regex: String) : Definition.Step.ThenSingle, Step(regex)
-//        class ThenMultiple(regex: String) : Definition.Step.ThenMultiple, Step(regex)
+    sealed class Step(definitionString: String) : Definition.Step, CucumberDefinition(definitionString) {
+        class Given(definitionString: String) : Definition.Step.Given, Step(definitionString)
+        class When(definitionString: String) : Definition.Step.When, Step(definitionString)
+        class Then(definitionString: String) : Definition.Step.Then, Step(definitionString)
     }
 
-    sealed class SubStep(regex: String) : CucumberDefinition(regex) {
-        class And(regex: String) : SubStep(regex)
+    sealed class SubStep(definitionString: String) : CucumberDefinition(definitionString) {
+        class And(definitionString: String) : SubStep(definitionString)
     }
 }
 
 interface GherkinTestCase<D: Definition> {
-    val step: D
+    val definition: D
 }
 
 expect val EXPECT_VALUE_STRING: String
@@ -102,14 +88,14 @@ expect class GherkinLambda2 : GherkinLambda
 //expect class GherkinLambda9 : GherkinLambda
 
 
-expect fun given(regex: String, lambda: GherkinLambda0)
-expect fun given(regex: String, lambda: GherkinLambda1)
-expect fun given(regex: String, lambda: GherkinLambda2)
+expect fun given(definitionString: String, lambda: GherkinLambda0)
+expect fun given(definitionString: String, lambda: GherkinLambda1)
+expect fun given(definitionString: String, lambda: GherkinLambda2)
 
-expect fun then(regex: String, lambda: GherkinLambda0)
-expect fun then(regex: String, lambda: GherkinLambda1)
-expect fun then(regex: String, lambda: GherkinLambda2)
+expect fun then(definitionString: String, lambda: GherkinLambda0)
+expect fun then(definitionString: String, lambda: GherkinLambda1)
+expect fun then(definitionString: String, lambda: GherkinLambda2)
 
-expect fun `when`(regex: String, lambda: GherkinLambda0)
-expect fun `when`(regex: String, lambda: GherkinLambda1)
-expect fun `when`(regex: String, lambda: GherkinLambda2)
+expect fun `when`(definitionString: String, lambda: GherkinLambda0)
+expect fun `when`(definitionString: String, lambda: GherkinLambda1)
+expect fun `when`(definitionString: String, lambda: GherkinLambda2)

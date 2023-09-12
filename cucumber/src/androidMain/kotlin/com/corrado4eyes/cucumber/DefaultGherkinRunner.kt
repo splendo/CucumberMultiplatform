@@ -64,74 +64,74 @@ actual class GherkinLambda2 (private val lambda: (String, String) -> Unit) : (St
 //    }
 //}
 
-actual fun given(regex: String, lambda: GherkinLambda0) {
+actual fun given(definitionString: String, lambda: GherkinLambda0) {
     object : En {
         init {
-            Given(regex, lambda)
+            Given(definitionString, lambda)
         }
     }
 }
 
-actual fun given(regex: String, lambda: GherkinLambda1) {
+actual fun given(definitionString: String, lambda: GherkinLambda1) {
     object : En {
         init {
-            Given(regex, lambda)
+            Given(definitionString, lambda)
         }
     }
 }
 
-actual fun given(regex: String, lambda: GherkinLambda2) {
+actual fun given(definitionString: String, lambda: GherkinLambda2) {
     object : En {
         init {
-            Given(regex, lambda)
+            Given(definitionString, lambda)
         }
     }
 }
 
-actual fun `when`(regex: String, lambda: GherkinLambda0) {
+actual fun `when`(definitionString: String, lambda: GherkinLambda0) {
     object : En {
         init {
-            When(regex, lambda)
+            When(definitionString, lambda)
         }
     }
 }
 
-actual fun `when`(regex: String, lambda: GherkinLambda1) {
+actual fun `when`(definitionString: String, lambda: GherkinLambda1) {
     object : En {
         init {
-            When(regex, lambda)
+            When(definitionString, lambda)
         }
     }
 }
 
-actual fun `when`(regex: String, lambda: GherkinLambda2) {
+actual fun `when`(definitionString: String, lambda: GherkinLambda2) {
     object : En {
         init {
-            When(regex, lambda)
+            When(definitionString, lambda)
         }
     }
 }
 
-actual fun then(regex: String, lambda: GherkinLambda0) {
+actual fun then(definitionString: String, lambda: GherkinLambda0) {
     object : En {
         init {
-            Then(regex, lambda)
+            Then(definitionString, lambda)
         }
     }
 }
 
-actual fun then(regex: String, lambda: GherkinLambda1) {
+actual fun then(definitionString: String, lambda: GherkinLambda1) {
     object : En {
         init {
-            Then(regex, lambda)
+            Then(definitionString, lambda)
         }
     }
 }
 
-actual fun then(regex: String, lambda: GherkinLambda2) {
+actual fun then(definitionString: String, lambda: GherkinLambda2) {
     object : En {
         init {
-            Then(regex, lambda)
+            Then(definitionString, lambda)
         }
     }
 }
