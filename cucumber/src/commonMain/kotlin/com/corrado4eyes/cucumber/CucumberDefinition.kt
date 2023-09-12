@@ -30,7 +30,6 @@ sealed interface Definition {
 
     sealed interface Step : Definition {
         override val regex: String
-        val lambda: GherkinLambda
 
         interface Given : Step
         interface GivenSingle : Step
@@ -46,18 +45,7 @@ sealed interface Definition {
     }
 }
 
-/**
- * Base class that takes care of taking a method to run on the initialization. The method is passed as parameter
- * instead of having it as an open method to be overriden to avoid calling a method in the base class init block while the
- * class that is extending it is probably partially initialized.
- */
-abstract class BaseCucumberDefinition(execute: () -> Unit) {
-    init {
-        execute()
-    }
-}
-
-sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): BaseCucumberDefinition(execute) {
+sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}) {
 
     sealed class Descriptive(regex: String) : Definition.Descriptive, CucumberDefinition(regex) {
 
@@ -77,79 +65,16 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class Example(override val message: String) : Definition.Descriptive.Example,  Descriptive(message)
     }
 
-    sealed class Step(regex: String, execute: () -> Unit) : Definition.Step, CucumberDefinition(regex, execute) {
-        class Given(
-            regex: String,
-            override val lambda: GherkinLambda0
-        ) : Definition.Step.Given,
-            Step(
-                regex,
-                { given(regex, lambda) }
-            )
-        class GivenSingle(
-            regex: String,
-            override val lambda: GherkinLambda1
-        ) : Definition.Step.GivenSingle,
-            Step(
-                regex,
-                { given(regex, lambda) }
-            )
-        class GivenMultiple(
-            regex: String,
-            override val lambda: GherkinLambda2
-        ) : Definition.Step.GivenMultiple,
-            Step(
-                regex,
-                { given(regex, lambda) }
-            )
-        class When(
-            regex: String,
-            override val lambda: GherkinLambda0
-        ) : Definition.Step.When,
-            Step(
-                regex,
-                { `when`(regex, lambda) }
-            )
-        class WhenSingle(
-            regex: String,
-            override val lambda: GherkinLambda1
-        ) :  Definition.Step.WhenSingle,
-             Step(
-                 regex,
-                 { `when`(regex, lambda) }
-             )
-        class WhenMultiple(
-            regex: String,
-            override val lambda: GherkinLambda2
-        ) :  Definition.Step.WhenMultiple,
-             Step(
-                 regex,
-                 { `when`(regex, lambda) }
-             )
-        class Then(
-            regex: String,
-            override val lambda: GherkinLambda0
-        ) : Definition.Step.Then,
-            Step(
-                regex,
-                { then(regex, lambda) }
-            )
-        class ThenSingle(
-            regex: String,
-            override val lambda: GherkinLambda1
-        ) : Definition.Step.ThenSingle,
-            Step(
-                regex,
-                { then(regex, lambda) }
-            )
-        class ThenMultiple(
-            regex: String,
-            override val lambda: GherkinLambda2
-        ) : Definition.Step.ThenMultiple,
-            Step(
-                regex,
-                { then(regex, lambda) }
-            )
+    sealed class Step(regex: String) : Definition.Step, CucumberDefinition(regex) {
+        class Given(regex: String) : Definition.Step.Given, Step(regex)
+//        class GivenSingle(regex: String) : Definition.Step.GivenSingle, Step(regex)
+//        class GivenMultiple(regex: String) : Definition.Step.GivenMultiple, Step(regex)
+        class When(regex: String) : Definition.Step.When, Step(regex)
+//        class WhenSingle(regex: String) :  Definition.Step.WhenSingle, Step(regex)
+//        class WhenMultiple(regex: String) :  Definition.Step.WhenMultiple, Step(regex)
+        class Then(regex: String) : Definition.Step.Then, Step(regex)
+//        class ThenSingle(regex: String) : Definition.Step.ThenSingle, Step(regex)
+//        class ThenMultiple(regex: String) : Definition.Step.ThenMultiple, Step(regex)
     }
 
     sealed class SubStep(regex: String) : CucumberDefinition(regex) {
@@ -157,9 +82,8 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
     }
 }
 
-interface GherkinTestCase<D: Definition, L: GherkinLambda> {
+interface GherkinTestCase<D: Definition> {
     val step: D
-    val lambda: L
 }
 
 expect val EXPECT_VALUE_STRING: String

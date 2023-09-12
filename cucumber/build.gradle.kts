@@ -26,7 +26,9 @@ kotlin {
         framework {
             baseName = "cucumber"
         }
-        pod("Cucumberish")
+        pod("Cucumberish") {
+            extraOpts = listOf("-Xforeign-exception-mode", "objc-wrap")
+        }
     }
 
     sourceSets {
