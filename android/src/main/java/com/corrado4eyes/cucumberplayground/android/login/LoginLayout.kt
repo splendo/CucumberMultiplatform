@@ -48,7 +48,10 @@ fun LoginLayout() {
                 CircularProgressIndicator()
             }
 
-            Button(this@ViewModelComposable::login) {
+            Button(
+                this@ViewModelComposable::login,
+                modifier = Modifier.testTag("Login")
+            ) {
                 Text("Login")
             }
         }
