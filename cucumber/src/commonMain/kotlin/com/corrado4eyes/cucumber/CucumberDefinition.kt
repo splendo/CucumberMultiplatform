@@ -72,12 +72,33 @@ interface GherkinTestCase<D: Definition> {
     val definition: D
 }
 
+/**
+ * How each platform represent an expected parameter in a definitionString.
+ */
 expect val EXPECT_VALUE_STRING: String
 
+/**
+ * An interface that marks a class as a GherkingLambda, hence a lambda defined on each module that takes specific arguments, or a specific amount
+ * of arguments and does some assertion on the views.
+ *
+ * On Android a step like Given or When will take a definitionString and an amount of arguments, while on iOS each step definition will always take a definitionString and a CCIStepBody.
+ * Therefore there will be multiple GherkinLambda to reflect how Android works.
+ */
 interface GherkinLambda
 
+/**
+ * Lambda that takes 0 parameters
+ */
 expect class GherkinLambda0 : GherkinLambda
+
+/**
+ * Lambda that takes 1 parameters
+ */
 expect class GherkinLambda1 : GherkinLambda
+
+/**
+ * Lambda that takes 2 parameters
+ */
 expect class GherkinLambda2 : GherkinLambda
 //expect class GherkinLambda3 : GherkinLambda
 //expect class GherkinLambda4 : GherkinLambda
@@ -88,14 +109,47 @@ expect class GherkinLambda2 : GherkinLambda
 //expect class GherkinLambda9 : GherkinLambda
 
 
+/**
+ * Method that wraps the given method that takes 0 parameters
+ */
 expect fun given(definitionString: String, lambda: GherkinLambda0)
+
+/**
+ * Method that wraps the given method that takes 1 parameter
+ */
 expect fun given(definitionString: String, lambda: GherkinLambda1)
+
+/**
+ * Method that wraps the Given method that takes 2 parameters
+ */
 expect fun given(definitionString: String, lambda: GherkinLambda2)
 
+/**
+ * Method that wraps the Then method that takes 0 parameters
+ */
 expect fun then(definitionString: String, lambda: GherkinLambda0)
+
+/**
+ * Method that wraps the Then method that takes 1 parameter
+ */
 expect fun then(definitionString: String, lambda: GherkinLambda1)
+
+/**
+ * Method that wraps the Then method that takes 2 parameters
+ */
 expect fun then(definitionString: String, lambda: GherkinLambda2)
 
+/**
+ * Method that wraps the When method that takes 0 parameters
+ */
 expect fun `when`(definitionString: String, lambda: GherkinLambda0)
+
+/**
+ * Method that wraps the Then method that takes 1 parameter
+ */
 expect fun `when`(definitionString: String, lambda: GherkinLambda1)
+
+/**
+ * Method that wraps the Then method that takes 2 parameters
+ */
 expect fun `when`(definitionString: String, lambda: GherkinLambda2)
