@@ -13,7 +13,7 @@ import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import com.corrado4eyes.cucumberplayground.android.MainActivity
-import com.corrado4eyes.cucumbershared.tests.TestCases
+import com.corrado4eyes.cucumbershared.tests.Definitions
 import io.cucumber.java8.En
 import io.cucumber.junit.WithJunitRule
 import org.junit.Rule
@@ -28,10 +28,10 @@ class StepDefinitions : En {
     val testRule = createComposeRule()
 
     init {
-        TestCases.values().forEach {
+        Definitions.values().forEach {
             val definitionString = it.definition.definitionString
             when (it) {
-                TestCases.SCREEN_IS_VISIBLE -> Given(definitionString) { screenName: String ->
+                Definitions.SCREEN_IS_VISIBLE -> Given(definitionString) { screenName: String ->
                         val screenTitleTag = when (screenName) {
                             "Login" -> {
                                 arguments["isLoggedIn"] = "false"
@@ -49,36 +49,36 @@ class StepDefinitions : En {
                         setLaunchScreen()
                         testRule.onNodeWithTag(screenTitleTag).assertIsDisplayed()
                     }
-                TestCases.TEXT_IS_VISIBLE -> Then(definitionString) { title: String ->
+                Definitions.TEXT_IS_VISIBLE -> Then(definitionString) { title: String ->
                     testRule.onNodeWithText(title).assertIsDisplayed()
                 }
-                TestCases.BUTTON_IS_VISIBLE -> Then(definitionString) { buttonName: String ->
+                Definitions.BUTTON_IS_VISIBLE -> Then(definitionString) { buttonName: String ->
                     when (buttonName) {
                         "Login" -> testRule.onNodeWithText("Login").assertIsDisplayed().assertHasClickAction()
                         "Logout" -> testRule.onNodeWithTag("Logout").assertIsDisplayed().assertHasClickAction()
                         else -> throw IllegalArgumentException("Couldn't find $it button")
                     }
                 }
-                TestCases.NAVIGATE_TO_SCREEN -> Then(definitionString) { screenName: String ->
+                Definitions.NAVIGATE_TO_SCREEN -> Then(definitionString) { screenName: String ->
                     Thread.sleep(1000)
                     when (screenName) {
                         "Login" -> testRule.onNodeWithTag("Login screen").assertIsDisplayed()
                         "Home" -> testRule.onNodeWithTag("Home screen").assertIsDisplayed()
                     }
                 }
-                TestCases.TEXTFIELD_IS_VISIBLE -> Then(definitionString) { tag: String, text: String ->
+                Definitions.TEXTFIELD_IS_VISIBLE -> Then(definitionString) { tag: String, text: String ->
                     testRule.onNodeWithTag(tag).assertIsDisplayed().assertTextContains(text)
                 }
-                TestCases.FILL_TEXTFIELD -> Then(definitionString) { textInput: String, tag: String,  ->
+                Definitions.FILL_TEXTFIELD -> Then(definitionString) { textInput: String, tag: String,  ->
                     testRule.onNodeWithText(tag).performTextInput(textInput)
                 }
-                TestCases.FILL_SECURE_TEXTFIELD -> Then(definitionString) { textInput: String, tag: String ->
+                Definitions.FILL_SECURE_TEXTFIELD -> Then(definitionString) { textInput: String, tag: String ->
                     testRule.onNodeWithText(tag).performTextInput(textInput)
                 }
-                TestCases.PRESS_BUTTON -> Then(definitionString) { buttonName: String ->
+                Definitions.PRESS_BUTTON -> Then(definitionString) { buttonName: String ->
                     testRule.onNodeWithTag(buttonName).assertIsDisplayed().performClick()
                 }
-                TestCases.USER_IS_LOGGED_IN -> Given(definitionString) { loggedInEmail: String ->
+                Definitions.USER_IS_LOGGED_IN -> Given(definitionString) { loggedInEmail: String ->
                     arguments["testEmail"] = loggedInEmail
                 }
             }

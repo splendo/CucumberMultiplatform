@@ -5,7 +5,7 @@ import com.corrado4eyes.cucumber.Definition
 import com.corrado4eyes.cucumber.EXPECT_VALUE_STRING
 import com.corrado4eyes.cucumber.GherkinTestCase
 
-enum class TestCases(override val definition: Definition): GherkinTestCase<Definition> {
+enum class Definitions(override val definition: Definition): GherkinTestCase<Definition> {
     SCREEN_IS_VISIBLE(
         CucumberDefinition.Step.Given("I am in the $EXPECT_VALUE_STRING screen")
     ),
@@ -35,6 +35,6 @@ enum class TestCases(override val definition: Definition): GherkinTestCase<Defin
     );
 
     companion object {
-        val allCases: List<TestCases> = TestCases.values().toList()
+        val allCases: List<Definitions> = Definitions.values().toList()
     }
 }

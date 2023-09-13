@@ -21,7 +21,7 @@ import Cucumberish
             app.launchArguments.append("test")
         }
         
-        for test in TestCases.companion.allCases {
+        for test in Definitions.companion.allCases {
             let definitionString = test.definition.definitionString
             switch test {
             case .screenIsVisible: Given(definitionString) { args, userInfo in
