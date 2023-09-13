@@ -29,12 +29,12 @@ import Cucumberish
                 
                 let text: XCUIElement
                 switch(screenName) {
-                case "Home":
+                case Strings.shared.homeScreenTag:
                     app.launchEnvironment["isLoggedIn"] = "true"
-                    text = app.staticTexts["Home screen"]
-                case "Login":
+                    text = app.staticTexts[Strings.shared.homeScreenTitle]
+                case Strings.shared.loginScreenTag:
                     app.launchEnvironment["isLoggedIn"] = "false"
-                    text = app.staticTexts["Login screen"]
+                    text = app.staticTexts[Strings.shared.loginScreenTitle]
                     
                 default:
                     text = app.staticTexts["Fail"]
@@ -61,11 +61,11 @@ import Cucumberish
             case .navigateToScreen: Then(definitionString) { args, userInfo in
                 guard let screenName = args?[0] as? String else { return }
                 switch(screenName) {
-                case "Home":
-                    let text = app.staticTexts["Home screen"]
+                case Strings.shared.homeScreenTag:
+                    let text = app.staticTexts[Strings.shared.homeScreenTitle]
                     XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
-                case "Login":
-                    let text = app.staticTexts["Login screen"]
+                case Strings.shared.loginScreenTag:
+                    let text = app.staticTexts[Strings.shared.loginScreenTitle]
                     XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
                 default: XCTFail("Couldn't find \(screenName) screen")
                 }
@@ -76,9 +76,9 @@ import Cucumberish
                 guard let textfieldText = args?[1] as? String else { return }
                 let textfield: XCUIElement? = {
                     switch (textfieldName){
-                    case "Email":
+                    case Strings.shared.emailTextFieldTag:
                         return app.textFields[textfieldName]
-                    case "Password":
+                    case Strings.shared.passwordTextFieldTag:
                         return app.secureTextFields[textfieldName]
                     default:
                         return nil

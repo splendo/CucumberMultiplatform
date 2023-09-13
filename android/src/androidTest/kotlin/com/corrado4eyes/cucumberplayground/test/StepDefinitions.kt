@@ -1,5 +1,6 @@
 package com.corrado4eyes.cucumberplayground.test
 
+import Strings
 import android.app.Activity
 import android.content.Intent
 import androidx.compose.ui.test.assertHasClickAction
@@ -12,6 +13,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
+import com.corrado4eyes.cucumber.errors.UIElementException
 import com.corrado4eyes.cucumberplayground.android.MainActivity
 import com.corrado4eyes.cucumbershared.tests.Definitions
 import io.cucumber.java8.En
@@ -33,41 +35,48 @@ class StepDefinitions : En {
             when (it) {
                 Definitions.SCREEN_IS_VISIBLE -> Given(definitionString) { screenName: String ->
                         val screenTitleTag = when (screenName) {
-                            "Login" -> {
+                            Strings.loginScreenTag -> {
                                 arguments["isLoggedIn"] = "false"
                                 arguments["testEmail"] = ""
-                                "Login screen"
+                                Strings.loginScreenTitle
                             }
 
-                            "Home" -> {
+                            Strings.homeScreenTag -> {
                                 arguments["isLoggedIn"] = "true"
-                                "Home screen"
+                                Strings.homeScreenTitle
                             }
 
-                            else -> throw IllegalArgumentException("Couldn't find any $screenName screen")
+                            else -> throw UIElementException.Screen.NotFound(screenName)
                         }
                         setLaunchScreen()
                         testRule.onNodeWithTag(screenTitleTag).assertIsDisplayed()
-                    }
+                }
                 Definitions.TEXT_IS_VISIBLE -> Then(definitionString) { title: String ->
                     testRule.onNodeWithText(title).assertIsDisplayed()
                 }
                 Definitions.BUTTON_IS_VISIBLE -> Then(definitionString) { buttonName: String ->
                     when (buttonName) {
-                        "Login" -> testRule.onNodeWithText("Login").assertIsDisplayed().assertHasClickAction()
-                        "Logout" -> testRule.onNodeWithTag("Logout").assertIsDisplayed().assertHasClickAction()
-                        else -> throw IllegalArgumentException("Couldn't find $it button")
+                        Strings.loginButtonText -> testRule.onNodeWithText(Strings.loginButtonText).assertIsDisplayed().assertHasClickAction()
+                        Strings.logoutButtonText -> testRule.onNodeWithTag(Strings.logoutButtonText).assertIsDisplayed().assertHasClickAction()
+                        else -> throw UIElementException.Button.NotFound(buttonName)
                     }
                 }
                 Definitions.NAVIGATE_TO_SCREEN -> Then(definitionString) { screenName: String ->
                     Thread.sleep(1000)
                     when (screenName) {
-                        "Login" -> testRule.onNodeWithTag("Login screen").assertIsDisplayed()
-                        "Home" -> testRule.onNodeWithTag("Home screen").assertIsDisplayed()
+                        Strings.loginScreenTag -> testRule.onNodeWithTag(Strings.loginScreenTitle).assertIsDisplayed()
+                        Strings.homeScreenTag -> testRule.onNodeWithTag(Strings.homeScreenTitle).assertIsDisplayed()
+                        else -> throw UIElementException.Screen.NotFound(screenName)
                     }
                 }
                 Definitions.TEXTFIELD_IS_VISIBLE -> Then(definitionString) { tag: String, text: String ->
-                    testRule.onNodeWithTag(tag).assertIsDisplayed().assertTextContains(text)
+                    val elementNode = try {
+                        testRule.onNodeWithTag(tag).assertIsDisplayed()
+                    } catch (e: AssertionError) {
+                        throw UIElementException.TextField.NotFound(tag)
+                    }
+
+                    elementNode.assertTextContains(text)
                 }
                 Definitions.FILL_TEXTFIELD -> Then(definitionString) { textInput: String, tag: String,  ->
                     testRule.onNodeWithText(tag).performTextInput(textInput)
@@ -76,7 +85,12 @@ class StepDefinitions : En {
                     testRule.onNodeWithText(tag).performTextInput(textInput)
                 }
                 Definitions.PRESS_BUTTON -> Then(definitionString) { buttonName: String ->
-                    testRule.onNodeWithTag(buttonName).assertIsDisplayed().performClick()
+                    val elementNode = try {
+                        testRule.onNodeWithTag(buttonName).assertIsDisplayed()
+                    } catch (e: AssertionError) {
+                        throw UIElementException.TextField.NotFound(buttonName)
+                    }
+                    elementNode.performClick()
                 }
                 Definitions.USER_IS_LOGGED_IN -> Given(definitionString) { loggedInEmail: String ->
                     arguments["testEmail"] = loggedInEmail
