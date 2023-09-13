@@ -1,18 +1,33 @@
 package com.corrado4eyes.cucumberplayground.models
 
 object Strings {
-    val loginScreenTitle = "Login screen"
-    val homeScreenTitle = "Home screen"
+    object Screen {
+        object Title {
+            val login = "Login screen"
+            val home = "Home screen"
+        }
+        object Tag {
+            val login = "Login"
+            val home = "Home"
+        }
+    }
 
-    val loginScreenTag = "Login"
-    val homeScreenTag = "Home"
+    object TextField {
+        object Placeholder {
+            val email = "Email"
+            val password = "Password"
+        }
 
-    val loginButtonText = "Login"
-    val logoutButtonText = "Logout"
+        object Tag {
+            val email = "Email"
+            val password = "Password"
+        }
+    }
 
-    val emailTextFieldTag = "Email"
-    val passwordTextFieldTag = "Password"
-
-    val emailTextFieldPlaceholder = "Email"
-    val passwordTextFieldPlaceholder = "Password"
+    object Button {
+        object Text {
+            val login = "Login"
+            val logout = "Logout"
+        }
+    }
 }
