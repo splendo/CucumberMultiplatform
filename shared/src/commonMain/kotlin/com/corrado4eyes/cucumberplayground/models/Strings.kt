@@ -1,5 +1,6 @@
-package com.corrado4eyes.cucumber.resources
+import kotlin.native.concurrent.ThreadLocal
 
+@ThreadLocal
 object Strings {
     val loginScreenTitle = "Login screen"
     val homeScreenTitle = "Home screen"
@@ -12,4 +13,7 @@ object Strings {
 
     val emailTextFieldTag = "Email"
     val passwordTextFieldTag = "Password"
+
+    val emailTextFieldPlaceholder = "Email"
+    val passwordTextFieldPlaceholder = "Password"
 }

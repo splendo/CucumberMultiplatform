@@ -1,5 +1,6 @@
 package com.corrado4eyes.cucumberplayground.viewModels.login
 
+import Strings
 import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import com.corrado4eyes.cucumberplayground.services.AuthService
 import com.splendo.kaluga.architecture.observable.toInitializedObservable
@@ -19,7 +20,7 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
         object Idle : LoginViewState()
         sealed class Error(val error: String) : LoginViewState() {
             enum class MissingField(val stringValue: String) {
-                EMAIL("email"), PASSWORD("password")
+                EMAIL(Strings.emailTextFieldTag), PASSWORD(Strings.passwordTextFieldTag)
             }
 
             object IncorrectEmailOrPassword : Error("Incorrect email or password")
@@ -34,10 +35,10 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
 
     private val viewState = MutableStateFlow<LoginViewState>(LoginViewState.Idle)
 
-    val screenTitle = "Login screen"
+    val screenTitle = Strings.loginScreenTitle
     private val emailTextFieldState = MutableStateFlow("")
     val emailText = emailTextFieldState.toInitializedSubject(coroutineScope)
-    val emailPlaceholder = "Email"
+    val emailPlaceholder = Strings.emailTextFieldPlaceholder
     val emailErrorText = viewState
         .map {
             if (it is LoginViewState.Error.EmptyField) {
@@ -53,7 +54,7 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
 
     private val passwordTextFieldState = MutableStateFlow("")
     val passwordText = passwordTextFieldState.toInitializedSubject(coroutineScope)
-    val passwordPlaceholder = "Password"
+    val passwordPlaceholder = Strings.passwordTextFieldPlaceholder
     val passwordErrorText = viewState
         .map {
             if (it is LoginViewState.Error.EmptyField) {
@@ -74,7 +75,7 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
             } else ""
         }.toInitializedObservable("", coroutineScope)
 
-    val buttonTitle = "Login"
+    val buttonTitle = Strings.loginButtonText
     val isButtonEnabled = viewState.map { it !is LoginViewState.Loading }
         .toInitializedObservable(false, coroutineScope)
     val isLoading = viewState.map { it is LoginViewState.Loading }
