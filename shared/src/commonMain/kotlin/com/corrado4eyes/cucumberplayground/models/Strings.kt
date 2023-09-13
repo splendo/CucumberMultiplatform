@@ -1,6 +1,5 @@
-import kotlin.native.concurrent.ThreadLocal
+package com.corrado4eyes.cucumberplayground.models
 
-@ThreadLocal
 object Strings {
     val loginScreenTitle = "Login screen"
     val homeScreenTitle = "Home screen"
