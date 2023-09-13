@@ -1,6 +1,5 @@
 package com.corrado4eyes.cucumberplayground.test
 
-import Strings
 import android.app.Activity
 import android.content.Intent
 import androidx.compose.ui.test.assertHasClickAction
@@ -15,6 +14,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import com.corrado4eyes.cucumber.errors.UIElementException
 import com.corrado4eyes.cucumberplayground.android.MainActivity
+import com.corrado4eyes.cucumberplayground.models.Strings
 import com.corrado4eyes.cucumbershared.tests.Definitions
 import io.cucumber.java8.En
 import io.cucumber.junit.WithJunitRule

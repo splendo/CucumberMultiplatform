@@ -1,7 +1,7 @@
 package com.corrado4eyes.cucumberplayground.viewModels.login
 
-import Strings
 import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
+import com.corrado4eyes.cucumberplayground.models.Strings
 import com.corrado4eyes.cucumberplayground.services.AuthService
 import com.splendo.kaluga.architecture.observable.toInitializedObservable
 import com.splendo.kaluga.architecture.observable.toInitializedSubject

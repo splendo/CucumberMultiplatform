@@ -1,6 +1,6 @@
 package com.corrado4eyes.cucumberplayground.viewModels.home
 
-import Strings
+import com.corrado4eyes.cucumberplayground.models.Strings
 import com.corrado4eyes.cucumberplayground.services.AuthService
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
 import kotlinx.coroutines.launch
