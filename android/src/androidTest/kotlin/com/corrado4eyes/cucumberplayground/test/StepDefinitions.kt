@@ -33,7 +33,7 @@ class StepDefinitions : En {
         Definitions.values().forEach {
             val definitionString = it.definition.definitionString
             when (it) {
-                Definitions.SCREEN_IS_VISIBLE -> Given(definitionString) { screenName: String ->
+                Definitions.I_AM_IN_THE_EXPECT_VALUE_STRING_SCREEN -> Given(definitionString) { screenName: String ->
                         val screenTitleTag = when (screenName) {
                             Strings.Screen.Tag.login -> {
                                 arguments["isLoggedIn"] = "false"
@@ -51,17 +51,17 @@ class StepDefinitions : En {
                         setLaunchScreen()
                         testRule.onNodeWithTag(screenTitleTag).assertIsDisplayed()
                 }
-                Definitions.TEXT_IS_VISIBLE -> Then(definitionString) { title: String ->
+                Definitions.I_SEE_EXPECT_VALUE_STRING_TEXT -> Then(definitionString) { title: String ->
                     testRule.onNodeWithText(title).assertIsDisplayed()
                 }
-                Definitions.BUTTON_IS_VISIBLE -> Then(definitionString) { buttonName: String ->
+                Definitions.I_SEE_THE_EXPECT_VALUE_STRING_BUTTON -> Then(definitionString) { buttonName: String ->
                     when (buttonName) {
                         Strings.Button.Text.login -> testRule.onNodeWithText(Strings.Button.Text.login).assertIsDisplayed().assertHasClickAction()
                         Strings.Button.Text.logout -> testRule.onNodeWithTag(Strings.Button.Text.logout).assertIsDisplayed().assertHasClickAction()
                         else -> throw UIElementException.Button.NotFound(buttonName)
                     }
                 }
-                Definitions.NAVIGATE_TO_SCREEN -> Then(definitionString) { screenName: String ->
+                Definitions.I_SEE_THE_EXPECT_VALUE_STRING_SCREEN -> Then(definitionString) { screenName: String ->
                     Thread.sleep(1000)
                     when (screenName) {
                         Strings.Screen.Tag.login -> testRule.onNodeWithTag(Strings.Screen.Title.login).assertIsDisplayed()
@@ -69,7 +69,7 @@ class StepDefinitions : En {
                         else -> throw UIElementException.Screen.NotFound(screenName)
                     }
                 }
-                Definitions.TEXTFIELD_IS_VISIBLE -> Then(definitionString) { tag: String, text: String ->
+                Definitions.I_SEE_THE_EXPECT_VALUE_STRING_TEXT_FIELD_WITH_TEXT_EXPECT_VALUE_STRING -> Then(definitionString) { tag: String, text: String ->
                     val elementNode = try {
                         testRule.onNodeWithTag(tag).assertIsDisplayed()
                     } catch (e: AssertionError) {
@@ -78,13 +78,13 @@ class StepDefinitions : En {
 
                     elementNode.assertTextContains(text)
                 }
-                Definitions.FILL_TEXTFIELD -> When(definitionString) { textInput: String, tag: String,  ->
+                Definitions.I_TYPE_EXPECT_VALUE_STRING_IN_THE_EXPECT_VALUE_STRING_TEXT_FIELD -> When(definitionString) { textInput: String, tag: String,  ->
                     testRule.onNodeWithText(tag).performTextInput(textInput)
                 }
-                Definitions.FILL_SECURE_TEXTFIELD -> When(definitionString) { textInput: String, tag: String ->
+                Definitions.I_TYPE_EXPECT_VALUE_STRING_IN_THE_EXPECT_VALUE_STRING_SECURE_TEXT_FIELD -> When(definitionString) { textInput: String, tag: String ->
                     testRule.onNodeWithText(tag).performTextInput(textInput)
                 }
-                Definitions.PRESS_BUTTON -> When(definitionString) { buttonName: String ->
+                Definitions.I_PRESS_THE_EXPECT_VALUE_STRING_BUTTON -> When(definitionString) { buttonName: String ->
                     val elementNode = try {
                         testRule.onNodeWithTag(buttonName).assertIsDisplayed()
                     } catch (e: AssertionError) {
@@ -92,7 +92,7 @@ class StepDefinitions : En {
                     }
                     elementNode.performClick()
                 }
-                Definitions.USER_IS_LOGGED_IN -> Given(definitionString) { loggedInEmail: String ->
+                Definitions.EMAIL_IS_EXPECT_VALUE_STRING -> Given(definitionString) { loggedInEmail: String ->
                     arguments["testEmail"] = loggedInEmail
                 }
             }

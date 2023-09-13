@@ -6,31 +6,31 @@ import com.corrado4eyes.cucumber.EXPECT_VALUE_STRING
 import com.corrado4eyes.cucumber.GherkinTestCase
 
 enum class Definitions(override val definition: Definition): GherkinTestCase<Definition> {
-    SCREEN_IS_VISIBLE(
+    I_AM_IN_THE_EXPECT_VALUE_STRING_SCREEN(
         CucumberDefinition.Step.Given("I am in the $EXPECT_VALUE_STRING screen")
     ),
-    TEXT_IS_VISIBLE(
+    I_SEE_EXPECT_VALUE_STRING_TEXT(
         CucumberDefinition.Step.Then("I see $EXPECT_VALUE_STRING text")
     ),
-    BUTTON_IS_VISIBLE(
+    I_SEE_THE_EXPECT_VALUE_STRING_BUTTON(
         CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING button")
     ),
-    NAVIGATE_TO_SCREEN(
+    I_SEE_THE_EXPECT_VALUE_STRING_SCREEN(
         CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING screen")
     ),
-    TEXTFIELD_IS_VISIBLE(
+    I_SEE_THE_EXPECT_VALUE_STRING_TEXT_FIELD_WITH_TEXT_EXPECT_VALUE_STRING(
         CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING textfield with text $EXPECT_VALUE_STRING")
     ),
-    FILL_TEXTFIELD(
+    I_TYPE_EXPECT_VALUE_STRING_IN_THE_EXPECT_VALUE_STRING_TEXT_FIELD(
         CucumberDefinition.Step.When("I type $EXPECT_VALUE_STRING in the $EXPECT_VALUE_STRING textfield")
     ),
-    FILL_SECURE_TEXTFIELD(
+    I_TYPE_EXPECT_VALUE_STRING_IN_THE_EXPECT_VALUE_STRING_SECURE_TEXT_FIELD(
         CucumberDefinition.Step.When("I type $EXPECT_VALUE_STRING in the $EXPECT_VALUE_STRING secure textfield")
     ),
-    PRESS_BUTTON(
+    I_PRESS_THE_EXPECT_VALUE_STRING_BUTTON(
         CucumberDefinition.Step.When("I press the $EXPECT_VALUE_STRING button")
     ),
-    USER_IS_LOGGED_IN(
+    EMAIL_IS_EXPECT_VALUE_STRING(
         CucumberDefinition.Step.Given("Email is $EXPECT_VALUE_STRING")
     );
 

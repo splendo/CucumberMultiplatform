@@ -24,7 +24,7 @@ import Cucumberish
         for test in Definitions.companion.allCases {
             let definitionString = test.definition.definitionString
             switch test {
-            case .screenIsVisible: Given(definitionString) { args, userInfo in
+            case .iAmInTheExpectValueStringScreen: Given(definitionString) { args, userInfo in
                 guard let screenName = args?[0] as? String else { return }
                 
                 let text: XCUIElement
@@ -46,19 +46,19 @@ import Cucumberish
                 XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
                 return
             }
-            case .textIsVisible: Then(definitionString){ args, userInfo in
+            case .iSeeExpectValueStringText: Then(definitionString){ args, userInfo in
                 guard let textString = args?[0] as? String else { return }
                 let text = app.staticTexts[textString]
                 XCTAssert(text.exists(timeout: .short), "Couldn't find \(text) text")
                 return
             }
-            case .buttonIsVisible: Then(definitionString) { args, userInfo in
+            case .iSeeTheExpectValueStringButton: Then(definitionString) { args, userInfo in
                 guard let text = args?[0] as? String else { return }
                 let button = app.buttons[text]
                 XCTAssert(button.exists(timeout: .short), "\"\(text)\" button should be visible")
                 return
             }
-            case .navigateToScreen: Then(definitionString) { args, userInfo in
+            case .iSeeTheExpectValueStringScreen: Then(definitionString) { args, userInfo in
                 guard let screenName = args?[0] as? String else { return }
                 switch(screenName) {
                 case Strings.ScreenTag.shared.home:
@@ -71,7 +71,7 @@ import Cucumberish
                 }
                 return
             }
-            case .textfieldIsVisible: Then(definitionString) { args, userInfo in
+            case .iSeeTheExpectValueStringTextFieldWithTextExpectValueString: Then(definitionString) { args, userInfo in
                 guard let textfieldName = args?[0] as? String else { return }
                 guard let textfieldText = args?[1] as? String else { return }
                 let textfield: XCUIElement? = {
@@ -92,7 +92,7 @@ import Cucumberish
                 XCTAssert(textfield?.value as? String == textfieldText, "\"\(textfieldName)\" field text should be \"\(textfield?.value)\"")
                 return
             }
-            case .fillTextfield: When(definitionString) { args, userInfo in
+            case .iTypeExpectValueStringInTheExpectValueStringTextField: When(definitionString) { args, userInfo in
                 guard let textfieldName = args?[1] as? String else { return }
                 guard let textfieldText = args?[0] as? String else { return }
                 let textfield = app.textFields[textfieldName]
@@ -100,7 +100,7 @@ import Cucumberish
                 textfield.typeText(textfieldText)
                 return
             }
-            case .fillSecureTextfield: When(definitionString) { args, userInfo in
+            case .iTypeExpectValueStringInTheExpectValueStringSecureTextField: When(definitionString) { args, userInfo in
                 guard let textfieldName = args?[1] as? String else { return }
                 guard let textfieldText = args?[0] as? String else { return }
                 let textfield = app.secureTextFields[textfieldName]
@@ -109,7 +109,7 @@ import Cucumberish
                 return
             }
                 
-            case .pressButton: When(definitionString) { args, userInfo in
+            case .iPressTheExpectValueStringButton: When(definitionString) { args, userInfo in
                 guard let buttonName = args?[0] as? String else { return }
                 let button = app.buttons[buttonName]
                 let link = app.links[buttonName]
@@ -123,7 +123,7 @@ import Cucumberish
                 }
                 return
             }
-            case .userIsLoggedIn: Given(definitionString) { args, userInfo in
+            case .emailIsExpectValueString: Given(definitionString) { args, userInfo in
                 guard let email = args?[0] as? String else { return }
                 app.launchEnvironment["testEmail"] = email
                 return
