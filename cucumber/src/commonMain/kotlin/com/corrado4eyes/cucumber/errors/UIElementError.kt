@@ -1,0 +1,35 @@
+package com.corrado4eyes.cucumber.errors
+
+enum class UIElementType(val type: String) {
+    SCREEN("screen"),
+    BUTTON("button"),
+    TEXT("text"),
+    TEXT_FIELD("text field")
+}
+
+class ArgumentNotFound(argumentName: String) : Throwable() {
+    override val message: String = "Couldn't find the argument called $argumentName"
+}
+
+sealed class UIElementException : Throwable() {
+    abstract val elementTitle: String
+    abstract val elementType: UIElementType
+    override val message: String by lazy { "Couldn't find ${elementType.type} $elementTitle" }
+
+    sealed class Screen : UIElementException() {
+        override val elementType: UIElementType = UIElementType.SCREEN
+        data class NotFound(override val elementTitle: String) : Screen()
+    }
+    sealed class Button : UIElementException() {
+        override val elementType: UIElementType = UIElementType.BUTTON
+        data class NotFound(override val elementTitle: String) : Button()
+    }
+    sealed class Text : UIElementException() {
+        override val elementType: UIElementType = UIElementType.TEXT
+        data class NotFound(override val elementTitle: String) : Text()
+    }
+    sealed class TextField : UIElementException() {
+        override val elementType: UIElementType = UIElementType.TEXT_FIELD
+        data class NotFound(override val elementTitle: String) : TextField()
+    }
+}
