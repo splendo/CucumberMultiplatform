@@ -35,15 +35,15 @@ class StepDefinitions : En {
             when (it) {
                 Definitions.SCREEN_IS_VISIBLE -> Given(definitionString) { screenName: String ->
                         val screenTitleTag = when (screenName) {
-                            Strings.loginScreenTag -> {
+                            Strings.Screen.Tag.login -> {
                                 arguments["isLoggedIn"] = "false"
                                 arguments["testEmail"] = ""
-                                Strings.loginScreenTitle
+                                Strings.Screen.Title.login
                             }
 
-                            Strings.homeScreenTag -> {
+                            Strings.Screen.Tag.home -> {
                                 arguments["isLoggedIn"] = "true"
-                                Strings.homeScreenTitle
+                                Strings.Screen.Title.home
                             }
 
                             else -> throw UIElementException.Screen.NotFound(screenName)
@@ -56,16 +56,16 @@ class StepDefinitions : En {
                 }
                 Definitions.BUTTON_IS_VISIBLE -> Then(definitionString) { buttonName: String ->
                     when (buttonName) {
-                        Strings.loginButtonText -> testRule.onNodeWithText(Strings.loginButtonText).assertIsDisplayed().assertHasClickAction()
-                        Strings.logoutButtonText -> testRule.onNodeWithTag(Strings.logoutButtonText).assertIsDisplayed().assertHasClickAction()
+                        Strings.Button.Text.login -> testRule.onNodeWithText(Strings.Button.Text.login).assertIsDisplayed().assertHasClickAction()
+                        Strings.Button.Text.logout -> testRule.onNodeWithTag(Strings.Button.Text.logout).assertIsDisplayed().assertHasClickAction()
                         else -> throw UIElementException.Button.NotFound(buttonName)
                     }
                 }
                 Definitions.NAVIGATE_TO_SCREEN -> Then(definitionString) { screenName: String ->
                     Thread.sleep(1000)
                     when (screenName) {
-                        Strings.loginScreenTag -> testRule.onNodeWithTag(Strings.loginScreenTitle).assertIsDisplayed()
-                        Strings.homeScreenTag -> testRule.onNodeWithTag(Strings.homeScreenTitle).assertIsDisplayed()
+                        Strings.Screen.Tag.login -> testRule.onNodeWithTag(Strings.Screen.Title.login).assertIsDisplayed()
+                        Strings.Screen.Tag.home -> testRule.onNodeWithTag(Strings.Screen.Title.home).assertIsDisplayed()
                         else -> throw UIElementException.Screen.NotFound(screenName)
                     }
                 }

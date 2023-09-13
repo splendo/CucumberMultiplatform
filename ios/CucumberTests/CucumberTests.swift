@@ -29,12 +29,12 @@ import Cucumberish
                 
                 let text: XCUIElement
                 switch(screenName) {
-                case Strings.shared.homeScreenTag:
+                case Strings.ScreenTag.shared.home:
                     app.launchEnvironment["isLoggedIn"] = "true"
-                    text = app.staticTexts[Strings.shared.homeScreenTitle]
-                case Strings.shared.loginScreenTag:
+                    text = app.staticTexts[Strings.ScreenTitle.shared.home]
+                case Strings.ScreenTag.shared.login:
                     app.launchEnvironment["isLoggedIn"] = "false"
-                    text = app.staticTexts[Strings.shared.loginScreenTitle]
+                    text = app.staticTexts[Strings.ScreenTitle.shared.login]
                     
                 default:
                     text = app.staticTexts["Fail"]
@@ -61,11 +61,11 @@ import Cucumberish
             case .navigateToScreen: Then(definitionString) { args, userInfo in
                 guard let screenName = args?[0] as? String else { return }
                 switch(screenName) {
-                case Strings.shared.homeScreenTag:
-                    let text = app.staticTexts[Strings.shared.homeScreenTitle]
+                case Strings.ScreenTag.shared.home:
+                    let text = app.staticTexts[Strings.ScreenTitle.shared.home]
                     XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
-                case Strings.shared.loginScreenTag:
-                    let text = app.staticTexts[Strings.shared.loginScreenTitle]
+                case Strings.ScreenTag.shared.login:
+                    let text = app.staticTexts[Strings.ScreenTitle.shared.login]
                     XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
                 default: XCTFail("Couldn't find \(screenName) screen")
                 }
@@ -76,9 +76,9 @@ import Cucumberish
                 guard let textfieldText = args?[1] as? String else { return }
                 let textfield: XCUIElement? = {
                     switch (textfieldName){
-                    case Strings.shared.emailTextFieldTag:
+                    case Strings.TextFieldTag.shared.email:
                         return app.textFields[textfieldName]
-                    case Strings.shared.passwordTextFieldTag:
+                    case Strings.TextFieldTag.shared.password:
                         return app.secureTextFields[textfieldName]
                     default:
                         return nil

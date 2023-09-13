@@ -20,7 +20,7 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
         object Idle : LoginViewState()
         sealed class Error(val error: String) : LoginViewState() {
             enum class MissingField(val stringValue: String) {
-                EMAIL(Strings.emailTextFieldTag), PASSWORD(Strings.passwordTextFieldTag)
+                EMAIL(Strings.TextField.Tag.email), PASSWORD(Strings.TextField.Tag.password)
             }
 
             object IncorrectEmailOrPassword : Error("Incorrect email or password")
@@ -35,10 +35,10 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
 
     private val viewState = MutableStateFlow<LoginViewState>(LoginViewState.Idle)
 
-    val screenTitle = Strings.loginScreenTitle
+    val screenTitle = Strings.Screen.Title.login
     private val emailTextFieldState = MutableStateFlow("")
     val emailText = emailTextFieldState.toInitializedSubject(coroutineScope)
-    val emailPlaceholder = Strings.emailTextFieldPlaceholder
+    val emailPlaceholder = Strings.TextField.Placeholder.email
     val emailErrorText = viewState
         .map {
             if (it is LoginViewState.Error.EmptyField) {
@@ -54,7 +54,7 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
 
     private val passwordTextFieldState = MutableStateFlow("")
     val passwordText = passwordTextFieldState.toInitializedSubject(coroutineScope)
-    val passwordPlaceholder = Strings.passwordTextFieldPlaceholder
+    val passwordPlaceholder = Strings.TextField.Placeholder.password
     val passwordErrorText = viewState
         .map {
             if (it is LoginViewState.Error.EmptyField) {
@@ -75,7 +75,7 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
             } else ""
         }.toInitializedObservable("", coroutineScope)
 
-    val buttonTitle = Strings.loginButtonText
+    val buttonTitle = Strings.Button.Text.login
     val isButtonEnabled = viewState.map { it !is LoginViewState.Loading }
         .toInitializedObservable(false, coroutineScope)
     val isLoading = viewState.map { it is LoginViewState.Loading }
