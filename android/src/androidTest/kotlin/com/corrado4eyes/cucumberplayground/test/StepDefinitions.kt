@@ -78,13 +78,13 @@ class StepDefinitions : En {
 
                     elementNode.assertTextContains(text)
                 }
-                Definitions.FILL_TEXTFIELD -> Then(definitionString) { textInput: String, tag: String,  ->
+                Definitions.FILL_TEXTFIELD -> When(definitionString) { textInput: String, tag: String,  ->
                     testRule.onNodeWithText(tag).performTextInput(textInput)
                 }
-                Definitions.FILL_SECURE_TEXTFIELD -> Then(definitionString) { textInput: String, tag: String ->
+                Definitions.FILL_SECURE_TEXTFIELD -> When(definitionString) { textInput: String, tag: String ->
                     testRule.onNodeWithText(tag).performTextInput(textInput)
                 }
-                Definitions.PRESS_BUTTON -> Then(definitionString) { buttonName: String ->
+                Definitions.PRESS_BUTTON -> When(definitionString) { buttonName: String ->
                     val elementNode = try {
                         testRule.onNodeWithTag(buttonName).assertIsDisplayed()
                     } catch (e: AssertionError) {

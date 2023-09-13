@@ -22,13 +22,13 @@ enum class Definitions(override val definition: Definition): GherkinTestCase<Def
         CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING textfield with text $EXPECT_VALUE_STRING")
     ),
     FILL_TEXTFIELD(
-        CucumberDefinition.Step.Then("I type $EXPECT_VALUE_STRING in the $EXPECT_VALUE_STRING textfield")
+        CucumberDefinition.Step.When("I type $EXPECT_VALUE_STRING in the $EXPECT_VALUE_STRING textfield")
     ),
     FILL_SECURE_TEXTFIELD(
-        CucumberDefinition.Step.Then("I type $EXPECT_VALUE_STRING in the $EXPECT_VALUE_STRING secure textfield")
+        CucumberDefinition.Step.When("I type $EXPECT_VALUE_STRING in the $EXPECT_VALUE_STRING secure textfield")
     ),
     PRESS_BUTTON(
-        CucumberDefinition.Step.Then("I press the $EXPECT_VALUE_STRING button")
+        CucumberDefinition.Step.When("I press the $EXPECT_VALUE_STRING button")
     ),
     USER_IS_LOGGED_IN(
         CucumberDefinition.Step.Given("Email is $EXPECT_VALUE_STRING")

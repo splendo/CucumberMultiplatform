@@ -92,7 +92,7 @@ import Cucumberish
                 XCTAssert(textfield?.value as? String == textfieldText, "\"\(textfieldName)\" field text should be \"\(textfield?.value)\"")
                 return
             }
-            case .fillTextfield: Then(definitionString) { args, userInfo in
+            case .fillTextfield: When(definitionString) { args, userInfo in
                 guard let textfieldName = args?[1] as? String else { return }
                 guard let textfieldText = args?[0] as? String else { return }
                 let textfield = app.textFields[textfieldName]
@@ -100,7 +100,7 @@ import Cucumberish
                 textfield.typeText(textfieldText)
                 return
             }
-            case .fillSecureTextfield: Then(definitionString) { args, userInfo in
+            case .fillSecureTextfield: When(definitionString) { args, userInfo in
                 guard let textfieldName = args?[1] as? String else { return }
                 guard let textfieldText = args?[0] as? String else { return }
                 let textfield = app.secureTextFields[textfieldName]
@@ -109,7 +109,7 @@ import Cucumberish
                 return
             }
                 
-            case .pressButton: Then(definitionString) { args, userInfo in
+            case .pressButton: When(definitionString) { args, userInfo in
                 guard let buttonName = args?[0] as? String else { return }
                 let button = app.buttons[buttonName]
                 let link = app.links[buttonName]
