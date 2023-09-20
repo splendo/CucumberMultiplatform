@@ -20,7 +20,10 @@ actual class DefaultNode(private val element: XCUIElement) : Node {
             handler = null
         )
 
-        val result = XCTWaiter().waitForExpectations(expectations = listOf(expectation))
+        val result = XCTWaiter().waitForExpectations(
+            expectations = listOf(expectation),
+            timeout = TimeoutDuration.SHORT.duration.toDouble(DurationUnit.SECONDS)
+        )
 
         return assertionResultFor { result == XCTWaiterResultCompleted }
     }
@@ -31,7 +34,7 @@ actual class DefaultNode(private val element: XCUIElement) : Node {
         )
     }
 
-    override fun isVisible(): AssertionResult = exists()
+    override fun isVisible(): AssertionResult = waitExists(TimeoutDuration.SHORT)
 
     override fun isButton(): AssertionResult = assertionResultFor(element::isHittable)
 

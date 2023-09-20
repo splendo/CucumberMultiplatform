@@ -8,6 +8,7 @@ actual class DefaultApplicationAdapter(app: XCUIApplication?) : BaseApplicationA
 
     override fun launch(identifier: String?, arguments: Map<String, String>) {
         super.launch(identifier, arguments)
+        app.setLaunchEnvironment((arguments as Map<Any?, *>))
         app.launch()
     }
 
@@ -20,6 +21,9 @@ actual class DefaultApplicationAdapter(app: XCUIApplication?) : BaseApplicationA
         return DefaultNode(element)
     }
 
+    /**
+     * Not called from iOS
+     */
     override fun assert(assertionResult: AssertionResult) {
         when (assertionResult) {
             is AssertionResult.Failure -> throw assertionResult.exception
@@ -27,8 +31,16 @@ actual class DefaultApplicationAdapter(app: XCUIApplication?) : BaseApplicationA
         }
     }
 
+    /**
+     * Not called from iOS
+     */
     override fun assertUntil(
         timeout: TimeoutDuration,
         blockAssertionResult: () -> AssertionResult
     ) = assert(blockAssertionResult())
+
+    /**
+     * Not called from iOS
+     */
+    override fun assertAll(assertions: List<AssertionResult>) = assert(assertions.first())
 }

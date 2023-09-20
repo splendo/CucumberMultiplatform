@@ -18,13 +18,9 @@ enum class TimeoutDuration(val duration: Duration) {
     LONG(60.seconds)
 }
 
-typealias ApplicationArguments = List<String>
+typealias ApplicationArguments = Map<String, String>?
 
 interface ApplicationAdapter {
-
-    companion object {
-        fun getArgument(arguments: List<String>?, index: Int): String? = arguments?.get(index)
-    }
 
     fun launch(identifier: String? = null, arguments: Map<String, String>)
     fun findView(tag: String): Node
@@ -32,6 +28,7 @@ interface ApplicationAdapter {
 
     fun assert(assertionResult: AssertionResult)
     fun assertUntil(timeout: TimeoutDuration, blockAssertionResult: () -> AssertionResult)
+    fun assertAll(assertions: List<AssertionResult>)
 
     interface TearDownHandler {
         fun tearDown()

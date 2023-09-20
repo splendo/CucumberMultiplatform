@@ -17,7 +17,7 @@ actual class DefaultApplicationAdapter(
 
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val appPackage = instrumentation.targetContext.packageName
-        val activityName = "$appPackage.$identifier"
+        val activityName = "$appPackage.MainActivity"
         val intent = Intent(Intent.ACTION_MAIN)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         intent.setClassName(instrumentation.targetContext, activityName)
@@ -49,6 +49,14 @@ actual class DefaultApplicationAdapter(
     ) {
         testRule.waitUntil(timeout.duration.toLong(DurationUnit.MILLISECONDS)) {
            blockAssertionResult() is AssertionResult.Success
+        }
+    }
+
+    override fun assertAll(assertions: List<AssertionResult>) {
+        assertions.forEach {
+            testRule.waitUntil(TimeoutDuration.LONG.duration.toLong(DurationUnit.MILLISECONDS)) {
+                it is AssertionResult.Success
+            }
         }
     }
 }
