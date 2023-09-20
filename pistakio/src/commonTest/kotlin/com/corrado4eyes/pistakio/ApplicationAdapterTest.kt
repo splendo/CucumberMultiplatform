@@ -1,6 +1,6 @@
 package com.corrado4eyes.pistakio
 
-import com.corrado4eyes.pistakio.mocks.StubCMApplication
+import com.corrado4eyes.pistakio.mocks.StubApplication
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -8,17 +8,18 @@ import kotlin.test.assertFailsWith
 
 class CMApplicationTest {
 
-    private lateinit var app: StubCMApplication
+    private lateinit var app: StubApplication
 
     @BeforeTest
     fun setUp() {
-        app = StubCMApplication()
+        app = StubApplication()
     }
 
     @Test
     fun test_launch_app() {
-        app.launch()
+        app.launch(identifier = null, arguments = mapOf("foo" to "bar", "baz" to qux))
         assertEquals(1, app.launchCalled)
+
     }
 
     @Test
@@ -27,7 +28,7 @@ class CMApplicationTest {
         assertEquals(1, app.launchCalled)
 
         app.findView(tag = "test")
-        assertEquals(1, app.findView)
+        assertEquals(1, app.findViewCalled)
         assertEquals("test", app.findViewWithTag)
     }
 

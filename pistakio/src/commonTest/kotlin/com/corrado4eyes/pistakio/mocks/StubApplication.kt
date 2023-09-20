@@ -1,6 +1,8 @@
 package com.corrado4eyes.pistakio.mocks
 
+import com.corrado4eyes.pistakio.AssertionResult
 import com.corrado4eyes.pistakio.BaseApplicationAdapter
+import com.corrado4eyes.pistakio.TimeoutDuration
 
 class StubCMApplication : BaseApplicationAdapter() {
     var launchCalled = 0
@@ -15,6 +17,17 @@ class StubCMApplication : BaseApplicationAdapter() {
         super.findView(tag)
         findViewWithTag = tag
         findView++
+    }
+
+    override fun assert(assertionResult: AssertionResult) {
+        TODO("Not yet implemented")
+    }
+
+    override fun assertUntil(
+        timeout: TimeoutDuration,
+        blockAssertionResult: () -> AssertionResult
+    ) {
+        TODO("Not yet implemented")
     }
 
     var tearDown = 0
