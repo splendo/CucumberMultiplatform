@@ -25,12 +25,14 @@ kotlin {
                 transitiveExport = true
                 export(project(":shared"))
                 export(project(":cucumber"))
+                export(project(":pistakio"))
                 baseName = "shared"
 
                 linkFrameworkSearchPaths("$projectDir/../cucumber")
+                linkFrameworkSearchPaths("$projectDir/../pistakio")
 
                 getTest("DEBUG").apply {
-                    linkFrameworkSearchPaths("$projectDir/../cucumber")
+                    linkFrameworkSearchPaths("$projectDir/../pistakio")
                 }
             }
         }
@@ -45,6 +47,7 @@ kotlin {
             dependencies {
                 api(project(":shared"))
                 api(project(":cucumber"))
+                api(project(":pistakio"))
             }
         }
         val commonTest by getting {
