@@ -21,14 +21,15 @@ struct HomeView: SwiftUI.View {
             NavigationView {
                 VStack {
                     Text(viewModel.user.email)
-                    
+                        .accessibilityLabel(viewModel.user.email)
                     Button(action: viewModel.logout) {
                         Text(viewModel.buttonTitle)
                     }
-                    .accessibilityLabel(viewModel.buttonTitle)
+                    .accessibilityLabel(Strings.ButtonTag.shared.logout)
                 }.toolbar {
                     ToolbarItem(placement: .principal) {
                         Text(viewModel.screenTitle)
+                            .accessibilityLabel(Strings.ScreenTag.shared.home)
                     }
                 }.navigationBarTitleDisplayMode(.inline)
             }

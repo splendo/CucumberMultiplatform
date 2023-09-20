@@ -25,6 +25,7 @@
 		48C5442ECE76BED5A8FFFAE9 /* ListObservable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140577234C8D9C9BD309475E /* ListObservable.generated.swift */; };
 		4D7D41A3A4FA6F91C431D068 /* KalugaDate+Extensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D787A9CEB2779127CD15B6F /* KalugaDate+Extensions.generated.swift */; };
 		5A0347FCDC0723695A7D6A7C /* PlatformValueMapper.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E798EA8B136B833082411B4 /* PlatformValueMapper.generated.swift */; };
+		640CC3C82AB49ECA003E3D8C /* Node+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640CC3C72AB49ECA003E3D8C /* Node+Extensions.swift */; };
 		640DFEEC2A370DA300ABF2DD /* CucumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640DFEEB2A370DA300ABF2DD /* CucumberTests.swift */; };
 		640DFEF52A370DD200ABF2DD /* Features in Resources */ = {isa = PBXBuildFile; fileRef = 640DFEF42A370DD200ABF2DD /* Features */; };
 		640DFEF82A370F5C00ABF2DD /* CucumberTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 640DFEF72A370F5C00ABF2DD /* CucumberTests.m */; };
@@ -89,6 +90,7 @@
 		48B350D3EB640C8B7B253753 /* UninitializedObservable.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = UninitializedObservable.generated.swift; sourceTree = "<group>"; };
 		4DEA2654EFE69B013946D9B0 /* Pods-CucumberTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CucumberTests.release.xcconfig"; path = "Target Support Files/Pods-CucumberTests/Pods-CucumberTests.release.xcconfig"; sourceTree = "<group>"; };
 		5416DF2E8BB6BE190C0431AF /* NavigationBarColor.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = NavigationBarColor.generated.swift; sourceTree = "<group>"; };
+		640CC3C72AB49ECA003E3D8C /* Node+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Node+Extensions.swift"; sourceTree = "<group>"; };
 		640DFEE92A370DA300ABF2DD /* CucumberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CucumberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		640DFEEB2A370DA300ABF2DD /* CucumberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CucumberTests.swift; sourceTree = "<group>"; };
 		640DFEF42A370DD200ABF2DD /* Features */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Features; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			children = (
 				649B6F992A389F5F00C40DCC /* XCUIElement.swift */,
 				649B6F9B2A389F9300C40DCC /* Timeout.swift */,
+				640CC3C72AB49ECA003E3D8C /* Node+Extensions.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				648329182A4AE6BB00E5A4A8 /* RoutingState.generated.swift in Sources */,
 				648329262A4AE6BB00E5A4A8 /* DefaultValues.generated.swift in Sources */,
 				6483291D2A4AE6BB00E5A4A8 /* Shape+Helpers.generated.swift in Sources */,
+				640CC3C82AB49ECA003E3D8C /* Node+Extensions.swift in Sources */,
 				648329032A43391500E5A4A8 /* iOSApp.swift in Sources */,
 				640DFEF82A370F5C00ABF2DD /* CucumberTests.m in Sources */,
 				648329152A4AE6BB00E5A4A8 /* Subject.generated.swift in Sources */,
