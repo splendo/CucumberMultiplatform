@@ -12,7 +12,7 @@ class HomeViewModel : BaseLifecycleViewModel(), KoinComponent {
     private val authService: AuthService by inject()
 
     val screenTitle = Strings.Screen.Title.home
-    val buttonTitle = Strings.Button.Text.logout
+    val buttonTitle = Strings.Button.Title.logout
 
     fun getCurrentUser() = authService.getCurrentUserIfAny()!!
     val user = authService.getCurrentUserIfAny()!!
