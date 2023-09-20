@@ -19,7 +19,7 @@ class LoginViewModelTest : KoinUIThreadViewModelTest<LoginViewModelTest.KoinCont
         }
     ) {
         val authService = get<AuthService>() as AuthServiceMock
-        override val viewModel: LoginViewModel = LoginViewModel(authService)
+        override val viewModel: LoginViewModel = LoginViewModel()
     }
 
     @Test

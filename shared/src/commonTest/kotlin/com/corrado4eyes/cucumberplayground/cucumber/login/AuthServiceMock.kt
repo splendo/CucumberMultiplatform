@@ -1,8 +1,8 @@
 package com.corrado4eyes.cucumberplayground.cucumber.login
 
+import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import com.corrado4eyes.cucumberplayground.models.User
 import com.corrado4eyes.cucumberplayground.services.AuthService
-import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -50,7 +50,9 @@ class AuthServiceMock : AuthService {
         }
     }
 
-    override fun observeUser(): Flow<User?> {
-        return currentUser.asStateFlow()
+    override val observeUser: Flow<User?> = currentUser.asStateFlow()
+
+    override fun getCurrentUserIfAny(): User? {
+        return currentUser.asStateFlow().value
     }
 }
