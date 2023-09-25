@@ -2,7 +2,6 @@ package com.corrado4eyes.pistakio
 
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
-import kotlinx.coroutines.flow.MutableStateFlow
 
 class CMAppLaunchedAlreadyException : Throwable() {
     override val message: String = "The app is already launched"
@@ -18,9 +17,11 @@ enum class TimeoutDuration(val duration: Duration) {
     LONG(60.seconds)
 }
 
-typealias ApplicationArguments = Map<String, String>?
+typealias ApplicationArguments = Map<String, String>
 
 interface ApplicationAdapter {
+
+    val applicationArguments: ApplicationArguments
 
     fun launch(identifier: String? = null, arguments: Map<String, String>)
     fun findView(tag: String): Node
@@ -33,26 +34,40 @@ interface ApplicationAdapter {
     interface TearDownHandler {
         fun tearDown()
     }
+
+    operator fun get(key: String): String?
+    operator fun set(key: String, value: String)
 }
 
 abstract class BaseApplicationAdapter : ApplicationAdapter {
-    private val isAppLaunched = MutableStateFlow(false)
+
+    private val _applicationArguments = mutableMapOf<String, String>()
+    override val applicationArguments: ApplicationArguments
+        get() = _applicationArguments
+
+    private var isAppLaunched = false
 
     override fun launch(identifier: String?, arguments: Map<String, String>) {
-        if (isAppLaunched.value) {
+        if (isAppLaunched) {
             throw CMAppLaunchedAlreadyException()
         }
-        isAppLaunched.value = true
+
+        isAppLaunched = true
     }
 
     override fun tearDown() {
-        isAppLaunched.value = false
+        isAppLaunched = false
     }
 
     protected fun assertAppIsRunning() {
-        if (!isAppLaunched.value) {
+        if (!isAppLaunched) {
             throw CMAppNotLaunchedYetException()
         }
+    }
+
+    override operator fun get(key: String): String? = applicationArguments[key]
+    override operator fun set(key: String, value: String) {
+        _applicationArguments[key] = value
     }
 }
 

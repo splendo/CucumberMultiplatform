@@ -6,6 +6,7 @@ import platform.XCTest.XCUIElementTypeAny
 actual class DefaultApplicationAdapter(app: XCUIApplication?) : BaseApplicationAdapter() {
     private val app: XCUIApplication = app ?: XCUIApplication()
 
+    @Suppress("UNCHECKED_CAST")
     override fun launch(identifier: String?, arguments: Map<String, String>) {
         super.launch(identifier, arguments)
         app.setLaunchEnvironment((arguments as Map<Any?, *>))

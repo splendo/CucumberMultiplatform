@@ -7,6 +7,7 @@ import com.corrado4eyes.pistakio.Node
 import com.corrado4eyes.pistakio.TimeoutDuration
 
 class StubApplication : BaseApplicationAdapter() {
+
     var launchCalled = 0
     var launchArguments: ApplicationArguments = emptyMap()
     override fun launch(identifier: String?, arguments: Map<String, String>) {

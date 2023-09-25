@@ -17,7 +17,7 @@ actual class DefaultApplicationAdapter(
 
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val appPackage = instrumentation.targetContext.packageName
-        val activityName = "$appPackage.MainActivity"
+        val activityName = "$appPackage.$identifier"
         val intent = Intent(Intent.ACTION_MAIN)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         intent.setClassName(instrumentation.targetContext, activityName)
