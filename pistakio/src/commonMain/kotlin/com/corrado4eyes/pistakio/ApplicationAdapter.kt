@@ -21,6 +21,11 @@ typealias ApplicationArguments = Map<String, String>
 
 interface ApplicationAdapter {
 
+    /**
+     * Map of arguments passed through the application arguments into the app MainActivity or MainView.
+     * Such map contains arguments to set up the app in a state required by certain tests. Both the
+     * content of the map and the implementation is up to the developer.
+     */
     val applicationArguments: ApplicationArguments
 
     fun launch(identifier: String? = null, arguments: Map<String, String>)
