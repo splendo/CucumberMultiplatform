@@ -53,7 +53,7 @@ class StepDefinitions : En {
                     application.assertAll(assertions)
                 }
                 Definitions.EMAIL_IS_EXPECT_VALUE_STRING -> Given(definitionString) { loggedInEmail: String ->
-                    arguments["testEmail"] = loggedInEmail
+                    application.assertAll(SealedDefinitions.SetLoggedInUserEmail(application, listOf(loggedInEmail)).runAndGetAssertions())
                 }
             }
         }

@@ -57,24 +57,21 @@ sealed class SealedDefinitions(
         override val definition: Definition = CucumberDefinition.Step.Given("I am in the $EXPECT_VALUE_STRING screen")
 
         override fun runAndGetAssertions(): List<AssertionResult> {
-            val arguments = mutableMapOf<String, String>()
 
             val screenTitleTag = when (val screenName = args[0]) {
                 Strings.Screen.Title.login -> {
-                    arguments["isLoggedIn"] = "false" // platform specific
-                    arguments["testEmail"] = ""
+                    application["isLoggedIn"] = "false"
+                    application["testEmail"] = ""
                     Strings.Screen.Tag.login
                 }
 
                 Strings.Screen.Title.home -> {
-                    arguments["isLoggedIn"] = "true"
-                    arguments["testEmail"] = "test@test.com"
+                    application["isLoggedIn"] = "true"
                     Strings.Screen.Tag.home
                 }
                 else -> throw UIElementException.Screen.NotFound(screenName)
             }
-
-            application.launch(null, arguments)
+            application.launch("MainActivity", application.applicationArguments)
             val element = application.findView(screenTitleTag)
             return listOf(
                 element.waitExists(TimeoutDuration.SHORT)
@@ -200,9 +197,8 @@ sealed class SealedDefinitions(
 
         override fun runAndGetAssertions(): List<AssertionResult> {
             val loggedInEmail = args[0]
-//            appArguments?.toMutableMap()?.set("testEmail", loggedInEmail)
-//            application.
-            return emptyList() // TODO: Fix issue with arguments
+            application["testEmail"] = loggedInEmail
+            return emptyList()
         }
     }
 }
