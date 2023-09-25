@@ -41,7 +41,7 @@ class ApplicationAdapterTest {
 
     @Test
     fun test_app_launched_twice() {
-        assertFailsWith<CMAppLaunchedAlreadyException> {
+        assertFailsWith<AppLaunchedAlreadyException> {
             app.launch(identifier = null, arguments = mapOf())
             app.launch(identifier = null, arguments = mapOf())
         }
@@ -58,7 +58,7 @@ class ApplicationAdapterTest {
 
     @Test
     fun test_find_view_fails_must_launch_app_first() {
-        assertFailsWith<CMAppNotLaunchedYetException> {
+        assertFailsWith<AppNotLaunchedYetException> {
             app.findView(tag = "test")
         }
     }

@@ -3,11 +3,11 @@ package com.corrado4eyes.pistakio
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-class CMAppLaunchedAlreadyException : Throwable() {
+class AppLaunchedAlreadyException : Throwable() {
     override val message: String = "The app is already launched"
 }
 
-class CMAppNotLaunchedYetException : Throwable() {
+class AppNotLaunchedYetException : Throwable() {
     override val message: String = "The app was not launched"
 }
 
@@ -54,7 +54,7 @@ abstract class BaseApplicationAdapter : ApplicationAdapter {
 
     override fun launch(identifier: String?, arguments: Map<String, String>) {
         if (isAppLaunched) {
-            throw CMAppLaunchedAlreadyException()
+            throw AppLaunchedAlreadyException()
         }
 
         isAppLaunched = true
@@ -66,7 +66,7 @@ abstract class BaseApplicationAdapter : ApplicationAdapter {
 
     protected fun assertAppIsRunning() {
         if (!isAppLaunched) {
-            throw CMAppNotLaunchedYetException()
+            throw AppNotLaunchedYetException()
         }
     }
 
