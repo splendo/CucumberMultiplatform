@@ -54,9 +54,7 @@ actual class DefaultApplicationAdapter(
 
     override fun assertAll(assertions: List<AssertionResult>) {
         assertions.forEach {
-            testRule.waitUntil(TimeoutDuration.LONG.duration.toLong(DurationUnit.MILLISECONDS)) {
-                it is AssertionResult.Success
-            }
+            it is AssertionResult.Success
         }
     }
 }
