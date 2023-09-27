@@ -36,7 +36,7 @@ import Cucumberish
             let definitionString = test.definition.definitionString
             switch test {
             case .iAmInTheExpectValueStringScreen: Given(definitionString) { args, userInfo in
-                let assertions = SealedDefinitions.IAmInScreen(
+                let assertions = AppDefinitions.CrossPlatformIAmInScreen(
                     application: applicationAdapter,
                     args: args
                 ).runAndGetAssertions()
@@ -44,7 +44,7 @@ import Cucumberish
                 assertAll(assertions: assertions)
             }
             case .iSeeExpectValueStringText: Then(definitionString) { args, userInfo in
-                let assertions = SealedDefinitions.ISeeText(
+                let assertions = AppDefinitions.CrossPlatformISeeText(
                     application: applicationAdapter,
                     args: args
                 ).runAndGetAssertions()
@@ -52,7 +52,7 @@ import Cucumberish
                 assertAll(assertions: assertions)
             }
             case .iSeeTheExpectValueStringButton: Then(definitionString) { args, userInfo in
-                let assertions = SealedDefinitions.ISeeButton(
+                let assertions = AppDefinitions.CrossPlatformISeeButton(
                     application: applicationAdapter,
                     args: args
                 ).runAndGetAssertions()
@@ -60,7 +60,7 @@ import Cucumberish
                 assertAll(assertions: assertions)
             }
             case .iSeeTheExpectValueStringScreen: Then(definitionString) { args, userInfo in
-                let assertions = SealedDefinitions.ISeeScreen(
+                let assertions = AppDefinitions.CrossPlatformISeeScreen(
                     application: applicationAdapter,
                     args: args
                 ).runAndGetAssertions()
@@ -68,7 +68,7 @@ import Cucumberish
                 assertAll(assertions: assertions)
             }
             case .iSeeTheExpectValueStringTextFieldWithTextExpectValueString: Then(definitionString) { args, userInfo in
-                let assertions = SealedDefinitions.ISeeTextFieldWithText(
+                let assertions = AppDefinitions.CrossPlatformISeeTextFieldWithText(
                     application: applicationAdapter,
                     args: args
                 ).runAndGetAssertions()
@@ -76,18 +76,28 @@ import Cucumberish
                 assertAll(assertions: assertions)
             }
             case .iTypeExpectValueStringInTheExpectValueStringTextField: When(definitionString) { args, userInfo in
-                let assertions = SealedDefinitions.ITypeTextIntoTextField(application: applicationAdapter, args: args).runAndGetAssertions()
+                let assertions = AppDefinitions.CrossPlatformITypeTextIntoTextField(application: applicationAdapter, args: args).runAndGetAssertions()
                 assertAll(assertions: assertions)
             }
                 
             case .iPressTheExpectValueStringButton: When(definitionString) { args, userInfo in
-                let assertions = SealedDefinitions.IPressTheButton(application: applicationAdapter, args: args).runAndGetAssertions()
+                let assertions = AppDefinitions.CrossPlatformIPressTheButton(application: applicationAdapter, args: args).runAndGetAssertions()
                 assertAll(assertions: assertions)
             }
             case .emailIsExpectValueString: Given(definitionString) { args, userInfo in
-                let assertions = SealedDefinitions.SetLoggedInUserEmail(application: applicationAdapter, args: args).runAndGetAssertions()
+                let assertions = AppDefinitions.CrossPlatformSetLoggedInUserEmail(application: applicationAdapter, args: args).runAndGetAssertions()
                 assertAll(assertions: assertions)
             }
+            case .iSeeExpectValueStringInTheScrollview: Then(definitionString) { args, userInfo in
+                guard let scrollViewItemIndex = args?[0] as? String else { return }
+                app.descendants(matching: .any)
+                    .matching(identifier: Strings.ScrollViewTag.shared.homeScrollView)
+                    .element.swipeUp()
+                let scrollItem = app.staticTexts[scrollViewItemIndex]
+                XCTAssert(scrollItem.waitForExistence(timeout: 0.1))
+            }
+                
+            
             default:
                 XCTFail("unrecognised test case.")
             }

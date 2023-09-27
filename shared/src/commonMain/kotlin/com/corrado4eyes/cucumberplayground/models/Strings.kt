@@ -12,6 +12,12 @@ object Strings {
         }
     }
 
+    object ScrollView {
+        object Tag {
+            val homeScrollView = "Home ScrollView"
+        }
+    }
+
     object TextField {
         object Placeholder {
             val email = "Email"
