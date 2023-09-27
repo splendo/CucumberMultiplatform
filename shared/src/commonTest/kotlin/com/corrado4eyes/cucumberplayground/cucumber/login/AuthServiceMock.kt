@@ -1,5 +1,6 @@
 package com.corrado4eyes.cucumberplayground.cucumber.login
 
+import com.corrado4eyes.cucumberplayground.cucumber.login.DummyUsers.defaultTestUser
 import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
 import com.corrado4eyes.cucumberplayground.models.User
 import com.corrado4eyes.cucumberplayground.services.AuthService
@@ -11,13 +12,14 @@ import kotlinx.coroutines.flow.asStateFlow
 /**
  * Mock is the same as impl but here for the sake of proper interfacing
  */
-class AuthServiceMock : AuthService {
+class AuthServiceMock(loggedInUser: User?) : AuthService {
 
-    private var currentUser: MutableStateFlow<User?> = MutableStateFlow(null)
+    private var currentUser: MutableStateFlow<User?> = MutableStateFlow(loggedInUser)
 
     private val users = mutableListOf(
         User("alex@alex.com", "1234"),
-        User("corrado@corrado.com", "1234")
+        User("corrado@corrado.com", "1234"),
+        defaultTestUser
     )
 
     override suspend fun login(email: String, pass: String): AuthResponse {
@@ -31,8 +33,9 @@ class AuthServiceMock : AuthService {
         } ?: AuthResponse.Error("Invalid credentials")
     }
 
+    var logoutCalledTimes = 0
     override suspend fun logout() {
-        delay(1000)
+        logoutCalledTimes++
         currentUser.value = null
     }
 
@@ -55,4 +58,8 @@ class AuthServiceMock : AuthService {
     override fun getCurrentUserIfAny(): User? {
         return currentUser.asStateFlow().value
     }
+}
+
+object DummyUsers {
+    val defaultTestUser = User("test@test.com", "1234")
 }
