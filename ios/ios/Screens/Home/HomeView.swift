@@ -26,6 +26,12 @@ struct HomeView: SwiftUI.View {
                         Text(viewModel.buttonTitle)
                     }
                     .accessibilityLabel(Strings.ButtonTag.shared.logout)
+                    ScrollView(.vertical) {
+                        ForEach(viewModel.scrollableItems, id: \.intValue) { index in
+                            Text("\(index)")
+                        }
+                    }.frame(height: 200)
+                    .accessibilityLabel(Strings.ScrollViewTag.shared.homeScrollView)
                 }.toolbar {
                     ToolbarItem(placement: .principal) {
                         Text(viewModel.screenTitle)
