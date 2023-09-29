@@ -29,7 +29,11 @@ class StepDefinitions : En {
             val definitionString = it.definition.definitionString
             when (it) {
                 Definitions.I_AM_IN_THE_EXPECT_VALUE_STRING_SCREEN -> Given(definitionString) { screenName: String ->
-                    val assertions = AppDefinitions.CrossPlatform.IAmInScreen(application, listOf(screenName)).runAndGetAssertions()
+                    val assertions = AppDefinitions.CrossPlatform.IAmInScreen(
+                        "MainActivity",
+                        application,
+                        listOf(screenName)
+                    ).runAndGetAssertions()
                     application.assertAll(assertions)
                 }
                 Definitions.I_SEE_EXPECT_VALUE_STRING_TEXT -> Then(definitionString) { textViewTitle: String ->

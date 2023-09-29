@@ -56,6 +56,7 @@ sealed class AppDefinitions : TestCase {
         protected val args = args ?: emptyList()
 
         class IAmInScreen(
+            private val launchScreenName: String? = null,
             application: ApplicationAdapter,
             args: List<String>?
         ) : CrossPlatform(application, args) {
@@ -76,7 +77,7 @@ sealed class AppDefinitions : TestCase {
                     }
                     else -> throw UIElementException.Screen.NotFound(screenName)
                 }
-                application.launch("MainActivity", application.applicationArguments)
+                application.launch(launchScreenName, application.applicationArguments)
                 val element = application.findView(screenTitleTag)
                 return listOf(
                     element.waitExists(TimeoutDuration.SHORT)

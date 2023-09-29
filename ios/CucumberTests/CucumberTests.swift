@@ -37,6 +37,7 @@ import Cucumberish
             switch test {
             case .iAmInTheExpectValueStringScreen: Given(definitionString) { args, userInfo in
                 let assertions = AppDefinitions.CrossPlatformIAmInScreen(
+                    launchScreenName: nil,
                     application: applicationAdapter,
                     args: args
                 ).runAndGetAssertions()
