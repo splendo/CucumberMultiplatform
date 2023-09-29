@@ -5,7 +5,6 @@ sealed class AssertionResult {
     class Failure(val exception: AssertionError) : AssertionResult()
 }
 
-
 interface Node {
     fun typeText(text: String)
     fun tap()
@@ -50,6 +49,19 @@ interface Node {
      * @param contains If true it will try to find a match in the substrings of the hint.
      */
     fun isHintEqualTo(value: String, contains: Boolean): AssertionResult
+
+    fun swipeUp()
+    fun swipeUp(swipeDuration: SwipeDuration)
+    fun swipeUp(startY: Float, endY: Float)
+
+    fun swipeDown()
+    fun swipeDown(swipeDuration: SwipeDuration)
+    fun swipeDown(startY: Float, endY: Float)
+
+
+    fun swipeUntilIndex(index: Int, velocity: Float? = null)
+
+    fun swipeUntilKey(key: Any, velocity: Float? = null)
 
 //    fun doubleTap()
 //    fun press()

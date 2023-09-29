@@ -19,7 +19,7 @@ actual class DefaultApplicationAdapter(app: XCUIApplication?) : BaseApplicationA
             .descendantsMatchingType(XCUIElementTypeAny)
             .matchingIdentifier(tag)
             .element
-        return DefaultNode(element)
+        return DefaultNode(app, element)
     }
 
     /**

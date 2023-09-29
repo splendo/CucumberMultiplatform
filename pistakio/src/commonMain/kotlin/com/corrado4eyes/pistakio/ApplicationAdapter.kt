@@ -1,6 +1,7 @@
 package com.corrado4eyes.pistakio
 
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
 class AppLaunchedAlreadyException : Throwable() {
@@ -15,6 +16,13 @@ enum class TimeoutDuration(val duration: Duration) {
     SHORT(10.seconds),
     MEDIUM(30.seconds),
     LONG(60.seconds)
+}
+
+sealed class SwipeDuration(val duration: Duration) {
+    object Short : SwipeDuration(50.milliseconds)
+    object Medium : SwipeDuration(100.milliseconds)
+    object Long : SwipeDuration(200.milliseconds)
+    class Custom(duration: Duration) : SwipeDuration(duration)
 }
 
 typealias ApplicationArguments = Map<String, String>
