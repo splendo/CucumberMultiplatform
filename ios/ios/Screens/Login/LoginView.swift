@@ -49,7 +49,6 @@ struct LoginView: SwiftUI.View {
                         .accessibilityLabel(Strings.TextFieldTag.shared.password)
                     Text(passwordErrorText.value)
                         .foregroundColor(Color.red)
-                    
                     Text(formFooterErrorText.value)
                         .foregroundColor(Color.red)
                     

@@ -60,7 +60,6 @@ interface Node {
 
 
     fun swipeUntilIndex(index: Int, velocity: Float? = null)
-
     fun swipeUntilKey(key: Any, velocity: Float? = null)
 
 //    fun doubleTap()
