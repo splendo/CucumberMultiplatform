@@ -1,3 +1,4 @@
+import co.touchlab.skie.configuration.SealedInterop
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.konan.file.File
 import org.jetbrains.kotlin.konan.properties.Properties
@@ -7,6 +8,7 @@ import org.jetbrains.kotlin.konan.properties.loadProperties
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("co.touchlab.skie") version "0.5.0"
 }
 
 kotlin {
@@ -25,12 +27,14 @@ kotlin {
                 transitiveExport = true
                 export(project(":shared"))
                 export(project(":cucumber"))
+                export(project(":pistakio"))
                 baseName = "shared"
 
                 linkFrameworkSearchPaths("$projectDir/../cucumber")
+                linkFrameworkSearchPaths("$projectDir/../pistakio")
 
                 getTest("DEBUG").apply {
-                    linkFrameworkSearchPaths("$projectDir/../cucumber")
+                    linkFrameworkSearchPaths("$projectDir/../pistakio")
                 }
             }
         }
@@ -45,6 +49,7 @@ kotlin {
             dependencies {
                 api(project(":shared"))
                 api(project(":cucumber"))
+                api(project(":pistakio"))
             }
         }
         val commonTest by getting {
@@ -165,6 +170,17 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.NativeBinary.linkFrameworkSearchPaths
     if (this is org.jetbrains.kotlin.gradle.plugin.mpp.AbstractExecutable) {
         frameworkSearchPaths.forEach {
             linkerOpts("-rpath", it)
+        }
+    }
+}
+
+skie {
+    analytics {
+        disableUpload.set(true)
+    }
+    features {
+        group {
+            SealedInterop.Enabled(true)
         }
     }
 }

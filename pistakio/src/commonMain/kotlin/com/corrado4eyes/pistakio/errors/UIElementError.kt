@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumber.errors
+package com.corrado4eyes.pistakio.errors
 
 enum class UIElementType {
     SCREEN,

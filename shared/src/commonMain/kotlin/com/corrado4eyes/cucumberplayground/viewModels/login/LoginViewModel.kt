@@ -75,7 +75,7 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
             } else ""
         }.toInitializedObservable("", coroutineScope)
 
-    val buttonTitle = Strings.Button.Text.login
+    val buttonTitle = Strings.Button.Title.login
     val isButtonEnabled = viewState.map { it !is LoginViewState.Loading }
         .toInitializedObservable(false, coroutineScope)
     val isLoading = viewState.map { it is LoginViewState.Loading }

@@ -15,11 +15,11 @@ import org.koin.dsl.module
 class LoginViewModelTest : KoinUIThreadViewModelTest<LoginViewModelTest.KoinContext, LoginViewModel>() {
     class KoinContext : KoinViewModelTestContext<LoginViewModel>(
         module {
-            single<AuthService> { AuthServiceMock() }
+            single<AuthService> { AuthServiceMock(getOrNull()) }
         }
     ) {
         val authService = get<AuthService>() as AuthServiceMock
-        override val viewModel: LoginViewModel = LoginViewModel(authService)
+        override val viewModel: LoginViewModel = LoginViewModel()
     }
 
     @Test

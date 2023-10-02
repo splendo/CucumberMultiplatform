@@ -13,127 +13,118 @@ import Cucumberish
 
 @objc public class CucumberishInitializer: NSObject {
     static var app: XCUIApplication!
+    static var applicationAdapter: ApplicationAdapter!
+    
+    @objc public class func assertAll(assertions: [AssertionResult]) {
+        for assertion in assertions {
+            XCTAssert(assertion is AssertionResult.Success)
+        }
+    }
     
     @objc public class func CucumberishSwiftInit() {
-        
-        before { _ in
+        beforeStart {
             app = XCUIApplication()
             app.launchArguments.append("test")
+            applicationAdapter = DefaultApplicationAdapter(app: app)
         }
         
-        for test in Definitions.companion.allCases {
-            let definitionString = test.definition.definitionString
-            switch test {
-            case .iAmInTheExpectValueStringScreen: Given(definitionString) { args, userInfo in
-                guard let screenName = args?[0] as? String else { return }
-                
-                let text: XCUIElement
-                switch(screenName) {
-                case Strings.ScreenTag.shared.home:
-                    app.launchEnvironment["isLoggedIn"] = "true"
-                    text = app.staticTexts[Strings.ScreenTitle.shared.home]
-                case Strings.ScreenTag.shared.login:
-                    app.launchEnvironment["isLoggedIn"] = "false"
-                    text = app.staticTexts[Strings.ScreenTitle.shared.login]
-                    
-                default:
-                    text = app.staticTexts["Fail"]
-                    XCTFail("Couldn't find \(screenName) screen")
-                }
-                
-                app.launch()
-                
-                XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
-                return
-            }
-            case .iSeeExpectValueStringText: Then(definitionString){ args, userInfo in
-                guard let textString = args?[0] as? String else { return }
-                let text = app.staticTexts[textString]
-                XCTAssert(text.exists(timeout: .short), "Couldn't find \(text) text")
-                return
-            }
-            case .iSeeTheExpectValueStringButton: Then(definitionString) { args, userInfo in
-                guard let text = args?[0] as? String else { return }
-                let button = app.buttons[text]
-                XCTAssert(button.exists(timeout: .short), "\"\(text)\" button should be visible")
-                return
-            }
-            case .iSeeTheExpectValueStringScreen: Then(definitionString) { args, userInfo in
-                guard let screenName = args?[0] as? String else { return }
-                switch(screenName) {
-                case Strings.ScreenTag.shared.home:
-                    let text = app.staticTexts[Strings.ScreenTitle.shared.home]
-                    XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
-                case Strings.ScreenTag.shared.login:
-                    let text = app.staticTexts[Strings.ScreenTitle.shared.login]
-                    XCTAssert(text.exists(timeout: .short), "Couldn't validate to be in \(screenName)")
-                default: XCTFail("Couldn't find \(screenName) screen")
-                }
-                return
-            }
-            case .iSeeTheExpectValueStringTextFieldWithTextExpectValueString: Then(definitionString) { args, userInfo in
-                guard let textfieldName = args?[0] as? String else { return }
-                guard let textfieldText = args?[1] as? String else { return }
-                let textfield: XCUIElement? = {
-                    switch (textfieldName){
-                    case Strings.TextFieldTag.shared.email:
-                        return app.textFields[textfieldName]
-                    case Strings.TextFieldTag.shared.password:
-                        return app.secureTextFields[textfieldName]
-                    default:
-                        return nil
-                    }
-                }()
-                if textfield == nil {
-                    XCTFail("Couldn't find \"\(textfieldName)\" field")
-                    return
-                }
-                
-                XCTAssert(textfield?.value as? String == textfieldText, "\"\(textfieldName)\" field text should be \"\(textfield?.value)\"")
-                return
-            }
-            case .iTypeExpectValueStringInTheExpectValueStringTextField: When(definitionString) { args, userInfo in
-                guard let textfieldName = args?[1] as? String else { return }
-                guard let textfieldText = args?[0] as? String else { return }
-                let textfield = app.textFields[textfieldName]
-                textfield.tap()
-                textfield.typeText(textfieldText)
-                return
-            }
-            case .iTypeExpectValueStringInTheExpectValueStringSecureTextField: When(definitionString) { args, userInfo in
-                guard let textfieldName = args?[1] as? String else { return }
-                guard let textfieldText = args?[0] as? String else { return }
-                let textfield = app.secureTextFields[textfieldName]
-                textfield.tap()
-                textfield.typeText(textfieldText)
-                return
-            }
-                
-            case .iPressTheExpectValueStringButton: When(definitionString) { args, userInfo in
-                guard let buttonName = args?[0] as? String else { return }
-                let button = app.buttons[buttonName]
-                let link = app.links[buttonName]
-                
-                if button.exists(timeout: .medium) && button.isEnabled(timeout: .short) {
-                    button.tap()
-                } else if link.exists(timeout: .medium) && link.isEnabled(timeout: .short) {
-                    link.tap()
-                } else {
-                    XCTFail("I press Login button failed")
-                }
-                return
-            }
-            case .emailIsExpectValueString: Given(definitionString) { args, userInfo in
-                guard let email = args?[0] as? String else { return }
-                app.launchEnvironment["testEmail"] = email
-                return
-            }
-            default:
-                XCTFail("unrecognised test case.")
-            }
-            
-            let bundle = Bundle(for: CucumberishInitializer.self)
-            Cucumberish.executeFeatures(inDirectory: "Features", from: bundle, includeTags: nil, excludeTags: ["ignore"])
+        afterFinish {
+            applicationAdapter.tearDown()
         }
+        
+        
+        
+        for testCase in AppDefinitions.companion.allCases {
+            let definitionString = testCase.definition.definitionString
+            switch onEnum(of: testCase) {
+
+            case .crossPlatform(let crossPlatformTestCase):
+                switch onEnum(of: crossPlatformTestCase) {
+                case .iAmInScreen(_):
+                    Given(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformIAmInScreen(
+                            launchScreenName: nil,
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iPressTheButton(_):
+                    When(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformIPressTheButton(application: applicationAdapter, args: args).runAndGetAssertions()
+                        assertAll(assertions: assertions)
+                    }
+                case .iSeeButton(_):
+                    Then(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformISeeButton(
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iSeeScreen(_):
+                    Then(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformISeeScreen(
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iSeeText(_):
+                    Then(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformISeeText(
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iSeeTextFieldWithText(_):
+                    Then(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformISeeTextFieldWithText(
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iTypeTextIntoTextField(_):
+                    When(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformITypeTextIntoTextField(application: applicationAdapter, args: args).runAndGetAssertions()
+                        assertAll(assertions: assertions)
+                    }
+                case .setLoggedInUserEmail(_):
+                    Given(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformSetLoggedInUserEmail(application: applicationAdapter, args: args).runAndGetAssertions()
+                        assertAll(assertions: assertions)
+                    }
+                }
+            case .platform(let platformTestCase):
+                switch onEnum(of: platformTestCase) {
+                case .iSeeValueInScrollView(_):
+                    Then(definitionString) { args, userInfo in
+                        guard let scrollViewItemIndex = args?[0] as? String else { return }
+                        // Platform implementation
+                        app.descendants(matching: .any)
+                            .matching(identifier: Strings.ScrollViewTag.shared.homeScrollView)
+                            .element.swipeUp()
+                        let scrollItem = app.staticTexts[scrollViewItemIndex]
+                        XCTAssert(scrollItem.waitForExistence(timeout: 0.1))
+
+                        // Cross-platform implementation
+//                        let element = applicationAdapter.findView(tag: Strings.ScrollViewTag.shared.homeScrollView)
+//                        element.swipeUntilIndex(index: Int32(scrollViewItemIndex)!, velocity: 200.0)
+//                        let text = applicationAdapter.findView(tag: scrollViewItemIndex)
+//                        assertAll(assertions: [text.exists()])
+                    }
+                }
+            }
+        }
+        
+        let bundle = Bundle(for: CucumberishInitializer.self)
+        Cucumberish.executeFeatures(inDirectory: "Features", from: bundle, includeTags: nil, excludeTags: ["ignore"])
     }
 }
