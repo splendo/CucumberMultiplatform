@@ -1,5 +1,6 @@
 package com.corrado4eyes.cucumberplayground.viewModels.home
 
+import com.corrado4eyes.cucumberplayground.models.Strings
 import com.corrado4eyes.cucumberplayground.services.AuthService
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
 import kotlinx.coroutines.launch
@@ -10,8 +11,8 @@ class HomeViewModel : BaseLifecycleViewModel(), KoinComponent {
 
     private val authService: AuthService by inject()
 
-    val screenTitle = "Home screen"
-    val buttonTitle = "Logout"
+    val screenTitle = Strings.Screen.Title.home
+    val buttonTitle = Strings.Button.Text.logout
 
     fun getCurrentUser() = authService.getCurrentUserIfAny()!!
     val user = authService.getCurrentUserIfAny()!!

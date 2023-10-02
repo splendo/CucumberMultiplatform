@@ -2,10 +2,10 @@ Feature: Login
   Scenario: Login screen
     Given I am in the "Login" screen
     Then I see the "Email" textfield with text "Email"
-    Then I type "test@test.com" in the email field
-    Then I see the "Password" textfield with text "Password"
-    Then I type "1234" in the password field
-    Then I see the "Login" button
-    Then I press the login button
+    And I see the "Password" textfield with text "Password"
+    And I see the "Login" button
+    When I type "test@test.com" in the "Email" textfield
+    And I type "1234" in the "Password" secure textfield
+    And I press the "Login" button
     Then I see the "Home" screen
-    Then I see "test@test.com" text
+    And I see "test@test.com" text

@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 
 extension XCUIElement {
-    func exists(timeout: Timeout) -> Bool {
+    func exists(timeout: Timeout) ->  Bool {
         let predicate = NSPredicate(format: "exists == true")
         let expectation = XCTestCase().expectation(for: predicate, evaluatedWith: self)
         let result = XCTWaiter().wait(for: [expectation], timeout: timeout.rawValue)

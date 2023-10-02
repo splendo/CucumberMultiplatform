@@ -3,7 +3,7 @@ package com.corrado4eyes.cucumber
 typealias Scenario = CucumberDefinition.Descriptive.Example
 
 sealed interface Definition {
-    val regex: String
+    val definitionString: String
     sealed interface Descriptive : Definition {
 
         /**
@@ -17,7 +17,7 @@ sealed interface Definition {
          * Groups more scenerio that tests a similar flow with a certain rule
          */
         interface Rule : Descriptive {
-            override val regex: String
+            override val definitionString: String
         }
 
         /**
@@ -29,37 +29,17 @@ sealed interface Definition {
     }
 
     sealed interface Step : Definition {
-        override val regex: String
-        val lambda: GherkinLambda
+        override val definitionString: String
 
         interface Given : Step
-        interface GivenSingle : Step
-        interface GivenMultiple : Step
-
         interface When : Step
-        interface WhenSingle : Step
-        interface WhenMultiple : Step
-
         interface Then : Step
-        interface ThenSingle : Step
-        interface ThenMultiple : Step
     }
 }
 
-/**
- * Base class that takes care of taking a method to run on the initialization. The method is passed as parameter
- * instead of having it as an open method to be overriden to avoid calling a method in the base class init block while the
- * class that is extending it is probably partially initialized.
- */
-abstract class BaseCucumberDefinition(execute: () -> Unit) {
-    init {
-        execute()
-    }
-}
+sealed class CucumberDefinition(val definitionString: String) {
 
-sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): BaseCucumberDefinition(execute) {
-
-    sealed class Descriptive(regex: String) : Definition.Descriptive, CucumberDefinition(regex) {
+    sealed class Descriptive(definitionString: String) : Definition.Descriptive, CucumberDefinition(definitionString) {
 
         /**
          * Represents a whole feature to be described. It groups the other descriptive keywords.
@@ -69,7 +49,7 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         /**
          * Groups more scenerio that tests a similar flow with a certain rule
          */
-        class Rule(regex: String) : Definition.Descriptive.Rule, Descriptive(regex)
+        class Rule(definitionString: String) : Definition.Descriptive.Rule, Descriptive(definitionString)
 
         /**
          * Represents a Scenario, hence a group of steps.
@@ -77,93 +57,23 @@ sealed class CucumberDefinition(val regex: String, execute: () -> Unit = {}): Ba
         class Example(override val message: String) : Definition.Descriptive.Example,  Descriptive(message)
     }
 
-    sealed class Step(regex: String, execute: () -> Unit) : Definition.Step, CucumberDefinition(regex, execute) {
-        class Given(
-            regex: String,
-            override val lambda: GherkinLambda0
-        ) : Definition.Step.Given,
-            Step(
-                regex,
-                { given(regex, lambda) }
-            )
-        class GivenSingle(
-            regex: String,
-            override val lambda: GherkinLambda1
-        ) : Definition.Step.GivenSingle,
-            Step(
-                regex,
-                { given(regex, lambda) }
-            )
-        class GivenMultiple(
-            regex: String,
-            override val lambda: GherkinLambda2
-        ) : Definition.Step.GivenMultiple,
-            Step(
-                regex,
-                { given(regex, lambda) }
-            )
-        class When(
-            regex: String,
-            override val lambda: GherkinLambda0
-        ) : Definition.Step.When,
-            Step(
-                regex,
-                { `when`(regex, lambda) }
-            )
-        class WhenSingle(
-            regex: String,
-            override val lambda: GherkinLambda1
-        ) :  Definition.Step.WhenSingle,
-             Step(
-                 regex,
-                 { `when`(regex, lambda) }
-             )
-        class WhenMultiple(
-            regex: String,
-            override val lambda: GherkinLambda2
-        ) :  Definition.Step.WhenMultiple,
-             Step(
-                 regex,
-                 { `when`(regex, lambda) }
-             )
-        class Then(
-            regex: String,
-            override val lambda: GherkinLambda0
-        ) : Definition.Step.Then,
-            Step(
-                regex,
-                { then(regex, lambda) }
-            )
-        class ThenSingle(
-            regex: String,
-            override val lambda: GherkinLambda1
-        ) : Definition.Step.ThenSingle,
-            Step(
-                regex,
-                { then(regex, lambda) }
-            )
-        class ThenMultiple(
-            regex: String,
-            override val lambda: GherkinLambda2
-        ) : Definition.Step.ThenMultiple,
-            Step(
-                regex,
-                { then(regex, lambda) }
-            )
+    sealed class Step(definitionString: String) : Definition.Step, CucumberDefinition(definitionString) {
+        class Given(definitionString: String) : Definition.Step.Given, Step(definitionString)
+        class When(definitionString: String) : Definition.Step.When, Step(definitionString)
+        class Then(definitionString: String) : Definition.Step.Then, Step(definitionString)
     }
 
-    sealed class SubStep(regex: String) : CucumberDefinition(regex) {
-        class And(regex: String) : SubStep(regex)
+    sealed class SubStep(definitionString: String) : CucumberDefinition(definitionString) {
+        class And(definitionString: String) : SubStep(definitionString)
     }
 }
 
-interface GherkinTestCase<D: Definition, L: GherkinLambda> {
-    val step: D
-    val lambda: L
+interface GherkinTestCase<D: Definition> {
+    val definition: D
 }
 
 /**
- * How each platform represent an expected parameter in a regex.
+ * How each platform represent an expected parameter in a definitionString.
  */
 expect val EXPECT_VALUE_STRING: String
 
@@ -171,7 +81,7 @@ expect val EXPECT_VALUE_STRING: String
  * An interface that marks a class as a GherkingLambda, hence a lambda defined on each module that takes specific arguments, or a specific amount
  * of arguments and does some assertion on the views.
  *
- * On Android a step like Given or When will take a regex and an amount of arguments, while on iOS each step definition will always take a regex and a CCIStepBody.
+ * On Android a step like Given or When will take a definitionString and an amount of arguments, while on iOS each step definition will always take a definitionString and a CCIStepBody.
  * Therefore there will be multiple GherkinLambda to reflect how Android works.
  */
 interface GherkinLambda
@@ -202,44 +112,44 @@ expect class GherkinLambda2 : GherkinLambda
 /**
  * Method that wraps the given method that takes 0 parameters
  */
-expect fun given(regex: String, lambda: GherkinLambda0)
+expect fun given(definitionString: String, lambda: GherkinLambda0)
 
 /**
  * Method that wraps the given method that takes 1 parameter
  */
-expect fun given(regex: String, lambda: GherkinLambda1)
+expect fun given(definitionString: String, lambda: GherkinLambda1)
 
 /**
  * Method that wraps the Given method that takes 2 parameters
  */
-expect fun given(regex: String, lambda: GherkinLambda2)
+expect fun given(definitionString: String, lambda: GherkinLambda2)
 
 /**
  * Method that wraps the Then method that takes 0 parameters
  */
-expect fun then(regex: String, lambda: GherkinLambda0)
+expect fun then(definitionString: String, lambda: GherkinLambda0)
 
 /**
  * Method that wraps the Then method that takes 1 parameter
  */
-expect fun then(regex: String, lambda: GherkinLambda1)
+expect fun then(definitionString: String, lambda: GherkinLambda1)
 
 /**
  * Method that wraps the Then method that takes 2 parameters
  */
-expect fun then(regex: String, lambda: GherkinLambda2)
+expect fun then(definitionString: String, lambda: GherkinLambda2)
 
 /**
  * Method that wraps the When method that takes 0 parameters
  */
-expect fun `when`(regex: String, lambda: GherkinLambda0)
+expect fun `when`(definitionString: String, lambda: GherkinLambda0)
 
 /**
  * Method that wraps the Then method that takes 1 parameter
  */
-expect fun `when`(regex: String, lambda: GherkinLambda1)
+expect fun `when`(definitionString: String, lambda: GherkinLambda1)
 
 /**
  * Method that wraps the Then method that takes 2 parameters
  */
-expect fun `when`(regex: String, lambda: GherkinLambda2)
+expect fun `when`(definitionString: String, lambda: GherkinLambda2)
