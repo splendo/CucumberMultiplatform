@@ -55,19 +55,23 @@ actual class DefaultNode(
 
     override fun swipeUntilIndex(index: Int, velocity: Float?) {
         val listElement = listItemAt(index)
-        while (!listElement.isHittable()) {
+        var retries = 0
+        while (!listElement.isHittable() && retries < 25) {
             element.swipeUpWithVelocity(
                 velocity = velocity?.toDouble() ?: 20.0
             )
+            retries++
         }
     }
 
     override fun swipeUntilKey(key: Any, velocity: Float?) {
         val listElement = listItemWithTag(key.toString()).element
-        while (!listElement.isHittable()) {
+        var retries = 0
+        while (!listElement.isHittable() && retries < 25) {
             element.swipeUpWithVelocity(
                 velocity = velocity?.toDouble() ?: 20.0
             )
+            retries++
         }
     }
 

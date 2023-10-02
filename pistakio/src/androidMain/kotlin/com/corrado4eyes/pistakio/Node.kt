@@ -38,11 +38,21 @@ actual class DefaultNode(internal val node: SemanticsNodeInteraction) : Node {
     }
 
     override fun swipeUntilIndex(index: Int, velocity: Float?) {
-        node.performScrollToIndex(index)
+        try {
+            node.performScrollToIndex(index)
+        } catch (e: IllegalArgumentException) {
+            // catch error thrown if the index is out of bounds.
+            // test should fail on the visibility assertion
+        }
     }
 
     override fun swipeUntilKey(key: Any, velocity: Float?) {
-        node.performScrollToKey(key)
+        try {
+            node.performScrollToKey(key)
+        } catch (e: IllegalArgumentException) {
+            // catch error thrown if the index is out of bounds.
+            // test should fail on the visibility assertion
+        }
     }
 
     override fun swipeUp() {
