@@ -50,16 +50,55 @@ interface Node {
      */
     fun isHintEqualTo(value: String, contains: Boolean): AssertionResult
 
+    /**
+     * Does a swipeUp action on an element.
+     */
+
     fun swipeUp()
+    /**
+     * Does a swipeUp action for a given [SwipeDuration] duration.
+     * @param swipeDuration The duration of the swipe.
+     */
     fun swipeUp(swipeDuration: SwipeDuration)
+
+    /**
+     * Does a swipeUp action from [startY] to [endY] coordinates on the view.
+     * @param startY Start coordinate
+     * @param endY End coordinate
+     */
     fun swipeUp(startY: Float, endY: Float)
 
+    /**
+     * Does a swipeDown action on an element.
+     */
     fun swipeDown()
+
+    /**
+     * Does a swipeDown action for a given [SwipeDuration] duration.
+     * @param swipeDuration The duration of the swipe.
+     */
     fun swipeDown(swipeDuration: SwipeDuration)
+
+    /**
+     * Does a swipeDown action from [startY] to [endY] coordinates on the view.
+     * @param startY Start coordinate
+     * @param endY End coordinate
+     */
     fun swipeDown(startY: Float, endY: Float)
 
 
+    /**
+     * Swipe the [Node] until the View with the given index is visible.
+     * @param index Index of the view inside a scrollable view
+     * @param velocity Speed of the swiping action
+     */
     fun swipeUntilIndex(index: Int, velocity: Float? = null)
+
+    /**
+     * Swipe the [Node] until the View with the given key is visible.
+     * @param index Index of the view inside a scrollable view
+     * @param velocity Speed of the swiping action
+     */
     fun swipeUntilKey(key: Any, velocity: Float? = null)
 
 //    fun doubleTap()

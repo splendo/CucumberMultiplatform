@@ -36,8 +36,22 @@ interface ApplicationAdapter {
      */
     val applicationArguments: ApplicationArguments
 
+    /**
+     * Launches the app on the given [identifier] and with the given [arguments]
+     * @param identifier On android it represents the name of the Activity.
+     * @param arguments A map passed to the Activity intent or on iOS the ProcessInfo.processInfo.environment.
+     */
     fun launch(identifier: String? = null, arguments: Map<String, String>)
+
+    /**
+     * Returns a [Node] of an element with the given [tag]
+     * @param tag Tag or text of a UI element.
+     */
     fun findView(tag: String): Node
+
+    /**
+     * Method to be called when you want to tear down the app.
+     */
     fun tearDown()
 
     fun assert(assertionResult: AssertionResult)
