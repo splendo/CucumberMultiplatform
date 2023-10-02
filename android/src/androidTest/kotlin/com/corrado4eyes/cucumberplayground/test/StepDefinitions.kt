@@ -5,7 +5,6 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollToIndex
-import androidx.test.core.app.ActivityScenario
 import com.corrado4eyes.cucumberplayground.models.Strings
 import com.corrado4eyes.cucumbershared.tests.AppDefinitions
 import com.corrado4eyes.pistakio.DefaultApplicationAdapter
@@ -15,10 +14,6 @@ import org.junit.Rule
 
 @WithJunitRule
 class StepDefinitions : En {
-
-    private val arguments = mutableMapOf<String, String>()
-    private var scenario: ActivityScenario<*>? = null
-
     @get:Rule(order = 0)
     val testRule = createComposeRule()
     private val application = DefaultApplicationAdapter(testRule)
@@ -65,11 +60,18 @@ class StepDefinitions : En {
                 }
 
                 is AppDefinitions.Platform.ISeeValueInScrollView -> When(definitionString) { index: String ->
+
+                    // Platform implementation
                     testRule
                         .onNodeWithTag(Strings.ScrollView.Tag.homeScrollView)
                         .performScrollToIndex(index.toInt())
 
                     testRule.onNodeWithText(index).assertIsDisplayed()
+
+                    // Cross-platform implementation
+//                    val element = application.findView(Strings.ScrollView.Tag.homeScrollView)
+//                    element.swipeUntilIndex(index.toInt())
+//                    application.assert(element.isVisible())
                 }
             }
         }
