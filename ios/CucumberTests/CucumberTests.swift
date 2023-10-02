@@ -107,11 +107,18 @@ import Cucumberish
                 case .iSeeValueInScrollView(_):
                     Then(definitionString) { args, userInfo in
                         guard let scrollViewItemIndex = args?[0] as? String else { return }
+                        // Platform implementation
                         app.descendants(matching: .any)
                             .matching(identifier: Strings.ScrollViewTag.shared.homeScrollView)
                             .element.swipeUp()
                         let scrollItem = app.staticTexts[scrollViewItemIndex]
                         XCTAssert(scrollItem.waitForExistence(timeout: 0.1))
+
+                        // Cross-platform implementation
+//                        let element = applicationAdapter.findView(tag: Strings.ScrollViewTag.shared.homeScrollView)
+//                        element.swipeUntilIndex(index: Int32(scrollViewItemIndex)!, velocity: 200.0)
+//                        let text = applicationAdapter.findView(tag: scrollViewItemIndex)
+//                        assertAll(assertions: [text.exists()])
                     }
                 }
             }

@@ -58,7 +58,6 @@ class StepDefinitions : En {
                 is AppDefinitions.CrossPlatform.SetLoggedInUserEmail -> Given(definitionString) { loggedInEmail: String ->
                     application.assertAll(AppDefinitions.CrossPlatform.SetLoggedInUserEmail(application, listOf(loggedInEmail)).runAndGetAssertions())
                 }
-
                 is AppDefinitions.Platform.ISeeValueInScrollView -> When(definitionString) { index: String ->
 
                     // Platform implementation
@@ -71,8 +70,10 @@ class StepDefinitions : En {
                     // Cross-platform implementation
 //                    val element = application.findView(Strings.ScrollView.Tag.homeScrollView)
 //                    element.swipeUntilIndex(index.toInt())
-//                    application.assert(element.isVisible())
+//                    val text = application.findView(index)
+//                    application.assert(text.isVisible())
                 }
+
             }
         }
     }
