@@ -32,79 +32,92 @@ import Cucumberish
             applicationAdapter.tearDown()
         }
         
-        for test in Definitions.companion.allCases {
-            let definitionString = test.definition.definitionString
-            switch test {
-            case .iAmInTheExpectValueStringScreen: Given(definitionString) { args, userInfo in
-                let assertions = AppDefinitions.CrossPlatformIAmInScreen(
-                    launchScreenName: nil,
-                    application: applicationAdapter,
-                    args: args
-                ).runAndGetAssertions()
-                
-                assertAll(assertions: assertions)
+        
+        
+        for testCase in AppDefinitions.companion.allCases {
+            let definitionString = testCase.definition.definitionString
+            switch onEnum(of: testCase) {
+
+            case .crossPlatform(let crossPlatformTestCase):
+                switch onEnum(of: crossPlatformTestCase) {
+                case .iAmInScreen(_):
+                    Given(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformIAmInScreen(
+                            launchScreenName: nil,
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iPressTheButton(_):
+                    When(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformIPressTheButton(application: applicationAdapter, args: args).runAndGetAssertions()
+                        assertAll(assertions: assertions)
+                    }
+                case .iSeeButton(_):
+                    Then(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformISeeButton(
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iSeeScreen(_):
+                    Then(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformISeeScreen(
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iSeeText(_):
+                    Then(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformISeeText(
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iSeeTextFieldWithText(_):
+                    Then(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformISeeTextFieldWithText(
+                            application: applicationAdapter,
+                            args: args
+                        ).runAndGetAssertions()
+
+                        assertAll(assertions: assertions)
+                    }
+                case .iTypeTextIntoTextField(_):
+                    When(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformITypeTextIntoTextField(application: applicationAdapter, args: args).runAndGetAssertions()
+                        assertAll(assertions: assertions)
+                    }
+                case .setLoggedInUserEmail(_):
+                    Given(definitionString) { args, userInfo in
+                        let assertions = AppDefinitions.CrossPlatformSetLoggedInUserEmail(application: applicationAdapter, args: args).runAndGetAssertions()
+                        assertAll(assertions: assertions)
+                    }
+                }
+            case .platform(let platformTestCase):
+                switch onEnum(of: platformTestCase) {
+                case .iSeeValueInScrollView(_):
+                    Then(definitionString) { args, userInfo in
+                        guard let scrollViewItemIndex = args?[0] as? String else { return }
+                        app.descendants(matching: .any)
+                            .matching(identifier: Strings.ScrollViewTag.shared.homeScrollView)
+                            .element.swipeUp()
+                        let scrollItem = app.staticTexts[scrollViewItemIndex]
+                        XCTAssert(scrollItem.waitForExistence(timeout: 0.1))
+                    }
+                }
             }
-            case .iSeeExpectValueStringText: Then(definitionString) { args, userInfo in
-                let assertions = AppDefinitions.CrossPlatformISeeText(
-                    application: applicationAdapter,
-                    args: args
-                ).runAndGetAssertions()
-                
-                assertAll(assertions: assertions)
-            }
-            case .iSeeTheExpectValueStringButton: Then(definitionString) { args, userInfo in
-                let assertions = AppDefinitions.CrossPlatformISeeButton(
-                    application: applicationAdapter,
-                    args: args
-                ).runAndGetAssertions()
-                
-                assertAll(assertions: assertions)
-            }
-            case .iSeeTheExpectValueStringScreen: Then(definitionString) { args, userInfo in
-                let assertions = AppDefinitions.CrossPlatformISeeScreen(
-                    application: applicationAdapter,
-                    args: args
-                ).runAndGetAssertions()
-                
-                assertAll(assertions: assertions)
-            }
-            case .iSeeTheExpectValueStringTextFieldWithTextExpectValueString: Then(definitionString) { args, userInfo in
-                let assertions = AppDefinitions.CrossPlatformISeeTextFieldWithText(
-                    application: applicationAdapter,
-                    args: args
-                ).runAndGetAssertions()
-                
-                assertAll(assertions: assertions)
-            }
-            case .iTypeExpectValueStringInTheExpectValueStringTextField: When(definitionString) { args, userInfo in
-                let assertions = AppDefinitions.CrossPlatformITypeTextIntoTextField(application: applicationAdapter, args: args).runAndGetAssertions()
-                assertAll(assertions: assertions)
-            }
-                
-            case .iPressTheExpectValueStringButton: When(definitionString) { args, userInfo in
-                let assertions = AppDefinitions.CrossPlatformIPressTheButton(application: applicationAdapter, args: args).runAndGetAssertions()
-                assertAll(assertions: assertions)
-            }
-            case .emailIsExpectValueString: Given(definitionString) { args, userInfo in
-                let assertions = AppDefinitions.CrossPlatformSetLoggedInUserEmail(application: applicationAdapter, args: args).runAndGetAssertions()
-                assertAll(assertions: assertions)
-            }
-            case .iSeeExpectValueStringInTheScrollview: Then(definitionString) { args, userInfo in
-                guard let scrollViewItemIndex = args?[0] as? String else { return }
-                app.descendants(matching: .any)
-                    .matching(identifier: Strings.ScrollViewTag.shared.homeScrollView)
-                    .element.swipeUp()
-                let scrollItem = app.staticTexts[scrollViewItemIndex]
-                XCTAssert(scrollItem.waitForExistence(timeout: 0.1))
-            }
-                
-            
-            default:
-                XCTFail("unrecognised test case.")
-            }
-            
-            let bundle = Bundle(for: CucumberishInitializer.self)
-            Cucumberish.executeFeatures(inDirectory: "Features", from: bundle, includeTags: nil, excludeTags: ["ignore"])
         }
+        
+        let bundle = Bundle(for: CucumberishInitializer.self)
+        Cucumberish.executeFeatures(inDirectory: "Features", from: bundle, includeTags: nil, excludeTags: ["ignore"])
     }
 }

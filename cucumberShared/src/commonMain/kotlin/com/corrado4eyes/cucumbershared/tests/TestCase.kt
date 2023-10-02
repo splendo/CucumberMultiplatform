@@ -3,50 +3,71 @@ package com.corrado4eyes.cucumbershared.tests
 import com.corrado4eyes.cucumber.CucumberDefinition
 import com.corrado4eyes.cucumber.Definition
 import com.corrado4eyes.cucumber.EXPECT_VALUE_STRING
-import com.corrado4eyes.cucumber.GherkinTestCase
 import com.corrado4eyes.cucumberplayground.models.Strings
 import com.corrado4eyes.pistakio.ApplicationAdapter
+import com.corrado4eyes.pistakio.ApplicationArguments
 import com.corrado4eyes.pistakio.AssertionResult
+import com.corrado4eyes.pistakio.Node
 import com.corrado4eyes.pistakio.TestCase
 import com.corrado4eyes.pistakio.TimeoutDuration
 import com.corrado4eyes.pistakio.errors.UIElementException
 
-enum class Definitions(override val definition: Definition): GherkinTestCase<Definition> {
-    I_AM_IN_THE_EXPECT_VALUE_STRING_SCREEN(
-        CucumberDefinition.Step.Given("I am in the $EXPECT_VALUE_STRING screen")
-    ),
-    I_SEE_EXPECT_VALUE_STRING_TEXT(
-        CucumberDefinition.Step.Then("I see $EXPECT_VALUE_STRING text")
-    ),
-    I_SEE_THE_EXPECT_VALUE_STRING_BUTTON(
-        CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING button")
-    ),
-    I_SEE_THE_EXPECT_VALUE_STRING_SCREEN(
-        CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING screen")
-    ),
-    I_SEE_THE_EXPECT_VALUE_STRING_TEXT_FIELD_WITH_TEXT_EXPECT_VALUE_STRING(
-        CucumberDefinition.Step.Then("I see the $EXPECT_VALUE_STRING textfield with text $EXPECT_VALUE_STRING")
-    ),
-    I_TYPE_EXPECT_VALUE_STRING_IN_THE_EXPECT_VALUE_STRING_TEXT_FIELD(
-        CucumberDefinition.Step.When("I type $EXPECT_VALUE_STRING in the $EXPECT_VALUE_STRING textfield")
-    ),
-    I_PRESS_THE_EXPECT_VALUE_STRING_BUTTON(
-        CucumberDefinition.Step.When("I press the $EXPECT_VALUE_STRING button")
-    ),
-    EMAIL_IS_EXPECT_VALUE_STRING(
-        CucumberDefinition.Step.Given("Email is $EXPECT_VALUE_STRING")
-    ),
-    I_SEE_EXPECT_VALUE_STRING_IN_THE_SCROLLVIEW(
-        CucumberDefinition.Step.Then("I see $EXPECT_VALUE_STRING in the scrollview")
-    );
-
-    companion object {
-        val allCases: List<Definitions> = Definitions.values().toList()
-    }
-}
-
 sealed class AppDefinitions : TestCase {
     abstract val definition: Definition
+
+    companion object {
+        val defaultApplicationAdapter = object : ApplicationAdapter {
+            override val applicationArguments: ApplicationArguments
+                get() = TODO("Not yet implemented")
+
+            override fun launch(identifier: String?, arguments: Map<String, String>) {
+                TODO("Not yet implemented")
+            }
+
+            override fun findView(tag: String): Node {
+                TODO("Not yet implemented")
+            }
+
+            override fun tearDown() {
+                TODO("Not yet implemented")
+            }
+
+            override fun assert(assertionResult: AssertionResult) {
+                TODO("Not yet implemented")
+            }
+
+            override fun assertUntil(
+                timeout: TimeoutDuration,
+                blockAssertionResult: () -> AssertionResult
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun assertAll(assertions: List<AssertionResult>) {
+                TODO("Not yet implemented")
+            }
+
+            override fun get(key: String): String? {
+                TODO("Not yet implemented")
+            }
+
+            override fun set(key: String, value: String) {
+                TODO("Not yet implemented")
+            }
+        }
+
+        val allCases = listOf(
+            CrossPlatform.IAmInScreen("", defaultApplicationAdapter, listOf()),
+            CrossPlatform.IPressTheButton(defaultApplicationAdapter, listOf()),
+            CrossPlatform.ISeeButton(defaultApplicationAdapter, listOf()),
+            CrossPlatform.ISeeScreen(defaultApplicationAdapter, listOf()),
+            CrossPlatform.ISeeText(defaultApplicationAdapter, listOf()),
+            CrossPlatform.ISeeTextFieldWithText(defaultApplicationAdapter, listOf()),
+            CrossPlatform.ITypeTextIntoTextField(defaultApplicationAdapter, listOf()),
+            CrossPlatform.SetLoggedInUserEmail(defaultApplicationAdapter, listOf()),
+            Platform.ISeeValueInScrollView
+        )
+    }
 
     sealed class CrossPlatform(
         protected val application: ApplicationAdapter,
@@ -210,7 +231,7 @@ sealed class AppDefinitions : TestCase {
     }
 
     sealed class Platform : TestCase.Platform, AppDefinitions() {
-        class ISeeValueInScrollView : Platform() {
+        object ISeeValueInScrollView : Platform() {
             override val definition: Definition = CucumberDefinition.Step.Then(
                 "I see $EXPECT_VALUE_STRING in the scrollview"
             )
