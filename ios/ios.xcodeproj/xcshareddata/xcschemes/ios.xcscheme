@@ -52,6 +52,56 @@
                BlueprintName = "CucumberTests"
                ReferencedContainer = "container:ios.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "CCIHome1">
+               </Test>
+               <Test
+                  Identifier = "CCIHome11">
+               </Test>
+               <Test
+                  Identifier = "CCIHome111">
+               </Test>
+               <Test
+                  Identifier = "CCIHome1111">
+               </Test>
+               <Test
+                  Identifier = "CCIHome11111">
+               </Test>
+               <Test
+                  Identifier = "CCIHome111111">
+               </Test>
+               <Test
+                  Identifier = "CCIHome1111111">
+               </Test>
+               <Test
+                  Identifier = "CCIHome11111111">
+               </Test>
+               <Test
+                  Identifier = "CCILogin1">
+               </Test>
+               <Test
+                  Identifier = "CCILogin11">
+               </Test>
+               <Test
+                  Identifier = "CCILogin111">
+               </Test>
+               <Test
+                  Identifier = "CCILogin1111">
+               </Test>
+               <Test
+                  Identifier = "CCILogin11111">
+               </Test>
+               <Test
+                  Identifier = "CCILogin111111">
+               </Test>
+               <Test
+                  Identifier = "CCILogin1111111">
+               </Test>
+               <Test
+                  Identifier = "CCILogin11111111">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

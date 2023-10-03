@@ -7,7 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollToIndex
 import com.corrado4eyes.cucumberplayground.models.Strings
 import com.corrado4eyes.cucumbershared.tests.AppDefinitions
-import com.corrado4eyes.pistakio.DefaultApplicationAdapter
+import com.splendo.kilka.DefaultApplicationAdapter
 import io.cucumber.java8.En
 import io.cucumber.junit.WithJunitRule
 import org.junit.Rule

@@ -52,8 +52,6 @@ dependencies {
     val kalugaVersion: String by project
 
     implementation(project(":shared"))
-    implementation(project(":cucumber"))
-    implementation(project(":pistakio"))
     implementation("androidx.compose.ui:ui:1.4.3")
     implementation("androidx.compose.ui:ui-tooling:1.4.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
@@ -63,6 +61,7 @@ dependencies {
 
     androidTestImplementation(kotlin("test"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+    androidTestImplementation("com.splendo.kilka:kilka:0.1.0")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$1.4.3")
 
     implementation("com.splendo.kaluga:architecture-compose:$kalugaVersion")

@@ -1,22 +1,24 @@
 package com.corrado4eyes.cucumbershared.tests
 
-import com.corrado4eyes.cucumber.CucumberDefinition
-import com.corrado4eyes.cucumber.Definition
-import com.corrado4eyes.cucumber.EXPECT_VALUE_STRING
+import co.touchlab.skie.configuration.annotations.SealedInterop
 import com.corrado4eyes.cucumberplayground.models.Strings
-import com.corrado4eyes.pistakio.ApplicationAdapter
-import com.corrado4eyes.pistakio.ApplicationArguments
-import com.corrado4eyes.pistakio.AssertionResult
-import com.corrado4eyes.pistakio.Node
-import com.corrado4eyes.pistakio.TestCase
-import com.corrado4eyes.pistakio.TimeoutDuration
-import com.corrado4eyes.pistakio.errors.UIElementException
+import com.splendo.cucumber.CucumberDefinition
+import com.splendo.cucumber.Definition
+import com.splendo.cucumber.EXPECT_VALUE_STRING
+import com.splendo.kilka.ApplicationAdapter
+import com.splendo.kilka.ApplicationArguments
+import com.splendo.kilka.AssertionResult
+import com.splendo.kilka.Node
+import com.splendo.kilka.TestCase
+import com.splendo.kilka.TimeoutDuration
+import com.splendo.kilka.errors.UIElementException
 
+@SealedInterop.Enabled
 sealed class AppDefinitions : TestCase {
     abstract val definition: Definition
 
     companion object {
-        val defaultApplicationAdapter = object : ApplicationAdapter {
+        private val defaultApplicationAdapter = object : ApplicationAdapter {
             override val applicationArguments: ApplicationArguments
                 get() = TODO("Not yet implemented")
 
@@ -69,6 +71,7 @@ sealed class AppDefinitions : TestCase {
         )
     }
 
+    @SealedInterop.Enabled
     sealed class CrossPlatform(
         protected val application: ApplicationAdapter,
         args: List<String>?
@@ -230,6 +233,7 @@ sealed class AppDefinitions : TestCase {
         }
     }
 
+    @SealedInterop.Enabled
     sealed class Platform : TestCase.Platform, AppDefinitions() {
         object ISeeValueInScrollView : Platform() {
             override val definition: Definition = CucumberDefinition.Step.Then(
