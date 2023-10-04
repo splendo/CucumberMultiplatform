@@ -96,7 +96,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.corrado4eyes.cucumberplayground"
+    namespace = "com.splendo.cucumberplayground"
     compileSdk = 33
     defaultConfig {
         minSdk = 29

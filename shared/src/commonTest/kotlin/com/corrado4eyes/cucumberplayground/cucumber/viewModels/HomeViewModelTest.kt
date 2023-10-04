@@ -1,10 +1,10 @@
-package com.corrado4eyes.cucumberplayground.cucumber.viewModels
+package com.splendo.cucumberplayground.cucumber.viewModels
 
-import com.corrado4eyes.cucumberplayground.cucumber.login.AuthServiceMock
-import com.corrado4eyes.cucumberplayground.cucumber.login.DummyUsers.defaultTestUser
-import com.corrado4eyes.cucumberplayground.models.Strings
-import com.corrado4eyes.cucumberplayground.services.AuthService
-import com.corrado4eyes.cucumberplayground.viewModels.home.HomeViewModel
+import com.splendo.cucumberplayground.cucumber.login.AuthServiceMock
+import com.splendo.cucumberplayground.cucumber.login.DummyUsers.defaultTestUser
+import com.splendo.cucumberplayground.models.Strings
+import com.splendo.cucumberplayground.services.AuthService
+import com.splendo.cucumberplayground.viewModels.home.HomeViewModel
 import com.splendo.kaluga.test.base.yieldMultiple
 import com.splendo.kaluga.test.koin.KoinUIThreadViewModelTest
 import kotlin.test.Test

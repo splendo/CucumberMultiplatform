@@ -1,8 +1,8 @@
-package com.corrado4eyes.cucumberplayground.viewModels.main
+package com.splendo.cucumberplayground.viewModels.main
 
-import com.corrado4eyes.cucumberplayground.models.TestConfiguration
-import com.corrado4eyes.cucumberplayground.models.User
-import com.corrado4eyes.cucumberplayground.services.AuthService
+import com.splendo.cucumberplayground.models.TestConfiguration
+import com.splendo.cucumberplayground.models.User
+import com.splendo.cucumberplayground.services.AuthService
 import com.splendo.kaluga.architecture.observable.toInitializedObservable
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

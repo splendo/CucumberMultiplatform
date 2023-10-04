@@ -1,12 +1,12 @@
-package com.corrado4eyes.cucumberplayground.test
+package com.splendo.cucumberplayground.test
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollToIndex
-import com.corrado4eyes.cucumberplayground.models.Strings
-import com.corrado4eyes.cucumbershared.tests.AppDefinitions
+import com.splendo.cucumberplayground.models.Strings
+import com.splendo.cucumbershared.tests.AppDefinitions
 import com.splendo.kilka.DefaultApplicationAdapter
 import io.cucumber.java8.En
 import io.cucumber.junit.WithJunitRule

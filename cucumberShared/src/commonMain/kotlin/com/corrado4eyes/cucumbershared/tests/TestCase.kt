@@ -1,7 +1,7 @@
-package com.corrado4eyes.cucumbershared.tests
+package com.splendo.cucumbershared.tests
 
 import co.touchlab.skie.configuration.annotations.SealedInterop
-import com.corrado4eyes.cucumberplayground.models.Strings
+import com.splendo.cucumberplayground.models.Strings
 import com.splendo.cucumber.CucumberDefinition
 import com.splendo.cucumber.Definition
 import com.splendo.cucumber.EXPECT_VALUE_STRING

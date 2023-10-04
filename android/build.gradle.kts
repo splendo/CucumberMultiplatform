@@ -4,17 +4,17 @@ plugins {
 }
 
 android {
-    namespace = "com.corrado4eyes.cucumberplayground.android"
+    namespace = "com.splendo.cucumberplayground.android"
     compileSdk = 33
     defaultConfig {
-        applicationId = "com.corrado4eyes.cucumberplayground.android"
+        applicationId = "com.splendo.cucumberplayground.android"
         minSdk = 29
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
-        testApplicationId = "com.corrado4eyes.cucumberplayground.test"
-        testInstrumentationRunner = "com.corrado4eyes.cucumberplayground.test.CucumberTests"
+        testApplicationId = "com.splendo.cucumberplayground.test"
+        testInstrumentationRunner = "com.splendo.cucumberplayground.test.CucumberTests"
     }
 
     buildFeatures {

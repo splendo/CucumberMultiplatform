@@ -1,8 +1,8 @@
-package com.corrado4eyes.cucumberplayground.cucumber.viewModels
+package com.splendo.cucumberplayground.cucumber.viewModels
 
-import com.corrado4eyes.cucumberplayground.cucumber.login.AuthServiceMock
-import com.corrado4eyes.cucumberplayground.services.AuthService
-import com.corrado4eyes.cucumberplayground.viewModels.login.LoginViewModel
+import com.splendo.cucumberplayground.cucumber.login.AuthServiceMock
+import com.splendo.cucumberplayground.services.AuthService
+import com.splendo.cucumberplayground.viewModels.login.LoginViewModel
 import com.splendo.kaluga.test.koin.KoinUIThreadViewModelTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

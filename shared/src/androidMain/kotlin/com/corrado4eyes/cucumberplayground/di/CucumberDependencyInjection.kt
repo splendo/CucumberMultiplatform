@@ -1,11 +1,11 @@
 @file:JvmName("AndroidDependencyInjection")
 
-package com.corrado4eyes.cucumberplayground.di
+package com.splendo.cucumberplayground.di
 
-import com.corrado4eyes.cucumberplayground.models.TestConfiguration
-import com.corrado4eyes.cucumberplayground.viewModels.home.HomeViewModel
-import com.corrado4eyes.cucumberplayground.viewModels.login.LoginViewModel
-import com.corrado4eyes.cucumberplayground.viewModels.main.MainViewModel
+import com.splendo.cucumberplayground.models.TestConfiguration
+import com.splendo.cucumberplayground.viewModels.home.HomeViewModel
+import com.splendo.cucumberplayground.viewModels.login.LoginViewModel
+import com.splendo.cucumberplayground.viewModels.main.MainViewModel
 import com.splendo.kaluga.base.ApplicationHolder
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext

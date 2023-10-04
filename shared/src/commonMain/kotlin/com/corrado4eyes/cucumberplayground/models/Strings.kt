@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumberplayground.models
+package com.splendo.cucumberplayground.models
 
 object Strings {
     object Screen {

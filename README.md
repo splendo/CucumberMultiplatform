@@ -103,7 +103,7 @@ While the Android implementation will be split into 2+ files. A test runner file
 @RunWith(Cucumber::class)
 @CucumberOptions(
     features = ["features"],
-    glue = ["com.corrado4eyes.cucumberplayground.test"]
+    glue = ["com.splendo.cucumberplayground.test"]
 )
 class TestRunner : CucumberAndroidJUnitRunner()
 ```

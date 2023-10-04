@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumberplayground.android.login
+package com.splendo.cucumberplayground.android.login
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
@@ -14,8 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import com.corrado4eyes.cucumberplayground.models.Strings
-import com.corrado4eyes.cucumberplayground.viewModels.login.LoginViewModel
+import com.splendo.cucumberplayground.models.Strings
+import com.splendo.cucumberplayground.viewModels.login.LoginViewModel
 import com.splendo.kaluga.architecture.compose.state
 import com.splendo.kaluga.architecture.compose.viewModel.ViewModelComposable
 import com.splendo.kaluga.architecture.observable.StateFlowInitializedSubject

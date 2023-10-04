@@ -580,7 +580,7 @@
 					"-framework",
 					shared,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.corrado4eyes.CucumberTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.splendo.CucumberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CucumberTests/CucumberTests-Bridging-Header.h";
@@ -620,7 +620,7 @@
 					"-framework",
 					shared,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.corrado4eyes.CucumberTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.splendo.CucumberTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "CucumberTests/CucumberTests-Bridging-Header.h";

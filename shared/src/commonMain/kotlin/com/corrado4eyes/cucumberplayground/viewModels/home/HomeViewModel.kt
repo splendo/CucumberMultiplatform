@@ -1,7 +1,7 @@
-package com.corrado4eyes.cucumberplayground.viewModels.home
+package com.splendo.cucumberplayground.viewModels.home
 
-import com.corrado4eyes.cucumberplayground.models.Strings
-import com.corrado4eyes.cucumberplayground.services.AuthService
+import com.splendo.cucumberplayground.models.Strings
+import com.splendo.cucumberplayground.services.AuthService
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent

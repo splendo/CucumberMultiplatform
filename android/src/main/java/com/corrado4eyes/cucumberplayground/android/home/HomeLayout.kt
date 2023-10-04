@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumberplayground.android.home
+package com.splendo.cucumberplayground.android.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.corrado4eyes.cucumberplayground.models.Strings
-import com.corrado4eyes.cucumberplayground.viewModels.home.HomeViewModel
+import com.splendo.cucumberplayground.models.Strings
+import com.splendo.cucumberplayground.viewModels.home.HomeViewModel
 import com.splendo.kaluga.architecture.compose.viewModel.ViewModelComposable
 import org.koin.androidx.compose.koinViewModel
 

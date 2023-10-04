@@ -1,7 +1,7 @@
-package com.corrado4eyes.cucumberplayground.services
+package com.splendo.cucumberplayground.services
 
-import com.corrado4eyes.cucumberplayground.models.User
-import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
+import com.splendo.cucumberplayground.models.User
+import com.splendo.cucumberplayground.login.model.AuthResponse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

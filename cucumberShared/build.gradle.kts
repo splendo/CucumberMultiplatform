@@ -77,7 +77,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.corrado4eyes.cucumbershared"
+    namespace = "com.splendo.cucumbershared"
     compileSdk = 33
     defaultConfig {
         minSdk = 29
