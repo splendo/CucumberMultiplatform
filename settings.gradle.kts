@@ -19,3 +19,5 @@ rootProject.name = "CucumberPlayground"
 include(":android")
 include(":shared")
 include(":cucumberShared")
+
+includeBuild("dependencies/kaluga-uitest")
