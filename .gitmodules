@@ -4,3 +4,6 @@
 [submodule "dependencies/kaluga-uitest"]
 	path = dependencies/kaluga-uitest
 	url = git@github.com:splendo/kaluga-uitest.git
+[submodule "dependencies/kaluga-cucumber"]
+	path = dependencies/kaluga-cucumber
+	url = git@github.com:splendo/kaluga-cucumber.git
