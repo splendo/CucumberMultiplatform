@@ -21,3 +21,4 @@ include(":shared")
 include(":cucumberShared")
 
 includeBuild("dependencies/kaluga-uitest")
+includeBuild("dependencies/kaluga-cucumber")

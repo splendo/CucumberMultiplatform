@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "com.splendo.cucumberplayground.android"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.splendo.cucumberplayground.android"
         minSdk = 29
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -52,17 +52,16 @@ dependencies {
     val kalugaVersion: String by project
 
     implementation(project(":shared"))
-    implementation("androidx.compose.ui:ui:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
-    implementation("androidx.compose.foundation:foundation:1.4.3")
-    implementation("androidx.compose.material:material:1.4.3")
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.compose.ui:ui:1.5.3")
+    implementation("androidx.compose.ui:ui-tooling:1.5.3")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
+    implementation("androidx.compose.foundation:foundation:1.5.3")
+    implementation("androidx.compose.material:material:1.5.3")
+    implementation("androidx.activity:activity-compose:1.8.0")
 
     androidTestImplementation(kotlin("test"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-    androidTestImplementation("com.splendo.kilka:kilka:0.1.0")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:$1.4.3")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.3")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.3")
 
     implementation("com.splendo.kaluga:architecture-compose:$kalugaVersion")
     implementation("com.splendo.kaluga:resources-compose:$kalugaVersion")
@@ -73,5 +72,5 @@ dependencies {
     // TODO figure out how it can be updated without breeaking the project
     androidTestImplementation("io.cucumber:cucumber-java8:4.8.1")
 
-    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.4")
 }
