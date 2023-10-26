@@ -41,15 +41,14 @@ struct LoginView: SwiftUI.View {
                 VStack {
                     TextField(viewModel.emailPlaceholder, text: $emailText.value)
                         .autocapitalization(.none)
-                        .accessibilityLabel(viewModel.emailPlaceholder)
+                        .accessibilityLabel(Strings.TextFieldTag.shared.email)
                     Text(emailErrorText.value)
                         .foregroundColor(Color.red)
                     SecureField(viewModel.passwordPlaceholder, text: $passwordText.value)
                         .autocapitalization(.none)
-                        .accessibilityLabel(viewModel.passwordPlaceholder)
+                        .accessibilityLabel(Strings.TextFieldTag.shared.password)
                     Text(passwordErrorText.value)
                         .foregroundColor(Color.red)
-                    
                     Text(formFooterErrorText.value)
                         .foregroundColor(Color.red)
                     
@@ -61,12 +60,13 @@ struct LoginView: SwiftUI.View {
                         Text(viewModel.buttonTitle)
                     }
                     .disabled(!isButtonEnabled.value)
-                    .accessibilityLabel(viewModel.buttonTitle)
+                    .accessibilityLabel(Strings.ButtonTag.shared.login)
                     Spacer()
                 }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Text(viewModel.screenTitle)
+                            .accessibilityLabel(Strings.ScreenTag.shared.login)
                     }
                 }.navigationBarTitleDisplayMode(.inline)
             }

@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumberplayground.android
+package com.splendo.cucumberplayground.android
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

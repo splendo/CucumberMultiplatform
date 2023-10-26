@@ -1,1 +1,1 @@
-package com.corrado4eyes.cucumbershared
+package com.splendo.cucumbershared

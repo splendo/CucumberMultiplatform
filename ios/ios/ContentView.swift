@@ -16,11 +16,7 @@ struct ContentView: View {
     init() {
         let testConfiguration: TestConfiguration? = {
             let arguments = CommandLine.arguments
-            guard arguments.contains("test") else {
-                return nil
-            }
             let tc = DefaultTestConfiguration(configuration: ProcessInfo.processInfo.environment)
-            print(tc)
             return tc
         }()
         let mainViewModel = MainViewModel(testConfiguration: testConfiguration)

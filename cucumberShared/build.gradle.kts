@@ -1,12 +1,18 @@
+import co.touchlab.skie.configuration.DefaultArgumentInterop
+import co.touchlab.skie.configuration.EnumInterop
+import co.touchlab.skie.configuration.ExperimentalFeatures
+import co.touchlab.skie.configuration.FlowInterop
+import co.touchlab.skie.configuration.SealedInterop
+import co.touchlab.skie.configuration.SuspendInterop
+import java.util.*
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.konan.file.File
-import org.jetbrains.kotlin.konan.properties.Properties
-import org.jetbrains.kotlin.konan.properties.hasProperty
 import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
+    id("co.touchlab.skie") version "0.5.0"
 }
 
 kotlin {
@@ -24,13 +30,14 @@ kotlin {
             framework {
                 transitiveExport = true
                 export(project(":shared"))
-                export(project(":cucumber"))
+                export("com.splendo.kaluga.cucumber:kaluga-cucumber")
+                export("com.splendo.kaluga.uitest:kaluga-uitest")
                 baseName = "shared"
 
-                linkFrameworkSearchPaths("$projectDir/../cucumber")
+                linkFrameworkSearchPaths("$rootDir/dependencies/kaluga-cucumber/kaluga-cucumber")
 
                 getTest("DEBUG").apply {
-                    linkFrameworkSearchPaths("$projectDir/../cucumber")
+                    linkFrameworkSearchPaths("$rootDir/dependencies/kaluga-cucumber/kaluga-cucumber")
                 }
             }
         }
@@ -44,7 +51,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":shared"))
-                api(project(":cucumber"))
+                api("com.splendo.kaluga.uitest:kaluga-uitest")
+                api("com.splendo.kaluga.cucumber:kaluga-cucumber")
+
+                implementation("co.touchlab.skie:configuration-annotations:0.5.0")
             }
         }
         val commonTest by getting {
@@ -76,7 +86,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.corrado4eyes.cucumbershared"
+    namespace = "com.splendo.cucumbershared"
     compileSdk = 33
     defaultConfig {
         minSdk = 29
@@ -84,6 +94,24 @@ android {
     compileOptions {
         sourceCompatibility =  JavaVersion.VERSION_11
         targetCompatibility =  JavaVersion.VERSION_11
+    }
+}
+
+skie {
+    analytics {
+        disableUpload.set(true)
+        enabled.set(false)
+    }
+
+    features {
+        group {
+            DefaultArgumentInterop.Enabled(false)
+            EnumInterop.Enabled(false)
+            ExperimentalFeatures.Enabled(false)
+            FlowInterop.Enabled(false)
+            SealedInterop.Enabled(false)
+            SuspendInterop.Enabled(false)
+        }
     }
 }
 
@@ -95,8 +123,7 @@ val KotlinNativeTarget.targetType: String get() {
 
 fun Properties.getPropertyOrNull(key: String) = if (hasProperty(key)) getProperty(key) else null
 fun Properties.getListProperty(key: String) = getPropertyOrNull(key).orEmpty().split("(\" )?\"".toRegex()).filter { it.isNotEmpty() }
-
-fun Properties.getFrameworkSearchPaths() = (getListProperty("FRAMEWORK_SEARCH_PATHS") + getPropertyOrNull("CONFIGURATION_BUILD_DIR")).filterNotNull()
+fun Properties.getFrameworkSearchPaths() = (listOf(getProperty("FRAMEWORK_SEARCH_PATHS")) + getProperty("CONFIGURATION_BUILD_DIR")).filterNotNull()
 
 /**
  * Gets the [Properties] file of a [KotlinNativeTarget] for a given dependency loaded by the `dependencies` module
@@ -107,6 +134,7 @@ fun Properties.getFrameworkSearchPaths() = (getListProperty("FRAMEWORK_SEARCH_PA
 fun KotlinNativeTarget.getPropertiesForDependency(dependency: String, pathToIosDependencies: String): Properties {
     val path = "$pathToIosDependencies/build/cocoapods/buildSettings/build-settings-$targetType-$dependency.properties"
     val file = org.jetbrains.kotlin.konan.file.File(path)
+
     return file.loadProperties()
 }
 
@@ -120,7 +148,8 @@ fun KotlinNativeTarget.getPropertiesForDependency(dependency: String, pathToIosD
 fun Project.dependenciesFromDefs(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }): List<String> {
     // Load all .def files from the defs folder to determine the list of dependencies
     val defs = File("$pathToIosDependencies/build/cocoapods/defs")
-    return defs.listFilesOrEmpty.mapNotNull { dependency ->
+    val files = defs.listFiles()?.toList() ?: emptyList<File>()
+    return files.mapNotNull { dependency ->
         val fileName = dependency.name.removeSuffix(".${dependency.extension}")
         when {
             dependency.extension != "def" -> null
@@ -138,8 +167,14 @@ fun Project.dependenciesFromDefs(pathToIosDependencies: String, includeDependenc
  */
 fun KotlinNativeTarget.createFrameworkSearchPath(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }): Set<String> {
     val dependencies = dependenciesFromDefs(pathToIosDependencies, includeDependency)
+    println("Dependencies: $dependencies")
+
     return dependencies.map { dependency ->
         val properties = getPropertiesForDependency(dependency, pathToIosDependencies)
+        println("Found properties = ${properties.stringPropertyNames()}")
+//        listOfNotNull(properties.getProperty("FRAMEWORK_SEARCH_PATHS") + properties.getProperty("CONFIGURATION_BUILD_DIR")).also {
+//            println("FrameworkSearchPaths = ${properties.stringPropertyNames()}")
+//        }
         properties.getFrameworkSearchPaths()
     }.flatten().toSet()
 }
@@ -150,7 +185,10 @@ fun KotlinNativeTarget.createFrameworkSearchPath(pathToIosDependencies: String, 
  * @param includeDependency returns whether a dependency with a given name should be added to the `NativeBinary`.
  */
 fun org.jetbrains.kotlin.gradle.plugin.mpp.NativeBinary.linkFrameworkSearchPaths(pathToIosDependencies: String, includeDependency: (String) -> Boolean = { true }) {
+    println("PathToIosDependencies: $pathToIosDependencies")
     val frameworkSearchPaths = target.createFrameworkSearchPath(pathToIosDependencies, includeDependency)
+    println("FrameworkSearchPaths: $frameworkSearchPaths")
+
     // Add all framework search paths
     linkerOpts(frameworkSearchPaths.map { "-F$it" })
 

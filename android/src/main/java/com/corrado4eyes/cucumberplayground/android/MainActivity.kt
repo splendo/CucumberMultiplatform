@@ -1,11 +1,11 @@
-package com.corrado4eyes.cucumberplayground.android
+package com.splendo.cucumberplayground.android
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.corrado4eyes.cucumberplayground.models.DefaultTestConfiguration
-import com.corrado4eyes.cucumberplayground.models.TestConfiguration
+import com.splendo.cucumberplayground.models.DefaultTestConfiguration
+import com.splendo.cucumberplayground.models.TestConfiguration
 
 class MainActivity : AppCompatActivity() {
     private lateinit var testConfiguration: TestConfiguration

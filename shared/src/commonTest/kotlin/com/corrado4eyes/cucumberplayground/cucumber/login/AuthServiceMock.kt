@@ -1,8 +1,9 @@
-package com.corrado4eyes.cucumberplayground.cucumber.login
+package com.splendo.cucumberplayground.cucumber.login
 
-import com.corrado4eyes.cucumberplayground.models.User
-import com.corrado4eyes.cucumberplayground.services.AuthService
-import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
+import com.splendo.cucumberplayground.cucumber.login.DummyUsers.defaultTestUser
+import com.splendo.cucumberplayground.login.model.AuthResponse
+import com.splendo.cucumberplayground.models.User
+import com.splendo.cucumberplayground.services.AuthService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,13 +12,14 @@ import kotlinx.coroutines.flow.asStateFlow
 /**
  * Mock is the same as impl but here for the sake of proper interfacing
  */
-class AuthServiceMock : AuthService {
+class AuthServiceMock(loggedInUser: User?) : AuthService {
 
-    private var currentUser: MutableStateFlow<User?> = MutableStateFlow(null)
+    private var currentUser: MutableStateFlow<User?> = MutableStateFlow(loggedInUser)
 
     private val users = mutableListOf(
         User("alex@alex.com", "1234"),
-        User("corrado@corrado.com", "1234")
+        User("corrado@corrado.com", "1234"),
+        defaultTestUser
     )
 
     override suspend fun login(email: String, pass: String): AuthResponse {
@@ -31,8 +33,9 @@ class AuthServiceMock : AuthService {
         } ?: AuthResponse.Error("Invalid credentials")
     }
 
+    var logoutCalledTimes = 0
     override suspend fun logout() {
-        delay(1000)
+        logoutCalledTimes++
         currentUser.value = null
     }
 
@@ -50,7 +53,13 @@ class AuthServiceMock : AuthService {
         }
     }
 
-    override fun observeUser(): Flow<User?> {
-        return currentUser.asStateFlow()
+    override val observeUser: Flow<User?> = currentUser.asStateFlow()
+
+    override fun getCurrentUserIfAny(): User? {
+        return currentUser.asStateFlow().value
     }
+}
+
+object DummyUsers {
+    val defaultTestUser = User("test@test.com", "1234")
 }

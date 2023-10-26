@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumberplayground.android.login
+package com.splendo.cucumberplayground.android.login
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
@@ -14,7 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import com.corrado4eyes.cucumberplayground.viewModels.login.LoginViewModel
+import com.splendo.cucumberplayground.models.Strings
+import com.splendo.cucumberplayground.viewModels.login.LoginViewModel
 import com.splendo.kaluga.architecture.compose.state
 import com.splendo.kaluga.architecture.compose.viewModel.ViewModelComposable
 import com.splendo.kaluga.architecture.observable.StateFlowInitializedSubject
@@ -26,18 +27,21 @@ fun LoginLayout() {
     ViewModelComposable(viewModel) {
         val isLoading by this.isLoading.state()
         Column {
-            Text(text = this@ViewModelComposable.screenTitle, modifier = Modifier.testTag("Login screen"))
+            Text(
+                text = this@ViewModelComposable.screenTitle,
+                modifier = Modifier.testTag(Strings.Screen.Tag.login)
+            )
             CustomTextField(
                 value = this@ViewModelComposable.emailText,
                 label = "Email",
-                modifier = Modifier.testTag("Email")
+                modifier = Modifier.testTag(Strings.TextField.Tag.email)
             )
             val emailErrorText by this@ViewModelComposable.emailErrorText.state()
             Text(text = emailErrorText, color = Color.Red)
             CustomTextField(
                 value = this@ViewModelComposable.passwordText,
                 label = "Password",
-                modifier = Modifier.testTag("Password")
+                modifier = Modifier.testTag(Strings.TextField.Tag.password)
             )
             val passwordErrorText by this@ViewModelComposable.passwordErrorText.state()
             Text(text = passwordErrorText, color = Color.Red)
@@ -50,9 +54,9 @@ fun LoginLayout() {
 
             Button(
                 this@ViewModelComposable::login,
-                modifier = Modifier.testTag("Login")
+                modifier = Modifier.testTag(Strings.Button.Tag.login)
             ) {
-                Text("Login")
+                Text(viewModel.buttonTitle)
             }
         }
     }

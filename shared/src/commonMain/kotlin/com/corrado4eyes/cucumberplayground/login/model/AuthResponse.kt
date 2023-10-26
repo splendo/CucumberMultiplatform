@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumberplayground.login.model
+package com.splendo.cucumberplayground.login.model
 
 sealed class AuthResponse {
     object Success : AuthResponse()

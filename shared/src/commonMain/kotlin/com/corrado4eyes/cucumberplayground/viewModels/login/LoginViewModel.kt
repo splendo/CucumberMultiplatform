@@ -1,8 +1,8 @@
-package com.corrado4eyes.cucumberplayground.viewModels.login
+package com.splendo.cucumberplayground.viewModels.login
 
-import com.corrado4eyes.cucumberplayground.login.model.AuthResponse
-import com.corrado4eyes.cucumberplayground.models.Strings
-import com.corrado4eyes.cucumberplayground.services.AuthService
+import com.splendo.cucumberplayground.login.model.AuthResponse
+import com.splendo.cucumberplayground.models.Strings
+import com.splendo.cucumberplayground.services.AuthService
 import com.splendo.kaluga.architecture.observable.toInitializedObservable
 import com.splendo.kaluga.architecture.observable.toInitializedSubject
 import com.splendo.kaluga.architecture.viewmodel.BaseLifecycleViewModel
@@ -75,7 +75,7 @@ class LoginViewModel : BaseLifecycleViewModel(), KoinComponent {
             } else ""
         }.toInitializedObservable("", coroutineScope)
 
-    val buttonTitle = Strings.Button.Text.login
+    val buttonTitle = Strings.Button.Title.login
     val isButtonEnabled = viewState.map { it !is LoginViewState.Loading }
         .toInitializedObservable(false, coroutineScope)
     val isLoading = viewState.map { it is LoginViewState.Loading }

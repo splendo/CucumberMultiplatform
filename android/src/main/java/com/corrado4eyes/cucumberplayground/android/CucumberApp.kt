@@ -1,7 +1,7 @@
-package com.corrado4eyes.cucumberplayground.android
+package com.splendo.cucumberplayground.android
 
 import android.app.Application
-import com.corrado4eyes.cucumberplayground.di.initKoin
+import com.splendo.cucumberplayground.di.initKoin
 import com.splendo.kaluga.base.ApplicationHolder
 
 class CucumberApp : Application() {

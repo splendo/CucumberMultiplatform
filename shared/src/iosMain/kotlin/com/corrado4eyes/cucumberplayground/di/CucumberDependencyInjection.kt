@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumberplayground.di
+package com.splendo.cucumberplayground.di
 
 import kotlinx.coroutines.newSingleThreadContext
 import org.koin.core.scope.Scope

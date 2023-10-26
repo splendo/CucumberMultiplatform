@@ -2,6 +2,7 @@ pluginManagement {
     repositories {
         google()
         gradlePluginPortal()
+        mavenLocal()
         mavenCentral()
     }
 }
@@ -9,6 +10,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositories {
         google()
+        mavenLocal()
         mavenCentral()
     }
 }
@@ -16,5 +18,7 @@ dependencyResolutionManagement {
 rootProject.name = "CucumberPlayground"
 include(":android")
 include(":shared")
-include(":cucumber")
 include(":cucumberShared")
+
+includeBuild("dependencies/kaluga-uitest")
+includeBuild("dependencies/kaluga-cucumber")

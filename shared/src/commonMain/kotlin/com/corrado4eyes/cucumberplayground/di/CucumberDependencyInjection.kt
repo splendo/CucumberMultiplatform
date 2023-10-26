@@ -1,8 +1,8 @@
-package com.corrado4eyes.cucumberplayground.di
+package com.splendo.cucumberplayground.di
 
-import com.corrado4eyes.cucumberplayground.services.AuthService
-import com.corrado4eyes.cucumberplayground.services.AuthServiceImpl
-import com.corrado4eyes.cucumberplayground.services.previewMocks.AuthServicePreviewMock
+import com.splendo.cucumberplayground.services.AuthService
+import com.splendo.cucumberplayground.services.AuthServiceImpl
+import com.splendo.cucumberplayground.services.previewMocks.AuthServicePreviewMock
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module

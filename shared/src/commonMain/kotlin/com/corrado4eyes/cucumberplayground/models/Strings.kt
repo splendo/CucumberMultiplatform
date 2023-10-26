@@ -1,14 +1,20 @@
-package com.corrado4eyes.cucumberplayground.models
+package com.splendo.cucumberplayground.models
 
 object Strings {
     object Screen {
         object Title {
-            val login = "Login screen"
-            val home = "Home screen"
-        }
-        object Tag {
             val login = "Login"
             val home = "Home"
+        }
+        object Tag {
+            val login = "Login Screen"
+            val home = "Home Screen"
+        }
+    }
+
+    object ScrollView {
+        object Tag {
+            val homeScrollView = "Home ScrollView"
         }
     }
 
@@ -25,9 +31,13 @@ object Strings {
     }
 
     object Button {
-        object Text {
+        object Title {
             val login = "Login"
             val logout = "Logout"
+        }
+        object Tag {
+            val login = "Login Button"
+            val logout = "Logout Button"
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.corrado4eyes.cucumberplayground.models
+package com.splendo.cucumberplayground.models
 
 typealias TestConfigurationMap = Map<String, String?>
 
