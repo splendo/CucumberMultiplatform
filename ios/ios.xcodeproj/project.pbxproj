@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,7 +20,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		277600BC3DC673E70E5A18C5 /* Color+Color.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76088B1B2130282DA6BB6E45 /* Color+Color.generated.swift */; };
 		29395FA8970D38A0CBBB8913 /* KalugaBackgroundStyle+SwiftUI.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91AE96E17B56B56CB7AF766 /* KalugaBackgroundStyle+SwiftUI.generated.swift */; };
-		4140822635AF9CFFF681C02E /* Pods_CucumberTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ECF88FBB45FBC97FE0BEDC8 /* Pods_CucumberTests.framework */; };
+		2F840DCC27B0A6704BC055E6 /* Pods_CucumberTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F9ECEF183B5649D7FE3536 /* Pods_CucumberTests.framework */; };
 		436308B705EE84E8FEE8CD21 /* DefaultValues.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC158DB5DDE249A03B2F51AC /* DefaultValues.generated.swift */; };
 		48C5442ECE76BED5A8FFFAE9 /* ListObservable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140577234C8D9C9BD309475E /* ListObservable.generated.swift */; };
 		4D7D41A3A4FA6F91C431D068 /* KalugaDate+Extensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D787A9CEB2779127CD15B6F /* KalugaDate+Extensions.generated.swift */; };
@@ -75,6 +75,16 @@
 		FAF26C36EFC614CD413B9488 /* UninitializedSubject.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191BB22D1226AD539DDC6631 /* UninitializedSubject.generated.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		64C235582AE942A600AA3E3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7555FF73242A565900829871 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7555FF7A242A565900829871;
+			remoteInfo = ios;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -87,8 +97,8 @@
 		1A7A62257F00AFBB12B8616B /* PlatformMappers.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = PlatformMappers.generated.swift; sourceTree = "<group>"; };
 		1D787A9CEB2779127CD15B6F /* KalugaDate+Extensions.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = "KalugaDate+Extensions.generated.swift"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		46F9ECEF183B5649D7FE3536 /* Pods_CucumberTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CucumberTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B350D3EB640C8B7B253753 /* UninitializedObservable.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = UninitializedObservable.generated.swift; sourceTree = "<group>"; };
-		4DEA2654EFE69B013946D9B0 /* Pods-CucumberTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CucumberTests.release.xcconfig"; path = "Target Support Files/Pods-CucumberTests/Pods-CucumberTests.release.xcconfig"; sourceTree = "<group>"; };
 		5416DF2E8BB6BE190C0431AF /* NavigationBarColor.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = NavigationBarColor.generated.swift; sourceTree = "<group>"; };
 		640CC3C72AB49ECA003E3D8C /* Node+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Node+Extensions.swift"; sourceTree = "<group>"; };
 		640DFEE92A370DA300ABF2DD /* CucumberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CucumberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,13 +106,16 @@
 		640DFEF42A370DD200ABF2DD /* Features */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Features; sourceTree = "<group>"; };
 		640DFEF62A370F5C00ABF2DD /* CucumberTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CucumberTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		640DFEF72A370F5C00ABF2DD /* CucumberTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CucumberTests.m; sourceTree = "<group>"; };
-		640DFEFC2A371F6300ABF2DD /* Cucumberish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cucumberish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6483290C2A4AE1C000E5A4A8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		648329292A4B0C4C00E5A4A8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6483292C2A4B2A5600E5A4A8 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
+		649AA4382AE94CAA0070EDEF /* Cucumberish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cucumberish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		649AA43A2AE94CB90070EDEF /* Cucumberish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cucumberish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		649B6F932A388AC600C40DCC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		649B6F992A389F5F00C40DCC /* XCUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		649B6F9B2A389F9300C40DCC /* Timeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeout.swift; sourceTree = "<group>"; };
+		64DDA56B2AE94C7600AF0D5A /* Cucumberish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Cucumberish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67E93FB7E23655257ECC8D9B /* Pods-CucumberTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CucumberTests.release.xcconfig"; path = "Target Support Files/Pods-CucumberTests/Pods-CucumberTests.release.xcconfig"; sourceTree = "<group>"; };
 		69246E55BCB962279D2220E0 /* Observable.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Observable.generated.swift; sourceTree = "<group>"; };
 		6DA39B482E4B46EDBEF4E573 /* RoutingState.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = RoutingState.generated.swift; sourceTree = "<group>"; };
 		71FBD06B4210EBAC91D0F6B4 /* HasDefaultValue.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = HasDefaultValue.generated.swift; sourceTree = "<group>"; };
@@ -110,12 +123,11 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76088B1B2130282DA6BB6E45 /* Color+Color.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = "Color+Color.generated.swift"; sourceTree = "<group>"; };
-		7ECF88FBB45FBC97FE0BEDC8 /* Pods_CucumberTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CucumberTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE43767F0B59D440634298D /* ContainerView.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = ContainerView.generated.swift; sourceTree = "<group>"; };
 		9E798EA8B136B833082411B4 /* PlatformValueMapper.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = PlatformValueMapper.generated.swift; sourceTree = "<group>"; };
 		A492DFDE55EF1239A015ECBA /* Navigation.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Navigation.generated.swift; sourceTree = "<group>"; };
+		C740D7E2E8EF042A9EF20A6B /* Pods-CucumberTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CucumberTests.debug.xcconfig"; path = "Target Support Files/Pods-CucumberTests/Pods-CucumberTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CC158DB5DDE249A03B2F51AC /* DefaultValues.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = DefaultValues.generated.swift; sourceTree = "<group>"; };
-		D8AF9DD8B6C07A08BD9ED21E /* Pods-CucumberTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CucumberTests.debug.xcconfig"; path = "Target Support Files/Pods-CucumberTests/Pods-CucumberTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D963EF3C4F0C141A4A80C891 /* KalugaStyledString+SwiftUI.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = "KalugaStyledString+SwiftUI.generated.swift"; sourceTree = "<group>"; };
 		E52FF51F397E317F81326758 /* TintedImage+Image.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = "TintedImage+Image.generated.swift"; sourceTree = "<group>"; };
 		EA6CBAFDA191747DE6BFB4B0 /* LazyView.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = LazyView.generated.swift; sourceTree = "<group>"; };
@@ -125,7 +137,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		46300BA9CC087F9271C3AAF0 /* Frameworks */ = {
+		07039B23A7E4365375829194 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,7 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				649B6F942A388AC600C40DCC /* XCTest.framework in Frameworks */,
-				4140822635AF9CFFF681C02E /* Pods_CucumberTests.framework in Frameworks */,
+				2F840DCC27B0A6704BC055E6 /* Pods_CucumberTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,15 +162,6 @@
 				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		0A0D2C84F18C844F76244379 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D8AF9DD8B6C07A08BD9ED21E /* Pods-CucumberTests.debug.xcconfig */,
-				4DEA2654EFE69B013946D9B0 /* Pods-CucumberTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		640DFEEA2A370DA300ABF2DD /* CucumberTests */ = {
@@ -215,9 +218,9 @@
 				7555FF7D242A565900829871 /* ios */,
 				640DFEEA2A370DA300ABF2DD /* CucumberTests */,
 				7555FF7C242A565900829871 /* Products */,
-				0A0D2C84F18C844F76244379 /* Pods */,
 				8A0E1A9AAD55C42A9D6F2E2E /* Frameworks */,
 				7959A7E223B309B74DABEA7A /* Generated */,
+				CC211C4B63C4CCEDBB37D71C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,9 +257,11 @@
 		8A0E1A9AAD55C42A9D6F2E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				649AA43A2AE94CB90070EDEF /* Cucumberish.framework */,
+				649AA4382AE94CAA0070EDEF /* Cucumberish.framework */,
+				64DDA56B2AE94C7600AF0D5A /* Cucumberish.framework */,
 				649B6F932A388AC600C40DCC /* XCTest.framework */,
-				640DFEFC2A371F6300ABF2DD /* Cucumberish.framework */,
-				7ECF88FBB45FBC97FE0BEDC8 /* Pods_CucumberTests.framework */,
+				46F9ECEF183B5649D7FE3536 /* Pods_CucumberTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -292,6 +297,15 @@
 			path = KalugaSwiftUI;
 			sourceTree = "<group>";
 		};
+		CC211C4B63C4CCEDBB37D71C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C740D7E2E8EF042A9EF20A6B /* Pods-CucumberTests.debug.xcconfig */,
+				67E93FB7E23655257ECC8D9B /* Pods-CucumberTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,16 +313,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 640DFEF32A370DA300ABF2DD /* Build configuration list for PBXNativeTarget "CucumberTests" */;
 			buildPhases = (
-				693FEEC8CBD656800AEB356B /* [CP] Check Pods Manifest.lock */,
+				87EB082BB1DBD788E080346B /* [CP] Check Pods Manifest.lock */,
 				648329012A43377A00E5A4A8 /* Embed framework */,
 				640DFEE52A370DA300ABF2DD /* Sources */,
 				640DFEE62A370DA300ABF2DD /* Frameworks */,
 				640DFEE72A370DA300ABF2DD /* Resources */,
-				558CBE5BFDE9242446515341 /* [CP] Embed Pods Frameworks */,
+				1C5C2AF5FCE568B7621337F7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				64C235592AE942A600AA3E3E /* PBXTargetDependency */,
 			);
 			name = CucumberTests;
 			productName = CucumberTests;
@@ -322,7 +337,7 @@
 				648329002A43373100E5A4A8 /* Embed Framework */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
-				46300BA9CC087F9271C3AAF0 /* Frameworks */,
+				07039B23A7E4365375829194 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -393,7 +408,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		558CBE5BFDE9242446515341 /* [CP] Embed Pods Frameworks */ = {
+		1C5C2AF5FCE568B7621337F7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -446,7 +461,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"$SRCROOT/../\"\n\n./gradlew :cucumberShared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		693FEEC8CBD656800AEB356B /* [CP] Check Pods Manifest.lock */ = {
+		87EB082BB1DBD788E080346B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -548,10 +563,18 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		64C235592AE942A600AA3E3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7555FF7A242A565900829871 /* ios */;
+			targetProxy = 64C235582AE942A600AA3E3E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		640DFEF12A370DA300ABF2DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8AF9DD8B6C07A08BD9ED21E /* Pods-CucumberTests.debug.xcconfig */;
+			baseConfigurationReference = C740D7E2E8EF042A9EF20A6B /* Pods-CucumberTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
@@ -561,11 +584,9 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = NHQ559J67Q;
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
 					"$(inherited)",
 					"$(SRCROOT)/../cucumberShared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Cucumberish\"",
-					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -593,7 +614,7 @@
 		};
 		640DFEF22A370DA300ABF2DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DEA2654EFE69B013946D9B0 /* Pods-CucumberTests.release.xcconfig */;
+			baseConfigurationReference = 67E93FB7E23655257ECC8D9B /* Pods-CucumberTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
@@ -603,9 +624,7 @@
 				DEVELOPMENT_TEAM = NHQ559J67Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(FRAMEWORK_SEARCH_PATHS)",
 					"$(SRCROOT)/../cucumberShared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
-					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -755,7 +774,6 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
@@ -782,7 +800,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ios/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+				);
 				INFOPLIST_FILE = ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
