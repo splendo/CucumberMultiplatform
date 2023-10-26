@@ -7,7 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollToIndex
 import com.splendo.cucumberplayground.models.Strings
 import com.splendo.cucumbershared.tests.AppDefinitions
-import com.splendo.kilka.DefaultApplicationAdapter
+import com.splendo.kaluga.uitest.DefaultApplicationAdapter
 import io.cucumber.java8.En
 import io.cucumber.junit.WithJunitRule
 import org.junit.Rule

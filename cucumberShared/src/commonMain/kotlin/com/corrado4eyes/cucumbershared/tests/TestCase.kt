@@ -2,16 +2,16 @@ package com.splendo.cucumbershared.tests
 
 import co.touchlab.skie.configuration.annotations.SealedInterop
 import com.splendo.cucumberplayground.models.Strings
-import com.splendo.cucumber.CucumberDefinition
-import com.splendo.cucumber.Definition
-import com.splendo.cucumber.EXPECT_VALUE_STRING
-import com.splendo.kilka.ApplicationAdapter
-import com.splendo.kilka.ApplicationArguments
-import com.splendo.kilka.AssertionResult
-import com.splendo.kilka.Node
-import com.splendo.kilka.TestCase
-import com.splendo.kilka.TimeoutDuration
-import com.splendo.kilka.errors.UIElementException
+import com.splendo.kaluga.cucumber.CucumberDefinition
+import com.splendo.kaluga.cucumber.Definition
+import com.splendo.kaluga.cucumber.EXPECT_VALUE_STRING
+import com.splendo.kaluga.uitest.ApplicationAdapter
+import com.splendo.kaluga.uitest.ApplicationArguments
+import com.splendo.kaluga.uitest.AssertionResult
+import com.splendo.kaluga.uitest.Node
+import com.splendo.kaluga.uitest.TestCase
+import com.splendo.kaluga.uitest.TimeoutDuration
+import com.splendo.kaluga.uitest.errors.UIElementException
 
 @SealedInterop.Enabled
 sealed class AppDefinitions : TestCase {
@@ -26,7 +26,11 @@ sealed class AppDefinitions : TestCase {
                 TODO("Not yet implemented")
             }
 
-            override fun findView(tag: String): Node {
+            override fun findViewByTag(tag: String): Node {
+                TODO("Not yet implemented")
+            }
+
+            override fun findViewByText(text: String): Node {
                 TODO("Not yet implemented")
             }
 
@@ -102,7 +106,7 @@ sealed class AppDefinitions : TestCase {
                     else -> throw UIElementException.Screen.NotFound(screenName)
                 }
                 application.launch(launchScreenName, application.applicationArguments)
-                val element = application.findView(screenTitleTag)
+                val element = application.findViewByTag(screenTitleTag)
                 return listOf(
                     element.waitExists(TimeoutDuration.SHORT)
                 )
@@ -119,7 +123,7 @@ sealed class AppDefinitions : TestCase {
 
             override fun runAndGetAssertions(): List<AssertionResult> {
                 val textViewTitle = args[0]
-                val element = application.findView(textViewTitle)
+                val element = application.findViewByTag(textViewTitle)
                 return listOf(element.waitExists(TimeoutDuration.SHORT), element.isVisible())
             }
         }
@@ -134,8 +138,8 @@ sealed class AppDefinitions : TestCase {
 
             override fun runAndGetAssertions(): List<AssertionResult> {
                 val element = when (val buttonTitle = args[0]) {
-                    Strings.Button.Title.login -> application.findView(Strings.Button.Tag.login)
-                    Strings.Button.Title.logout -> application.findView(Strings.Button.Tag.logout)
+                    Strings.Button.Title.login -> application.findViewByTag(Strings.Button.Tag.login)
+                    Strings.Button.Title.logout -> application.findViewByTag(Strings.Button.Tag.logout)
                     else -> throw UIElementException.Button.NotFound(buttonTitle)
                 }
                 return listOf(
@@ -154,8 +158,8 @@ sealed class AppDefinitions : TestCase {
 
             override fun runAndGetAssertions(): List<AssertionResult> {
                 val element  = when (val screenTitle = args[0]) {
-                    Strings.Screen.Title.login -> application.findView(Strings.Screen.Tag.login)
-                    Strings.Screen.Title.home -> application.findView(Strings.Screen.Tag.home)
+                    Strings.Screen.Title.login -> application.findViewByTag(Strings.Screen.Tag.login)
+                    Strings.Screen.Title.home -> application.findViewByTag(Strings.Screen.Tag.home)
                     else -> throw UIElementException.Screen.NotFound(screenTitle)
                 }
                 return listOf(element.exists())
@@ -171,7 +175,7 @@ sealed class AppDefinitions : TestCase {
             override fun runAndGetAssertions(): List<AssertionResult> {
                 val textFieldTag = args[1]
                 val textFieldText = args[1]
-                val element = application.findView(textFieldTag)
+                val element = application.findViewByTag(textFieldTag)
                 return listOf(
                     element.waitExists(TimeoutDuration.SHORT),
                     element.isHintEqualTo(textFieldText, true)
@@ -191,7 +195,7 @@ sealed class AppDefinitions : TestCase {
                 val textInput = args[0]
                 val tag = args[1]
                 application
-                    .findView(tag)
+                    .findViewByTag(tag)
                     .typeText(textInput)
                 return emptyList()
             }
@@ -207,8 +211,8 @@ sealed class AppDefinitions : TestCase {
 
             override fun runAndGetAssertions(): List<AssertionResult> {
                 val element = when(val buttonTag = args[0]) {
-                    Strings.Button.Title.login -> application.findView(Strings.Button.Tag.login)
-                    Strings.Button.Title.logout -> application.findView(Strings.Button.Tag.logout)
+                    Strings.Button.Title.login -> application.findViewByTag(Strings.Button.Tag.login)
+                    Strings.Button.Title.logout -> application.findViewByTag(Strings.Button.Tag.logout)
                     else -> throw UIElementException.Button.NotFound(buttonTag)
                 }
                 application.assert(element.waitExists(TimeoutDuration.SHORT))
